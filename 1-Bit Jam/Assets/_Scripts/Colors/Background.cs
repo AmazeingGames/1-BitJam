@@ -23,8 +23,7 @@ public class Background : MonoBehaviour, IColored
     {
         if (ColorSwap.Instance == null)
         {
-            if (showDebug)
-                Debug.LogWarning("ColorSwap.Instance is null");
+            Debug.LogWarning("ColorSwap.Instance is null");
             return;
         }
 
@@ -46,8 +45,7 @@ public class Background : MonoBehaviour, IColored
     {
         bool setActive = IsActiveCheck(newColor);
 
-        if (showDebug)
-            Debug.Log($"Set {newColor} background {setActive}");
+        DebugHelper.ShouldLog($"Set {newColor} background {setActive}", showDebug);
 
         backgroundObject.SetActive(setActive);
     }

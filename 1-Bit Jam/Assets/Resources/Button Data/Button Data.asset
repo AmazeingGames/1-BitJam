@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2f01bc83bf9bf749b54ed4f136d72ac, type: 3}
-  m_Name: DarkEnemy
+  m_Script: {fileID: 11500000, guid: 3f05bd325bbb74849aee24f78142ad43, type: 3}
+  m_Name: Button Data
   m_EditorClassIdentifier: 
-  <Controller>k__BackingField: {fileID: 9100000, guid: 0d5eca73d6c3c74418a4a1d14e98520c, type: 2}
-  <ActiveSprite>k__BackingField: {fileID: 0}
-  <UnactiveSprite>k__BackingField: {fileID: 0}
+  <InteractRadius>k__BackingField: 2
+  <IsConstant>k__BackingField: 1
+  <SwapColor>k__BackingField: 0
+  <ActiveColor>k__BackingField: 0

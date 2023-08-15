@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2f01bc83bf9bf749b54ed4f136d72ac, type: 3}
+  m_Name: LightEnemy
+  m_EditorClassIdentifier: 
+  <Controller>k__BackingField: {fileID: 9100000, guid: f34f536cdb4cd6c4492d7c0b6e89b672, type: 2}
+  <DefaultActiveSprite>k__BackingField: {fileID: 2029051738, guid: 255a4312488f36049809dd26b600b228, type: 3}
+  <DefaultInactiveSprite>k__BackingField: {fileID: 854598479, guid: 255a4312488f36049809dd26b600b228, type: 3}

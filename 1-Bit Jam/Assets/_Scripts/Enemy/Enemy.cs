@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour, IColored
 {
-    [field: SerializeField] public Sprites Sprites { get; private set; }
+    [field: SerializeField] public SpriteData Sprites { get; private set; }
 
     [SerializeField] ColorSwap.Color startingColor;
 
@@ -55,16 +55,15 @@ public class Enemy : MonoBehaviour, IColored
 
         Sprite newSprite;
 
-        if (showDebug)
-            Debug.Log($"Set enemy sprite active : {IsActiveProperty}");
+        DebugHelper.ShouldLog($"Set enemy sprite active : {IsActiveProperty}", showDebug);
 
         if (IsActiveProperty)
         {
-            newSprite = Sprites.ActiveSprite;
+            newSprite = Sprites.DefaultActiveSprite;
         }
         else
         {
-            newSprite = Sprites.UnactiveSprite;
+            newSprite = Sprites.DefaultInactiveSprite;
         }
 
         spriteRenderer.sprite = newSprite;

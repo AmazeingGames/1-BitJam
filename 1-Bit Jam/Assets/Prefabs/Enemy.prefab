@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7821231835711369767}
-  - component: {fileID: 1955799471662938871}
+  - component: {fileID: 816890803236683964}
   m_Layer: 0
   m_Name: VisionCone
   m_TagString: Untagged
@@ -24,15 +24,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5298766218947236020}
-  m_LocalRotation: {x: 0, y: 0, z: 0.76040596, w: 0.6494481}
+  m_LocalRotation: {x: 0, y: 0, z: -0.021727936, w: 0.99976397}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4020987631048603695}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 99}
---- !u!114 &1955799471662938871
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 1437.51}
+--- !u!114 &816890803236683964
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,20 +41,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 5298766218947236020}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91d03220daeb4a045998cd101fa9af17, type: 3}
+  m_Script: {fileID: 11500000, guid: 7688e06275e6ecb40837a63405f1ca4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   targetLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   obstructionLayerMask:
     serializedVersion: 2
-    m_Bits: 0
-  visionAngle: 45
+    m_Bits: 256
   visionRadius: 5
   timeBetweenCalls: 0.2
-  showDebugLogs: 0
-  showGizmos: 0
+  showDebugLogs: 1
+  showGizmos: 1
+  visionAngle: 45
 --- !u!1 &7156220862040595063
 GameObject:
   m_ObjectHideFlags: 0
@@ -84,7 +84,7 @@ Transform:
   m_GameObject: {fileID: 7156220862040595063}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7821231835711369767}
@@ -132,15 +132,15 @@ SpriteRenderer:
   m_SortingLayerID: 1104675887
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: -965063466, guid: a220b85f86beaa644bc24dc997d17b6c, type: 3}
+  m_Sprite: {fileID: 2029051738, guid: 255a4312488f36049809dd26b600b228, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.96, y: 0.84}
+  m_Size: {x: 0.48, y: 0.48}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &31999548696238977
@@ -165,7 +165,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7156220862040595063}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bd73fb623e0e5bf4d83878deff403fb8, type: 3}
   m_Name: 

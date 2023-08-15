@@ -8,7 +8,7 @@ public class ColorSwap : Singleton<ColorSwap>
 {
     [SerializeField] bool showDebug = true;
 
-    public enum Color { White, Black }
+    public enum Color { White, Black, Neutral }
 
     public Color BackgroundColor { get; private set; }
 
@@ -17,8 +17,7 @@ public class ColorSwap : Singleton<ColorSwap>
 
     private void OnEnable()
     {
-        if (showDebug)
-            Debug.Log($"Is instance null : {Instance == null}");
+        DebugHelper.ShouldLog($"Is instance null : {Instance == null}", showDebug);
     }
 
     void Update()
@@ -35,8 +34,7 @@ public class ColorSwap : Singleton<ColorSwap>
 
     void ChangeColor(Color newColor)
     {
-        if (showDebug)
-            Debug.Log($"Set background to {newColor}");
+        DebugHelper.ShouldLog($"Set background to {newColor}", showDebug);
 
         BackgroundColor = newColor;
 
