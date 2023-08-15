@@ -10,8 +10,6 @@ public class ColorSwap : Singleton<ColorSwap>
 
     public enum Color { White, Black }
 
-    Dictionary<Color, GameObject> colorToBackground;
-
     public Color BackgroundColor { get; private set; }
 
     public event Action <Color> OnColorChange;

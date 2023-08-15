@@ -6,15 +6,16 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour, IColored
 {
-    public ColorSwap.Color Color { get; private set; }
+    [field: SerializeField] public Sprites Sprites { get; private set; }
 
-    [SerializeField] Sprites sprites;
     [SerializeField] ColorSwap.Color startingColor;
 
     [SerializeField] bool showDebug;
 
     SpriteRenderer spriteRenderer;
 
+    public ColorSwap.Color Color { get; private set; }
+    public bool IsActiveProperty { get; private set; }
 
     void OnEnable()
     {
@@ -48,32 +49,26 @@ public class Enemy : MonoBehaviour, IColored
         Color = startingColor;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void HandleColorSwap(ColorSwap.Color newColor)
     {
-        bool isActive = IsActive(newColor);
+        IsActiveProperty = IsActiveCheck(newColor);
 
         Sprite newSprite;
 
         if (showDebug)
-            Debug.Log($"Set enemy sprite active : {isActive}");
+            Debug.Log($"Set enemy sprite active : {IsActiveProperty}");
 
-        if (isActive)
+        if (IsActiveProperty)
         {
-            newSprite = sprites.ActiveSprite;
+            newSprite = Sprites.ActiveSprite;
         }
         else
         {
-            newSprite = sprites.UnactiveSprite;
+            newSprite = Sprites.UnactiveSprite;
         }
 
         spriteRenderer.sprite = newSprite;
     }
 
-    public bool IsActive(ColorSwap.Color backgroundColor) => Color != backgroundColor;
+    public bool IsActiveCheck(ColorSwap.Color backgroundColor) => Color != backgroundColor;
 }

@@ -44,7 +44,7 @@ public class Background : MonoBehaviour, IColored
 
     public void HandleColorSwap(ColorSwap.Color newColor)
     {
-        bool setActive = IsActive(newColor);
+        bool setActive = IsActiveCheck(newColor);
 
         if (showDebug)
             Debug.Log($"Set {newColor} background {setActive}");
@@ -52,5 +52,5 @@ public class Background : MonoBehaviour, IColored
         backgroundObject.SetActive(setActive);
     }
 
-    public bool IsActive(ColorSwap.Color backgroundColor) => backgroundColor == color;
+    public bool IsActiveCheck(ColorSwap.Color backgroundColor) => backgroundColor == color;
 }

@@ -6,5 +6,5 @@ public interface IColored
 {
     void HandleColorSwap(ColorSwap.Color newColor);
 
-    bool IsActive(ColorSwap.Color backgroundColor);
+    bool IsActiveCheck(ColorSwap.Color backgroundColor);
 }

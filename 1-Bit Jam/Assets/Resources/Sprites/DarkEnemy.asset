@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2f01bc83bf9bf749b54ed4f136d72ac, type: 3}
   m_Name: DarkEnemy
   m_EditorClassIdentifier: 
+  <Controller>k__BackingField: {fileID: 9100000, guid: 0d5eca73d6c3c74418a4a1d14e98520c, type: 2}
   <ActiveSprite>k__BackingField: {fileID: 0}
   <UnactiveSprite>k__BackingField: {fileID: 0}
