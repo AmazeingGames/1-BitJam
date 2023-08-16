@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour, IColored
 {
     [field: SerializeField] public SpriteData Sprites { get; private set; }
 
-    [SerializeField] ColorSwap.Color startingColor;
+    [SerializeField] ColorSwap.Color color;
 
     [SerializeField] bool showDebug;
 
@@ -46,7 +46,7 @@ public class Enemy : MonoBehaviour, IColored
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        Color = startingColor;
+        Color = color;
     }
 
     public void HandleColorSwap(ColorSwap.Color newColor)
@@ -69,5 +69,5 @@ public class Enemy : MonoBehaviour, IColored
         spriteRenderer.sprite = newSprite;
     }
 
-    public bool IsActiveCheck(ColorSwap.Color backgroundColor) => Color != backgroundColor;
+    public bool IsActiveCheck(ColorSwap.Color backgroundColor) => Color == backgroundColor;
 }

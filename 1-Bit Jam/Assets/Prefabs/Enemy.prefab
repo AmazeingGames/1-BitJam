@@ -52,7 +52,7 @@ MonoBehaviour:
     m_Bits: 256
   visionRadius: 5
   timeBetweenCalls: 0.2
-  showDebugLogs: 1
+  showDebugLogs: 0
   showGizmos: 1
   visionAngle: 45
 --- !u!1 &7156220862040595063
@@ -130,7 +130,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1104675887
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 2029051738, guid: 255a4312488f36049809dd26b600b228, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -156,7 +156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Sprites>k__BackingField: {fileID: 11400000, guid: d56e2a2d82a81ef45aa2738252e74a80, type: 2}
-  startingColor: 0
+  color: 0
   showDebug: 0
 --- !u!114 &-6257396646667584075
 MonoBehaviour:

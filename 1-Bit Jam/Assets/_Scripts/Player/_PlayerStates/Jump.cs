@@ -6,8 +6,10 @@ using UnityEngine;
 public class Jump : State<CharacterController>
 {
     [SerializeField] float jumpHeight;
+    [SerializeField] float jumpEndLength = .2f;
 
     Rigidbody2D rigidBody;
+    float switchTimer;
 
     public override void Enter(CharacterController parent)
     {
@@ -16,7 +18,7 @@ public class Jump : State<CharacterController>
         if (rigidBody == null)
             rigidBody = parent.GetComponent<Rigidbody2D>();
 
-        Debug.Log("Jumped");
+        switchTimer = jumpEndLength;
         rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpHeight);
 
     }
@@ -26,6 +28,7 @@ public class Jump : State<CharacterController>
     }
     public override void Update()
     {
+        switchTimer -= Time.deltaTime;
     }
 
     public override void FixedUpdate()
@@ -34,7 +37,8 @@ public class Jump : State<CharacterController>
 
     public override void ChangeState()
     {
-        runner.SetState(typeof(Walk));
+        if (switchTimer <= 0)
+            runner.SetState(typeof(Walk));
     }
 
     public override void Exit()

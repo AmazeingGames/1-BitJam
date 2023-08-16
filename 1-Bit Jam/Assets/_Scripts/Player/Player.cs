@@ -6,7 +6,6 @@ public class Player : Singleton<Player>
 {
     [Header("Ground Check")]
     [SerializeField] GameObject groundRaycastStart;
-    [SerializeField] float timeBetweenChecks = .1f;
     [SerializeField] float groundRaycastLength;
     [SerializeField] LayerMask groundLayer;
     [SerializeField] bool showGroundCheckDebug;
@@ -38,7 +37,7 @@ public class Player : Singleton<Player>
 
             IsGrounded = raycast;
 
-            yield return new WaitForSeconds(timeBetweenChecks);
+            yield return null;
         }
         
     }

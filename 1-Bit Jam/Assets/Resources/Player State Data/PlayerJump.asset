@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: PlayerJump
   m_EditorClassIdentifier: 
   jumpHeight: 5
+  jumpEndLength: 0.05
