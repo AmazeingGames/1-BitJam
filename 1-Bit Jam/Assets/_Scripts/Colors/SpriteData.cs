@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.Animations;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Sprite Data")]
+[CreateAssetMenu(menuName = "Sprites/Sprite Data")]
 public class SpriteData : ScriptableObject
 {
     [field: SerializeField] public AnimatorController Controller { get; private set; }

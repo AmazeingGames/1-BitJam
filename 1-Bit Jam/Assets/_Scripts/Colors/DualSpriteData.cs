@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Dual Sprite Data")]
+[CreateAssetMenu(menuName = "Sprites/Dual Sprite Data")]
 public class DualSpriteData : SpriteData
 {
     [field: Header("Light Sprites")]
