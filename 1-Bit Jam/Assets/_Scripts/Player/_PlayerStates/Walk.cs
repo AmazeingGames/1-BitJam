@@ -86,6 +86,7 @@ public class Walk : State<CharacterController>
         ApplyFriction();
     }
 
+    //Uses forces and math to move the player
     void MovePlayer()
     {
         //Calculates the direction we wish to move in; this is our desired velocity
@@ -104,6 +105,7 @@ public class Walk : State<CharacterController>
         rigidbody.AddForce(movement * Vector2.right);
     }
 
+    //Applies force opposite to the player
     void ApplyFriction()
     {
         float amount = Mathf.Min(Mathf.Abs(rigidbody.velocity.x), Mathf.Abs(frictionAmount));

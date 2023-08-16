@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 5428887720416920012}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.67296, y: 0.67296, z: 0.67296}
+  m_LocalScale: {x: 5, y: 5, z: 0.67296}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -72,10 +72,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2123186099
+  m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 91e9a156f88ff2d4b895a536affbc8e3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -104,10 +104,9 @@ MonoBehaviour:
   obstructionLayerMask:
     serializedVersion: 2
     m_Bits: 0
-  visionAngle: 360
   visionRadius: 1
   timeBetweenCalls: 0.2
-  showDebugLogs: 1
+  showDebugLogs: 0
   showGizmos: 1
 --- !u!114 &5145089212481034869
 MonoBehaviour:
@@ -121,7 +120,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f75b0fe819b1914184c36b26f5fe42b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <ButtonData>k__BackingField: {fileID: 0}
-  <SpriteData>k__BackingField: {fileID: 0}
-  showDebug: 0
-  showGizmos: 0
+  <ButtonData>k__BackingField: {fileID: 11400000, guid: 5c01ce9b80d9d65419f052e5b88f8f68, type: 2}
+  <SpriteData>k__BackingField: {fileID: 11400000, guid: d023db6050b59e449a91eea2be018314, type: 2}
+  showDebug: 1

@@ -878,7 +878,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 816890803236683964, guid: a36803995dae8ea429c85cbbdf322852, type: 3}
       propertyPath: visionRadius
-      value: 3
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 816890803236683964, guid: a36803995dae8ea429c85cbbdf322852, type: 3}
       propertyPath: showDebugLogs
@@ -926,11 +926,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4020987631048603695, guid: a36803995dae8ea429c85cbbdf322852, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.99
+      value: -1.72
       objectReference: {fileID: 0}
     - target: {fileID: 4020987631048603695, guid: a36803995dae8ea429c85cbbdf322852, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.65
+      value: 0.77
       objectReference: {fileID: 0}
     - target: {fileID: 4020987631048603695, guid: a36803995dae8ea429c85cbbdf322852, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1462,16 +1462,8 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5145089212481034869, guid: e0820dc15ceff224a8e68b9a0687d232, type: 3}
       propertyPath: showDebug
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5145089212481034869, guid: e0820dc15ceff224a8e68b9a0687d232, type: 3}
-      propertyPath: <ButtonData>k__BackingField
-      value: 
-      objectReference: {fileID: 11400000, guid: 5c01ce9b80d9d65419f052e5b88f8f68, type: 2}
-    - target: {fileID: 5145089212481034869, guid: e0820dc15ceff224a8e68b9a0687d232, type: 3}
-      propertyPath: <SpriteData>k__BackingField
-      value: 
-      objectReference: {fileID: 11400000, guid: d023db6050b59e449a91eea2be018314, type: 2}
     - target: {fileID: 5428887720416920012, guid: e0820dc15ceff224a8e68b9a0687d232, type: 3}
       propertyPath: m_Name
       value: Button
@@ -1518,10 +1510,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5567525258839286211, guid: e0820dc15ceff224a8e68b9a0687d232, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5909598516075576875, guid: e0820dc15ceff224a8e68b9a0687d232, type: 3}
-      propertyPath: showDebugLogs
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
