@@ -7,23 +7,13 @@ public abstract class ObjectAnimator : MonoBehaviour
 {
     protected AnimatorController controller;
 
-    protected Animator animator;
 
     protected abstract void SetAnimator();
-
-    void CheckAnimator()
-    {
-        if (animator == null || controller == null)
-            SetAnimator();
-
-        if (animator == null || controller == null)
-            Debug.LogError("ANIMATOR IS STILL NULL");
-    }
 
     protected List<int> animationQueue = new();
 
     //This code should pass in objects instead; grabbing the values listed in the objects instead of them being manually put in
-    protected IEnumerator AddToQueue(int animationStatePlay, float animationLength, float animationSpeed = 1, int animationStateResume = -1, float animationResumeSpeed = 1)
+    /* protected IEnumerator AddToQueue(int animationStatePlay, float animationLength, float animationSpeed = 1, int animationStateResume = -1, float animationResumeSpeed = 1)
     {
         CheckAnimator();
 
@@ -53,17 +43,5 @@ public abstract class ObjectAnimator : MonoBehaviour
 
         yield break;
     }
-
-    protected void PlayAnimation(int animationToPlay, float animationSpeed)
-    {
-        CheckAnimator();
-
-        var speed = animator.speed;
-
-        animator.speed = animationSpeed;
-        animator.CrossFade(animationToPlay, 0, 0);
-
-        animator.speed = speed;
-    }
-
+    */
 }

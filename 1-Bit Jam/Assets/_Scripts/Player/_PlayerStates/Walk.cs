@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Animations;
 
 [CreateAssetMenu(menuName = "States/Player/Walk")]
 public class Walk : State<CharacterController>
@@ -23,6 +24,7 @@ public class Walk : State<CharacterController>
     [SerializeField] float maxFallVelocity;
 
     Rigidbody2D rigidbody;
+    PlayerAnimator playerAnimator;
     Player player;
 
     float jumpTimer;
@@ -41,10 +43,10 @@ public class Walk : State<CharacterController>
             player = parent.GetComponent<Player>();
         if (rigidbody == null)
             rigidbody = parent.GetComponent<Rigidbody2D>();
+        if (playerAnimator == null)
+            playerAnimator = parent.GetComponent<PlayerAnimator>();
 
         maxVerticalVelocity = rigidbody.velocity.y;
-
-        Debug.Log($"Walk Vertical Velocity Max: {maxVerticalVelocity}");
     }
 
     public override void CaptureInput()
@@ -64,8 +66,38 @@ public class Walk : State<CharacterController>
             groundedTimer = coyoteTimeLength;
 
         KeepConstantVelocity();
+
+        CheckAnimations();
+
+        FlipPlayer();
     }
-        
+
+    void CheckAnimations()
+    {
+        playerAnimator.ShouldPlayWalk(rigidbody.velocity.x);
+        playerAnimator.ShouldPlayIdle(rigidbody.velocity.x);
+    }
+
+
+    //Sets the scale of the player negative or positve, when they move left/right
+    void FlipPlayer()
+    {
+        if (horizontalInput == 0 && rigidbody.velocity.x == 0)
+            return;
+
+        int multipler;
+
+        //This is already in the MovePlayer function, so it might be more performant to put the checks there
+        if (horizontalInput < 0 && rigidbody.velocity.x < 0)
+            multipler = -1;
+        else if (horizontalInput > 0 && rigidbody.velocity.x > 0)
+            multipler = 1;
+        else
+            return;
+
+        runner.transform.localScale = new Vector2(Mathf.Abs(runner.transform.localScale.x) * multipler, Mathf.Abs(runner.transform.localScale.y));
+    }
+
     //Makes sure the player can't gain more vertical velocity than they already have.
     //Prevents bouncing.
     //Note: Performance is poor, optimize using Clamp

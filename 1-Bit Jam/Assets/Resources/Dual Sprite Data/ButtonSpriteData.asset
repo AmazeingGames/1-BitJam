@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: ButtonSpriteData
   m_EditorClassIdentifier: 
   <Controller>k__BackingField: {fileID: 0}
-  <DefaultActiveSprite>k__BackingField: {fileID: 0}
-  <DefaultInactiveSprite>k__BackingField: {fileID: 0}
-  <LightActiveSprite>k__BackingField: {fileID: 0}
-  <LightInactiveSprite>k__BackingField: {fileID: 0}
-  <DarkActiveSprite>k__BackingField: {fileID: 0}
-  <DarkInactiveSprite>k__BackingField: {fileID: 0}
+  <DefaultActiveSprite>k__BackingField: {fileID: 21300000, guid: 91e9a156f88ff2d4b895a536affbc8e3, type: 3}
+  <DefaultInactiveSprite>k__BackingField: {fileID: 21300000, guid: 91e9a156f88ff2d4b895a536affbc8e3, type: 3}
+  <LightActiveSprite>k__BackingField: {fileID: 21300000, guid: 91e9a156f88ff2d4b895a536affbc8e3, type: 3}
+  <LightInactiveSprite>k__BackingField: {fileID: 21300000, guid: 91e9a156f88ff2d4b895a536affbc8e3, type: 3}
+  <DarkActiveSprite>k__BackingField: {fileID: 21300000, guid: 91e9a156f88ff2d4b895a536affbc8e3, type: 3}
+  <DarkInactiveSprite>k__BackingField: {fileID: 21300000, guid: 91e9a156f88ff2d4b895a536affbc8e3, type: 3}

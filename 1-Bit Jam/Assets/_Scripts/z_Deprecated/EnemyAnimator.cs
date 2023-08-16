@@ -41,13 +41,10 @@ public class EnemyAnimator : ObjectAnimator
             resumeAnimation = activeIdle;
         }
 
-        StartCoroutine(AddToQueue(reappear, reappearAnimationLength, reappearAnimationSpeed * reverse, resumeAnimation, idleAnimationSpeed));
+        //StartCoroutine(AddToQueue(reappear, reappearAnimationLength, reappearAnimationSpeed * reverse, resumeAnimation, idleAnimationSpeed));
     }
 
     protected override void SetAnimator()
     {
-        GetComponent<Animator>();
-
-        controller = enemy.Sprites.Controller;
     }
 }
