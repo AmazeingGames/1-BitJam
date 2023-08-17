@@ -9,8 +9,7 @@ public class ButtonData : ScriptableObject
 
     [field: SerializeField] public bool IsConstant { get; private set; }
 
+    [field: SerializeField] public ColorSwap.Color Color { get; private set; }
 
-    [field: SerializeField] public ColorSwap.Color SwapColor { get; private set; }
-
-    [field: SerializeField] public ColorSwap.Color ActiveColor { get; private set; }
+    [field: SerializeField] public SpriteData SpriteData { get; private set; }
 }

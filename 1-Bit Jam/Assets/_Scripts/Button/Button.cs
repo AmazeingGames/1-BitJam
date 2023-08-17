@@ -7,7 +7,7 @@ using UnityEngine;
 public class Button : MonoBehaviour, IColored
 {
     [field: SerializeField] public ButtonData ButtonData { get; private set; }
-    [field: SerializeField] public DualSpriteData SpriteData { get; private set; }
+    [field: SerializeField] public SpriteData SpriteData { get; private set; }
 
     [SerializeField] bool showDebug;
 
@@ -60,7 +60,7 @@ public class Button : MonoBehaviour, IColored
     {
         IsActiveProperty = IsActiveCheck(newColor);
 
-        spriteRenderer.sprite = SpriteData.GetSprite(newColor, IsActiveProperty);
+        spriteRenderer.sprite = SpriteData.ActiveSprite;
     }
 
     public bool IsActiveCheck(ColorSwap.Color backgroundColor)
@@ -68,6 +68,6 @@ public class Button : MonoBehaviour, IColored
         if (ButtonData.IsConstant)
             return true;
 
-        return (backgroundColor == ButtonData.ActiveColor);
+        return (backgroundColor == ButtonData.Color);
     }
 }

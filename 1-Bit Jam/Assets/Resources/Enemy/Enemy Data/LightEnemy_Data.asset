@@ -9,10 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f05bd325bbb74849aee24f78142ad43, type: 3}
-  m_Name: Button Data
+  m_Script: {fileID: 11500000, guid: 13394c5b26647814b9ea6f05d8b7b3bf, type: 3}
+  m_Name: LightEnemy_Data
   m_EditorClassIdentifier: 
-  <InteractRadius>k__BackingField: 2
-  <IsConstant>k__BackingField: 1
-  <SwapColor>k__BackingField: 0
-  <ActiveColor>k__BackingField: 0
+  <SpriteData>k__BackingField: {fileID: 11400000, guid: d56e2a2d82a81ef45aa2738252e74a80, type: 2}
+  <EnemyColor>k__BackingField: 0

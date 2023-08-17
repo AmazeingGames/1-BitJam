@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13394c5b26647814b9ea6f05d8b7b3bf, type: 3}
+  m_Name: DarkEnemy_Data
+  m_EditorClassIdentifier: 
+  <SpriteData>k__BackingField: {fileID: 11400000, guid: f154b076afdcbb740ad41248b8958f7d, type: 2}
+  <EnemyColor>k__BackingField: 1

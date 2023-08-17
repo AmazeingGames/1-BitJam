@@ -6,9 +6,8 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour, IColored
 {
-    [field: SerializeField] public SpriteData Sprites { get; private set; }
-
-    [SerializeField] ColorSwap.Color color;
+    [field: SerializeField] public EnemyData EnemyData { get; private set; }
+    public SpriteData Sprites { get => EnemyData.SpriteData; }
 
     [SerializeField] bool showDebug;
 
@@ -16,7 +15,6 @@ public class Enemy : MonoBehaviour, IColored
     EnemyAnimator enemyAnimator;
     Animator animator;
 
-    public ColorSwap.Color Color { get; private set; }
     public bool IsActiveProperty { get; private set; }
 
     bool playPhaseAnimation;
@@ -38,8 +36,6 @@ public class Enemy : MonoBehaviour, IColored
         animator = GetComponent<Animator>();
 
         animator.runtimeAnimatorController = Sprites.Controller;
-
-        Color = color;
     }
 
     void Update()
@@ -92,11 +88,11 @@ public class Enemy : MonoBehaviour, IColored
 
         if (IsActiveProperty)
         {
-            newSprite = Sprites.DefaultActiveSprite;
+            newSprite = Sprites.ActiveSprite;
         }
         else
         {
-            newSprite = Sprites.DefaultInactiveSprite;
+            newSprite = Sprites.InactiveSprite;
         }
 
         spriteRenderer.sprite = newSprite;
@@ -104,5 +100,5 @@ public class Enemy : MonoBehaviour, IColored
         playPhaseAnimation = true;
     }
 
-    public bool IsActiveCheck(ColorSwap.Color backgroundColor) => Color == backgroundColor;
+    public bool IsActiveCheck(ColorSwap.Color backgroundColor) => EnemyData.Color == backgroundColor;
 }
