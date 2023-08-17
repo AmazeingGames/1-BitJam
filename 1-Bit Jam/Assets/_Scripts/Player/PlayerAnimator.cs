@@ -4,6 +4,7 @@ using Unity.VisualScripting.FullSerializer;
 using UnityEditor.Animations;
 using UnityEngine;
 
+//Create a base class that this and Enemy Animator both derive from
 public class PlayerAnimator : MonoBehaviour
 {
     [SerializeField] bool showDebugLog = false;
@@ -14,8 +15,9 @@ public class PlayerAnimator : MonoBehaviour
     [Header("Idle")]
     [SerializeField] float maxIdleVelocity;
 
-
     Animator animator;
+
+    bool isJumpPlaying;
 
     static readonly string runName  = "Run_Player";
     static readonly string jumpName = "Jump_Player";
@@ -26,18 +28,9 @@ public class PlayerAnimator : MonoBehaviour
     static readonly int idle = Animator.StringToHash(idleName);
 
 
-    bool isJumpPlaying;
-
     void Start()
     {
         animator = GetComponent<Animator>();
-
-        Debug.Log($"Is animator null: {animator == null}");
-    }
-
-    void Update()
-    {
-        Debug.Log($"is JumpPlaying : {isJumpPlaying}");
     }
 
     public void ShouldPlayIdle(float playerMovement)

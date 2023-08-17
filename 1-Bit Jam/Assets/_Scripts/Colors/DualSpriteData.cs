@@ -22,33 +22,33 @@ public class DualSpriteData : SpriteData
             case ColorSwap.Color.White:
                 if (isActive)
                 {
-                    Debug.Log("White, Active");
+                    //Debug.Log("White, Active");
                     return LightActiveSprite;
                 }
-                Debug.Log("White, Inactive");
+                //Debug.Log("White, Inactive");
 
                 return LightInactiveSprite;
 
             case ColorSwap.Color.Black:
                 if (isActive)
                 {
-                    Debug.Log("Black, Active");
+                    //Debug.Log("Black, Active");
                     return DarkActiveSprite;
                 }
-                Debug.Log("Black, Inactive");
+                //Debug.Log("Black, Inactive");
                 return DarkInactiveSprite;
 
             case ColorSwap.Color.Neutral:
                 if (isActive)
                 {
-                    Debug.Log("Neutral, Active");
+                    //Debug.Log("Neutral, Active");
                     return DefaultActiveSprite;
                 }
-                Debug.Log("Neutral, Inactive");
+               //Debug.Log("Neutral, Inactive");
                 return DefaultInactiveSprite;
 
             default:
-                Debug.LogWarning("Color not recognized");
+                //Debug.LogWarning("Color not recognized");
                 return null;
         }
     }

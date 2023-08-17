@@ -13,9 +13,13 @@ public class Enemy : MonoBehaviour, IColored
     [SerializeField] bool showDebug;
 
     SpriteRenderer spriteRenderer;
+    EnemyAnimator enemyAnimator;
+    Animator animator;
 
     public ColorSwap.Color Color { get; private set; }
     public bool IsActiveProperty { get; private set; }
+
+    bool playPhaseAnimation;
 
     void OnEnable()
     {
@@ -27,6 +31,37 @@ public class Enemy : MonoBehaviour, IColored
         SubscribeToColorSwap(false);
     }
 
+    void Start()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        enemyAnimator = GetComponent<EnemyAnimator>();
+        animator = GetComponent<Animator>();
+
+        animator.runtimeAnimatorController = Sprites.Controller;
+
+        Color = color;
+    }
+
+    void Update()
+    {
+        CheckAnimations();
+    }
+
+    void CheckAnimations()
+    {
+        if (playPhaseAnimation)
+        {
+            Debug.Log("checked phase");
+            enemyAnimator.ShouldPlayPhaseIn(true, IsActiveProperty);
+            playPhaseAnimation = false;
+        }
+        else
+        {
+            enemyAnimator.ShouldPlayIdle(IsActiveProperty);
+            enemyAnimator.ShouldPlayInactive(IsActiveProperty);
+        }
+    }
+
     void SubscribeToColorSwap(bool isSubscribing)
     {
         if (ColorSwap.Instance == null)
@@ -36,18 +71,16 @@ public class Enemy : MonoBehaviour, IColored
         }
 
         if (isSubscribing)
+        {
             ColorSwap.Instance.OnColorChange += HandleColorSwap;
+        }
         else
+        {
             ColorSwap.Instance.OnColorChange -= HandleColorSwap;
+        }
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-
-        Color = color;
-    }
+    
 
     public void HandleColorSwap(ColorSwap.Color newColor)
     {
@@ -67,6 +100,8 @@ public class Enemy : MonoBehaviour, IColored
         }
 
         spriteRenderer.sprite = newSprite;
+
+        playPhaseAnimation = true;
     }
 
     public bool IsActiveCheck(ColorSwap.Color backgroundColor) => Color == backgroundColor;

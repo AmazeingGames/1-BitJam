@@ -24,14 +24,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5298766218947236020}
-  m_LocalRotation: {x: 0, y: 0, z: -0.021727936, w: 0.99976397}
+  m_LocalRotation: {x: 0, y: -0, z: 0.9996798, w: -0.025304984}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4020987631048603695}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 1437.51}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 1622.9}
 --- !u!114 &816890803236683964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50,7 +50,7 @@ MonoBehaviour:
   obstructionLayerMask:
     serializedVersion: 2
     m_Bits: 256
-  visionRadius: 5
+  visionRadius: 3.5
   timeBetweenCalls: 0.2
   showDebugLogs: 0
   showGizmos: 1
@@ -66,7 +66,7 @@ GameObject:
   - component: {fileID: 4020987631048603695}
   - component: {fileID: -6986752095829493008}
   - component: {fileID: 31999548696238977}
-  - component: {fileID: -6257396646667584075}
+  - component: {fileID: 2064210426772977098}
   - component: {fileID: 3917469687893717529}
   m_Layer: 0
   m_Name: Enemy
@@ -158,21 +158,20 @@ MonoBehaviour:
   <Sprites>k__BackingField: {fileID: 11400000, guid: d56e2a2d82a81ef45aa2738252e74a80, type: 2}
   color: 0
   showDebug: 0
---- !u!114 &-6257396646667584075
+--- !u!114 &2064210426772977098
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7156220862040595063}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd73fb623e0e5bf4d83878deff403fb8, type: 3}
+  m_Script: {fileID: 11500000, guid: c8a11ce6eb562564381ce65c1e625512, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reappearAnimationLength: 1
-  reappearAnimationSpeed: 1
-  idleAnimationSpeed: 1
+  showDebugLog: 0
+  phaseAnimationLength: 0.4
 --- !u!95 &3917469687893717529
 Animator:
   serializedVersion: 5

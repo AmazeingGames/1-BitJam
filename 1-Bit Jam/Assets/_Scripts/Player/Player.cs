@@ -22,11 +22,6 @@ public class Player : Singleton<Player>
         StartCoroutine(GroundCheck());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
     IEnumerator GroundCheck()
     {
         while (true)
