@@ -2,14 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Button Data")]
+[CreateAssetMenu(menuName = "Object Data/Button Data")]
+
+//This should inherit from a base scriptable object class. Maybe 'ObjectData' or 'ColoredData'
 public class ButtonData : ScriptableObject
 {
-    [field: SerializeField] public float InteractRadius { get; private set; }
-
-    [field: SerializeField] public bool IsConstant { get; private set; }
-
     [field: SerializeField] public ColorSwap.Color Color { get; private set; }
-
     [field: SerializeField] public SpriteData SpriteData { get; private set; }
 }
+

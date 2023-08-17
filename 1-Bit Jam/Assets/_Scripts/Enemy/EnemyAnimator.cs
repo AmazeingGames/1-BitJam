@@ -8,7 +8,6 @@ public class EnemyAnimator : MonoBehaviour
     [SerializeField] bool showDebugLog = false;
     [SerializeField] float phaseAnimationLength;
 
-
     Animator animator;
 
     static readonly string phaseInSpeedMultiplierName = "PhaseMultiplier";

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4b1b8bb17f93f8c47a4744bce1735cf8
+guid: 5b6cef3bc62627243be6fe5602c83afb
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -117,7 +117,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Buttons_0
+      name: ButtonStates_0
       rect:
         serializedVersion: 2
         x: 0
@@ -131,14 +131,56 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 75ee1f80c00461c469c7df43d1a14240
-      internalID: 59586644
+      spriteID: 9b84b4942b64a2c4297558e5f339521f
+      internalID: 529714074
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Buttons_1
+      name: ButtonStates_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e086f6940573f5341964a63320f63bde
+      internalID: 250580657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ButtonStates_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 136396b6bb944484ba45c0691abecab1
+      internalID: 1154235072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ButtonStates_3
       rect:
         serializedVersion: 2
         x: 0
@@ -152,8 +194,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a00ea7e8476481149906e97564bb9a42
-      internalID: 1688701821
+      spriteID: 7bc17b7101f0c4e4bb56ca05498c1483
+      internalID: 1875195200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ButtonStates_4
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64ba455e4adaae340893fb3612b369fc
+      internalID: 1617375771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ButtonStates_5
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8fc470c47ea470d4c9ae56e244fbf07f
+      internalID: 10791783
       vertices: []
       indices: 
       edges: []
@@ -169,8 +253,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Buttons_0: 59586644
-      Buttons_1: 1688701821
+      ButtonStates_0: 529714074
+      ButtonStates_1: 250580657
+      ButtonStates_2: 1154235072
+      ButtonStates_3: 1875195200
+      ButtonStates_4: 1617375771
+      ButtonStates_5: 10791783
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -7,7 +7,7 @@ using UnityEngine;
 public class Button : MonoBehaviour, IColored
 {
     [field: SerializeField] public ButtonData ButtonData { get; private set; }
-    [field: SerializeField] public SpriteData SpriteData { get; private set; }
+    public SpriteData SpriteData { get => ButtonData.SpriteData; }
 
     [SerializeField] bool showDebug;
 
@@ -65,7 +65,7 @@ public class Button : MonoBehaviour, IColored
 
     public bool IsActiveCheck(ColorSwap.Color backgroundColor)
     {
-        if (ButtonData.IsConstant)
+        if (ButtonData.Color == ColorSwap.Color.Neutral)
             return true;
 
         return (backgroundColor == ButtonData.Color);
