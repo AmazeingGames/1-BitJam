@@ -197,7 +197,7 @@ MonoBehaviour:
   visionRadius: 1
   timeBetweenCalls: 0.2
   showDebugLogs: 0
-  showGizmos: 1
+  showGizmos: 0
 --- !u!114 &5145089212481034869
 MonoBehaviour:
   m_ObjectHideFlags: 0

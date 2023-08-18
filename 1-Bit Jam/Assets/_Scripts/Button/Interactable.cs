@@ -39,6 +39,7 @@ public class Interactable : MonoBehaviour
         GetInput();
 
         CanBeInteractedWith(vison.CanSeeCollider(Player.Instance.Collider));
+        ShouldPlayInteraction();
     }
 
     void UpdateTimers()
@@ -60,13 +61,14 @@ public class Interactable : MonoBehaviour
     {
     }
 
-    //If player is within range
+    //This could could probably be improved via a state machine. This would also help with optimization
+    //While the player is within range, the button can be interacted with
+    //The button can still be interacted with for a short time after the player leaves the range
     void CanBeInteractedWith(bool inRange)
     {
         interactIcon.SetActive(false);
-        lastCouldInteract = -1;
 
-        if (IsOnCooldown)
+        if (cooldownTimer > 0)
             return;
 
         if (!inRange)
@@ -74,15 +76,17 @@ public class Interactable : MonoBehaviour
 
         if (!button.IsActiveProperty)
             return;
+
         interactIcon.SetActive(true);
         lastCouldInteract = canInteractTime;
-
-        ShouldPlayInteraction();
     }
 
     //If player presses interact
     void ShouldPlayInteraction()
     {
+        if (cooldownTimer > 0)
+            return;
+
         if (lastCouldInteract < 0)
             return;
 
