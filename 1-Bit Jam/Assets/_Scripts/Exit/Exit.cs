@@ -1,26 +1,21 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
-//This and Button clearly share some repeating qualities. Could do something; not sure.
-public class Enemy : MonoBehaviour, IColored
+public class Exit : MonoBehaviour, IColored
 {
     [field: SerializeField] public ColorSwap.Color Color { get; private set; }
 
-    [field: SerializeField] public EnemyData DarkEnemyData { get; private set; }
-    [field: SerializeField] public EnemyData LightEnemyData { get; private set; }
+    [field: SerializeField] public SpriteData DarkExitData { get; private set; }
+    [field: SerializeField] public SpriteData LightExitData { get; private set; }
 
-    public EnemyData EnemyData { get; private set; }
-
-    public SpriteData Sprites { get => EnemyData.SpriteData; }
+    public SpriteData Sprites { get; private set; }
 
     [SerializeField] bool showDebug;
 
     SpriteRenderer spriteRenderer;
-    ColoredAnimator enemyAnimator;
+    ColoredAnimator exitAnimator;
     Animator animator;
 
     public bool IsActiveProperty { get; private set; }
@@ -36,13 +31,14 @@ public class Enemy : MonoBehaviour, IColored
     {
         SubscribeToColorSwap(false);
     }
-    
+
+    // Start is called before the first frame update
     void Awake()
     {
-        EnemyData = Color switch
+        Sprites = Color switch
         {
-            ColorSwap.Color.White => LightEnemyData,
-            ColorSwap.Color.Black => DarkEnemyData,
+            ColorSwap.Color.White => LightExitData,
+            ColorSwap.Color.Black => DarkExitData,
             ColorSwap.Color.Neutral => throw new NotImplementedException(),
             _ => throw new Exception(),
         };
@@ -51,11 +47,12 @@ public class Enemy : MonoBehaviour, IColored
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        enemyAnimator = GetComponent<ColoredAnimator>();
+        exitAnimator = GetComponent<ColoredAnimator>();
         animator = GetComponent<Animator>();
 
         animator.runtimeAnimatorController = Sprites.Controller;
     }
+
 
     void Update()
     {
@@ -66,13 +63,14 @@ public class Enemy : MonoBehaviour, IColored
     {
         if (playPhaseAnimation)
         {
-            enemyAnimator.ShouldPlayPhaseIn(true, IsActiveProperty);
+            Debug.Log("checked phase");
+            exitAnimator.ShouldPlayPhaseIn(true, IsActiveProperty);
             playPhaseAnimation = false;
         }
         else
         {
-            enemyAnimator.ShouldPlayIdle(IsActiveProperty);
-            enemyAnimator.ShouldPlayInactive(IsActiveProperty);
+            exitAnimator.ShouldPlayIdle(IsActiveProperty);
+            exitAnimator.ShouldPlayInactive(IsActiveProperty);
         }
     }
 
@@ -100,7 +98,7 @@ public class Enemy : MonoBehaviour, IColored
 
         Sprite newSprite;
 
-        DebugHelper.ShouldLog($"Set enemy sprite active : {IsActiveProperty}", showDebug);
+        DebugHelper.ShouldLog($"Set Exit sprite active : {IsActiveProperty}", showDebug);
 
         if (IsActiveProperty)
         {
@@ -121,6 +119,6 @@ public class Enemy : MonoBehaviour, IColored
         if (Color == ColorSwap.Color.Neutral)
             return true;
 
-        return Color == backgroundColor;
+        return Color != backgroundColor;
     }
 }

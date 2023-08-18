@@ -10,6 +10,7 @@ public class ColoredEditorSprites : MonoBehaviour
     SpriteRenderer spriteRenderer;
     Enemy enemy;
     Button button;
+    Exit exit;
 
     //Awake is only called when the script is instanced.
     void Awake()
@@ -20,6 +21,8 @@ public class ColoredEditorSprites : MonoBehaviour
 
         enemy = GetComponent<Enemy>();
         button = GetComponent<Button>();
+        exit = GetComponent<Exit>();
+
     }
 
     //Update is only called when something in the Scene changed.
@@ -55,6 +58,17 @@ public class ColoredEditorSprites : MonoBehaviour
             {
                 ColorSwap.Color.White => button.LightButtonData.SpriteData.ActiveSprite,
                 ColorSwap.Color.Black => button.DarkButtonData.SpriteData.ActiveSprite,
+                ColorSwap.Color.Neutral => throw new NotImplementedException(),
+                _ => throw new Exception(),
+            };
+        }
+
+        else if (exit != null)
+        {
+            newSprite = exit.Color switch
+            {
+                ColorSwap.Color.White => exit.LightExitData.ActiveSprite,
+                ColorSwap.Color.Black => exit.DarkExitData.ActiveSprite,
                 ColorSwap.Color.Neutral => throw new NotImplementedException(),
                 _ => throw new Exception(),
             };

@@ -22,6 +22,14 @@ public class Player : Singleton<Player>
         StartCoroutine(GroundCheck());
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.G)) 
+        { 
+            gameObject.SetActive(false);
+        }
+    }
+
     IEnumerator GroundCheck()
     {
         while (true)
