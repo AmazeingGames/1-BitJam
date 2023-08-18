@@ -12,7 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f05bd325bbb74849aee24f78142ad43, type: 3}
   m_Name: LightButton_Data
   m_EditorClassIdentifier: 
-  <InteractRadius>k__BackingField: 0
-  <IsConstant>k__BackingField: 0
-  <Color>k__BackingField: 0
-  <SpriteData>k__BackingField: {fileID: 0}
+  <SpriteData>k__BackingField: {fileID: 11400000, guid: e5a40b6e44add57489ad26fe929bed1e, type: 2}

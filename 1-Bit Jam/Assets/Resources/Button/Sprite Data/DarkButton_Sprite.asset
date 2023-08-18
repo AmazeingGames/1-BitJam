@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2f01bc83bf9bf749b54ed4f136d72ac, type: 3}
   m_Name: DarkButton_Sprite
   m_EditorClassIdentifier: 
-  <Controller>k__BackingField: {fileID: 0}
-  <ActiveSprite>k__BackingField: {fileID: 0}
-  <InactiveSprite>k__BackingField: {fileID: 0}
+  <Controller>k__BackingField: {fileID: 9100000, guid: 8cfaf4c1f722ca5478aeed2017d98d1f, type: 2}
+  <ActiveSprite>k__BackingField: {fileID: 1875195200, guid: 5b6cef3bc62627243be6fe5602c83afb, type: 3}
+  <InactiveSprite>k__BackingField: {fileID: 1617375771, guid: 5b6cef3bc62627243be6fe5602c83afb, type: 3}

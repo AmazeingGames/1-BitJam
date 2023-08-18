@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //Create a base class that this and Player Animator both derive from
-public class EnemyAnimator : MonoBehaviour
+public class ColoredAnimator : MonoBehaviour
 {
     [SerializeField] bool showDebugLog = false;
     [SerializeField] float phaseAnimationLength;
@@ -34,7 +34,6 @@ public class EnemyAnimator : MonoBehaviour
 
         if (isActive)
         {
-            Debug.Log("Playing active");
             PlayAnimation(idle);
         }
     }
@@ -44,8 +43,6 @@ public class EnemyAnimator : MonoBehaviour
         if (startedPhase)
         {
             isPhasePlaying = true;
-
-            Debug.Log("Started Phase");
 
             float phaseMultiplier = 1;
             float normalizedTime = 0;
@@ -60,7 +57,6 @@ public class EnemyAnimator : MonoBehaviour
 
             PlayAnimation(phaseIn, normalizedTime);
 
-            
             StartCoroutine(StartPhaseTimer());
         }
     }
@@ -72,7 +68,6 @@ public class EnemyAnimator : MonoBehaviour
 
         if (!isActive)
         {
-            Debug.Log("Playing inactive");
             PlayAnimation(inactive);
         }
     }
@@ -89,7 +84,6 @@ public class EnemyAnimator : MonoBehaviour
             if (timer >= phaseAnimationLength)
             {
                 isPhasePlaying = false;
-                Debug.Log("Finished phase in");
                 yield break;
             }
             yield return null;

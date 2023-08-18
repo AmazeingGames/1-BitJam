@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2f01bc83bf9bf749b54ed4f136d72ac, type: 3}
   m_Name: LightButton_Sprite
   m_EditorClassIdentifier: 
-  <Controller>k__BackingField: {fileID: 0}
-  <ActiveSprite>k__BackingField: {fileID: 0}
-  <InactiveSprite>k__BackingField: {fileID: 0}
+  <Controller>k__BackingField: {fileID: 9100000, guid: c6235c8c75cc35842acfd95dc16dde3f, type: 2}
+  <ActiveSprite>k__BackingField: {fileID: 529714074, guid: 5b6cef3bc62627243be6fe5602c83afb, type: 3}
+  <InactiveSprite>k__BackingField: {fileID: 250580657, guid: 5b6cef3bc62627243be6fe5602c83afb, type: 3}

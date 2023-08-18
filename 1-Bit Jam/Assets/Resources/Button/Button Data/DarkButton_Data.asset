@@ -12,5 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f05bd325bbb74849aee24f78142ad43, type: 3}
   m_Name: DarkButton_Data
   m_EditorClassIdentifier: 
-  <Color>k__BackingField: 0
-  <SpriteData>k__BackingField: {fileID: 0}
+  <SpriteData>k__BackingField: {fileID: 11400000, guid: 8e977ad1791bd8445924143ca20e045d, type: 2}

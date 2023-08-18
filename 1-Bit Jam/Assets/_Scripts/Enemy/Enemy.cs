@@ -1,18 +1,26 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
+//This and Button clearly share some repeating qualities. Could do something; not sure.
 public class Enemy : MonoBehaviour, IColored
 {
-    [field: SerializeField] public EnemyData EnemyData { get; private set; }
+    [field: SerializeField] public ColorSwap.Color Color { get; private set; }
+
+    [field: SerializeField] public EnemyData DarkEnemyData { get; private set; }
+    [field: SerializeField] public EnemyData LightEnemyData { get; private set; }
+
+    public EnemyData EnemyData { get; private set; }
+
     public SpriteData Sprites { get => EnemyData.SpriteData; }
 
     [SerializeField] bool showDebug;
 
     SpriteRenderer spriteRenderer;
-    EnemyAnimator enemyAnimator;
+    ColoredAnimator enemyAnimator;
     Animator animator;
 
     public bool IsActiveProperty { get; private set; }
@@ -28,11 +36,22 @@ public class Enemy : MonoBehaviour, IColored
     {
         SubscribeToColorSwap(false);
     }
+    
+    void Awake()
+    {
+        EnemyData = Color switch
+        {
+            ColorSwap.Color.White => LightEnemyData,
+            ColorSwap.Color.Black => DarkEnemyData,
+            ColorSwap.Color.Neutral => throw new NotImplementedException(),
+            _ => throw new Exception(),
+        };
+    }
 
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        enemyAnimator = GetComponent<EnemyAnimator>();
+        enemyAnimator = GetComponent<ColoredAnimator>();
         animator = GetComponent<Animator>();
 
         animator.runtimeAnimatorController = Sprites.Controller;
@@ -76,8 +95,6 @@ public class Enemy : MonoBehaviour, IColored
         }
     }
 
-    
-
     public void HandleColorSwap(ColorSwap.Color newColor)
     {
         IsActiveProperty = IsActiveCheck(newColor);
@@ -100,5 +117,5 @@ public class Enemy : MonoBehaviour, IColored
         playPhaseAnimation = true;
     }
 
-    public bool IsActiveCheck(ColorSwap.Color backgroundColor) => EnemyData.Color == backgroundColor;
+    public bool IsActiveCheck(ColorSwap.Color backgroundColor) => Color == backgroundColor;
 }

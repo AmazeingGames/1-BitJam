@@ -4,7 +4,7 @@ using Unity.VisualScripting.FullSerializer;
 using UnityEditor.Animations;
 using UnityEngine;
 
-//Create a base class that this and Enemy Animator both derive from
+//Create a base class that this and Colored Animator both derive from
 public class PlayerAnimator : MonoBehaviour
 {
     [SerializeField] bool showDebugLog = false;

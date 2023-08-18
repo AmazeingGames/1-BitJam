@@ -4,10 +4,7 @@ using UnityEngine;
 
 [CreateAssetMenu(menuName = "Object Data/Button Data")]
 
-//This should inherit from a base scriptable object class. Maybe 'ObjectData' or 'ColoredData'
-public class ButtonData : ScriptableObject
+public class ButtonData : ColoredObject
 {
-    [field: SerializeField] public ColorSwap.Color Color { get; private set; }
-    [field: SerializeField] public SpriteData SpriteData { get; private set; }
 }
 

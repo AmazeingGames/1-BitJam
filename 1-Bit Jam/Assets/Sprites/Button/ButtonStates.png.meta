@@ -117,7 +117,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ButtonStates_0
+      name: ButtonStates_2
       rect:
         serializedVersion: 2
         x: 0
@@ -125,7 +125,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -138,7 +138,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ButtonStates_1
+      name: ButtonStates_0
       rect:
         serializedVersion: 2
         x: 32
@@ -146,7 +146,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -159,7 +159,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ButtonStates_2
+      name: ButtonStates_1
       rect:
         serializedVersion: 2
         x: 64
@@ -167,7 +167,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -180,7 +180,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ButtonStates_3
+      name: ButtonStates_5
       rect:
         serializedVersion: 2
         x: 0
@@ -188,7 +188,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -201,7 +201,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ButtonStates_4
+      name: ButtonStates_3
       rect:
         serializedVersion: 2
         x: 32
@@ -209,7 +209,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -222,7 +222,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ButtonStates_5
+      name: ButtonStates_4
       rect:
         serializedVersion: 2
         x: 64
@@ -230,7 +230,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -253,12 +253,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      ButtonStates_0: 529714074
-      ButtonStates_1: 250580657
-      ButtonStates_2: 1154235072
-      ButtonStates_3: 1875195200
-      ButtonStates_4: 1617375771
-      ButtonStates_5: 10791783
+      ButtonStates_0: 250580657
+      ButtonStates_1: 1154235072
+      ButtonStates_2: 529714074
+      ButtonStates_3: 1617375771
+      ButtonStates_4: 10791783
+      ButtonStates_5: 1875195200
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
