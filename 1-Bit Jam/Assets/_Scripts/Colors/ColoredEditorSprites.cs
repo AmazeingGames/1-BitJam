@@ -31,11 +31,10 @@ public class ColoredEditorSprites : MonoBehaviour
         }
     }
 
-    //This code, obviously, is bad and would be drastically improved if both Enemy and Button inherited logic from the same script
+    //This code, obviously, is pretty bad and would be drastically improved if both Enemy and Button inherited logic from the same script or if I could just grab SpriteData directly
     //However, we are on a time crunch here
     void SetSprite()
     {
-        Debug.Log("Set Sprite");
 
         Sprite newSprite = null;
 

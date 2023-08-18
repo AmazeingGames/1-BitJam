@@ -5,7 +5,6 @@ using UnityEngine;
 //Create a base class that this and Player Animator both derive from
 public class ColoredAnimator : MonoBehaviour
 {
-    [SerializeField] bool showDebugLog = false;
     [SerializeField] float phaseAnimationLength;
 
     Animator animator;

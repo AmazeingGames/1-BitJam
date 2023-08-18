@@ -14,7 +14,7 @@ public class Vision : MonoBehaviour
     [SerializeField] protected bool showDebugLogs;
     [SerializeField] protected bool showGizmos;
 
-    public List<Collider2D> VisibleTargets { get; } = new();
+    protected List<Collider2D> VisibleTargets { get; } = new();
 
     // Start is called before the first frame update
     void Start()
@@ -63,4 +63,6 @@ public class Vision : MonoBehaviour
 
         return new Vector2(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
     }
+
+    public bool CanSeeCollider(Collider2D collider) => VisibleTargets.Contains(collider);
 }

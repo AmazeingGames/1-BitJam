@@ -117,5 +117,11 @@ public class Enemy : MonoBehaviour, IColored
         playPhaseAnimation = true;
     }
 
-    public bool IsActiveCheck(ColorSwap.Color backgroundColor) => Color == backgroundColor;
+    public bool IsActiveCheck(ColorSwap.Color backgroundColor)
+    {
+        if (Color == ColorSwap.Color.Neutral)
+            return true;
+
+        return Color == backgroundColor;
+    }
 }

@@ -6,9 +6,7 @@ using UnityEngine;
 
 //Create a base class that this and Colored Animator both derive from
 public class PlayerAnimator : MonoBehaviour
-{
-    [SerializeField] bool showDebugLog = false;
-    
+{    
     [Header("Jump")]
     [SerializeField] float jumpAnimationLength;
 
@@ -79,7 +77,6 @@ public class PlayerAnimator : MonoBehaviour
             if (timer >= jumpAnimationLength)
             {
                 isJumpPlaying = false;
-                Debug.Log("Finished jump");
                 yield break;
             }
             yield return null;

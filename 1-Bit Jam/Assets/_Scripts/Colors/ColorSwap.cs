@@ -8,7 +8,9 @@ public class ColorSwap : Singleton<ColorSwap>
 {
     [SerializeField] bool showDebug = true;
 
-    public enum Color { White, Black, Neutral }
+    readonly List<GameObject> whiteListed = new();
+
+    public enum Color { White, Black, Neutral, Null }
 
     public Color BackgroundColor { get; private set; }
 
@@ -20,24 +22,46 @@ public class ColorSwap : Singleton<ColorSwap>
         DebugHelper.ShouldLog($"Is instance null : {Instance == null}", showDebug);
     }
 
+    void Start()
+    {
+        whiteListed.Add(gameObject);
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            ChangeColor(Color.White);
+            ChangeColor(Color.White, gameObject);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            ChangeColor(Color.Black);
+            ChangeColor(Color.Black, gameObject);
         }
     }
 
-    void ChangeColor(Color newColor)
+    public void ChangeColor(Color newColor, GameObject callingObject)
     {
-        DebugHelper.ShouldLog($"Set background to {newColor}", showDebug);
+        if (whiteListed.Contains(callingObject))
+        {
+            DebugHelper.ShouldLog($"Set background to {newColor}", showDebug);
 
-        BackgroundColor = newColor;
+            BackgroundColor = newColor;
 
-        OnColorChange?.Invoke(newColor);
+            OnColorChange?.Invoke(newColor);
+        }
     }
+
+    public Color OppositeColor() => OppositeColor(BackgroundColor);
+
+    public Color OppositeColor(Color contrastColor)
+    {
+        return contrastColor switch
+        {
+            Color.White => Color.Black,
+            Color.Black => Color.White,
+            _ => throw new Exception(),
+        };
+    }
+
+    public void AddToWhiteList(GameObject gameObject) => whiteListed.Add(gameObject);
 }

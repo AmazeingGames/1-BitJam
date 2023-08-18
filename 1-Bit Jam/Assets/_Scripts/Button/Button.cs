@@ -16,13 +16,14 @@ public class Button : MonoBehaviour, IColored
     [SerializeField] bool showDebug;
 
     Vision vision;
-
     ColoredAnimator buttonAnimator;
     SpriteRenderer spriteRenderer;
     Animator animator;
 
     public ButtonData ButtonData { get; private set; }
     public SpriteData SpriteData { get => ButtonData.SpriteData; }
+
+    public bool IsActiveProperty { get; private set; }
 
     bool playPhaseAnimation;
 
@@ -52,9 +53,9 @@ public class Button : MonoBehaviour, IColored
 
     void Update()
     {
-        if (vision.VisibleTargets.Contains(Player.Instance.Collider))
+        if (vision.CanSeeCollider(Player.Instance.Collider))
         {
-            DebugHelper.ShouldLog("Player is within interact range", showDebug);
+            
         }
 
         CheckAnimations();
@@ -64,7 +65,6 @@ public class Button : MonoBehaviour, IColored
     {
         if (playPhaseAnimation)
         {
-            Debug.Log("checked phase");
             buttonAnimator.ShouldPlayPhaseIn(true, IsActiveProperty);
             playPhaseAnimation = false;
         }
@@ -99,7 +99,6 @@ public class Button : MonoBehaviour, IColored
             ColorSwap.Instance.OnColorChange -= HandleColorSwap;
     }
 
-    public bool IsActiveProperty { get; private set; }
 
     public void HandleColorSwap(ColorSwap.Color newColor)
     {
