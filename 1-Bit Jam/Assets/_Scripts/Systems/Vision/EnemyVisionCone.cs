@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyVisionCone : Vision
 {
-    [SerializeField] [Range(1, 360)] protected float visionAngle = 45;
+    [SerializeField] GameObject alertIcon;
+    [SerializeField][Range(1, 360)] protected float visionAngle = 45;
+    public bool CanSeePlayer { get; private set; }
+
     Enemy enemy;
 
     void Awake()
@@ -15,8 +19,23 @@ public class EnemyVisionCone : Vision
     // Start is called before the first frame update
     void Start()
     {
+        alertIcon.SetActive(false);
+
         StartCoroutine(FOVCheck());
     }
+
+    void Update()
+    {
+        CheckForPlayer();
+    }
+
+    void CheckForPlayer()
+    {
+        CanSeePlayer = VisibleTargets.Contains(Player.Instance.Collider);
+
+        alertIcon.SetActive(CanSeePlayer);
+    }
+
 
     protected override List<Collider2D> FOV()
     {

@@ -56,11 +56,11 @@ TagManager:
   - name: Enemies
     uniqueID: 1104675887
     locked: 0
-  - name: Player
-    uniqueID: 791344295
-    locked: 0
   - name: Game Icons
     uniqueID: 3520683733
+    locked: 0
+  - name: Player
+    uniqueID: 791344295
     locked: 0
   - name: UI
     uniqueID: 201238311
