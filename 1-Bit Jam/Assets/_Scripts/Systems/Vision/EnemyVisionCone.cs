@@ -6,7 +6,7 @@ using UnityEngine;
 public class EnemyVisionCone : Vision
 {
     [SerializeField] GameObject alertIcon;
-    [SerializeField][Range(1, 360)] protected float visionAngle = 45;
+    [SerializeField] [Range(1, 360)] protected float visionAngle = 45;
     public bool CanSeePlayer { get; private set; }
 
     Enemy enemy;
@@ -42,6 +42,7 @@ public class EnemyVisionCone : Vision
         if (!enemy.IsActiveProperty)
         {
             DebugHelper.ShouldLog("Not active", showDebugLogs);
+            VisibleTargets.Clear();
             return null;
         }
 

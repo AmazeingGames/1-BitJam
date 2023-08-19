@@ -5,7 +5,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-//This and Button clearly share some repeating qualities. Could do something; not sure.
+//This, Button, and Enemy clearly share some repeating qualities.
+//TO DO: Make changes to reduce repeated code.
 public class Enemy : MonoBehaviour, IColored
 {
     [field: SerializeField] public ColorSwap.Color Color { get; private set; }

@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//This, Button, and Enemy clearly share some repeating qualities.
+//TO DO: Make changes to reduce repeated code.
 public class Exit : MonoBehaviour, IColored
 {
     [field: SerializeField] public ColorSwap.Color Color { get; private set; }
@@ -58,7 +60,6 @@ public class Exit : MonoBehaviour, IColored
     {
         CheckAnimations();
     }
-
     void CheckAnimations()
     {
         if (playPhaseAnimation)

@@ -5,7 +5,8 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
 
-//This and Enemy clearly share some repeating qualities. Could do something; not sure.
+//This, Button, and Enemy clearly share some repeating qualities.
+//TO DO: Make changes to reduce repeated code.
 public class Button : MonoBehaviour, IColored
 {
     [field: SerializeField] public ColorSwap.Color Color { get; private set; }

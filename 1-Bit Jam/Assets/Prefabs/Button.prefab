@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 4069634734950977940}
   - component: {fileID: -4936601367461091557}
   - component: {fileID: -8876349256976934944}
-  - component: {fileID: -1573944351732557473}
+  - component: {fileID: 9093858742224055747}
   m_Layer: 0
   m_Name: Button
   m_TagString: Untagged
@@ -272,7 +272,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5165457e377b324abcb83854e79b928, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-1573944351732557473
+--- !u!114 &9093858742224055747
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -281,7 +281,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5428887720416920012}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2f8a65142f19eb4eb5dcfc34e6f052c, type: 3}
+  m_Script: {fileID: 11500000, guid: f4e1a162ceb286b4a843712432df74ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   interactIcon: {fileID: 2390617377971542526}

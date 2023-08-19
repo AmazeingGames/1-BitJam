@@ -1,11 +1,12 @@
 using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor.Build;
 using UnityEngine;
 
-public class Interactable : MonoBehaviour
+public abstract class Interactable : MonoBehaviour
 {
     [SerializeField] GameObject interactIcon;
     [SerializeField] float interactionCooldownLength;
@@ -13,8 +14,7 @@ public class Interactable : MonoBehaviour
     [SerializeField] float interactBuffer;
     [SerializeField] float canInteractTime;
 
-    Vision vison;
-    Button button;
+    protected Vision vison;
 
     float lastPressedInteract;
     float lastCouldInteract;
@@ -22,34 +22,42 @@ public class Interactable : MonoBehaviour
     public bool PlayInteraction { get; private set; }
     public bool IsOnCooldown { get; private set; }
 
+    protected List<bool> extraCaseGuards = new(); 
+
     float cooldownTimer;
 
-    private void Start()
+    protected void Start()
     {
-        vison = GetComponent<Vision>();
-        button = GetComponent<Button>();
+        Debug.Log("start is called");
 
-        interactIcon.SetActive(false);
+        SetVision();
+            
+        SetInteractIconActive(false);
     }
 
-    void Update()
+    protected virtual void SetVision()
+    {
+        vison = GetComponent<Vision>();
+    }
+
+    protected void Update()
     {
         UpdateTimers();
 
         GetInput();
 
-        CanBeInteractedWith(vison.CanSeeCollider(Player.Instance.Collider));
+        CanBeInteractedWith();
         ShouldPlayInteraction();
     }
 
-    void UpdateTimers()
+    protected void UpdateTimers()
     {
         lastPressedInteract -= Time.deltaTime;
         lastCouldInteract -= Time.deltaTime;
         cooldownTimer -= Time.deltaTime;
     }
 
-    void GetInput()
+    protected virtual void GetInput()
     {
         if (Input.GetButtonDown("Interact"))
         {
@@ -57,32 +65,45 @@ public class Interactable : MonoBehaviour
         }
     }
 
-    public void Initialize(ColorSwap.Color color)
+    protected virtual void FillExtraCaseguards()
     {
+        extraCaseGuards.Clear();
     }
 
     //This could could probably be improved via a state machine. This would also help with optimization
     //While the player is within range, the button can be interacted with
     //The button can still be interacted with for a short time after the player leaves the range
-    void CanBeInteractedWith(bool inRange)
+    protected void CanBeInteractedWith()
     {
-        interactIcon.SetActive(false);
+        SetInteractIconActive(false);
 
         if (cooldownTimer > 0)
             return;
 
-        if (!inRange)
+        bool canSeePlayer = vison.CanSeeCollider(Player.Instance.Collider);
+
+        if (!canSeePlayer)
             return;
 
-        if (!button.IsActiveProperty)
-            return;
+        FillExtraCaseguards();
 
-        interactIcon.SetActive(true);
+        foreach (bool caseGaurd in extraCaseGuards)
+            if (caseGaurd)
+                return;
+
+        SetInteractIconActive(true);
         lastCouldInteract = canInteractTime;
     }
 
+    protected void SetInteractIconActive(bool setActive)
+    {
+        if (interactIcon != null)
+            interactIcon.SetActive(setActive);
+    }
+
+
     //If player presses interact
-    void ShouldPlayInteraction()
+    protected void ShouldPlayInteraction()
     {
         if (cooldownTimer > 0)
             return;
@@ -97,10 +118,8 @@ public class Interactable : MonoBehaviour
     }
 
     //On interaction
-    void Interaction()
+    protected virtual void Interaction()
     {
         cooldownTimer = interactionCooldownLength;
-
-        ColorSwap.Instance.ChangeColor(ColorSwap.Instance.OppositeColor(), gameObject);
     }
 }
