@@ -26,6 +26,9 @@ public class EnemyVisionCone : Vision
 
     void Update()
     {
+        if (!GameManager.Instance.IsLevelPlaying)
+            return;
+
         CheckForPlayer();
     }
 

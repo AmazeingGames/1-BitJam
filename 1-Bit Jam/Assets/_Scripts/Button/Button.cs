@@ -16,7 +16,6 @@ public class Button : MonoBehaviour, IColored
 
     [SerializeField] bool showDebug;
 
-    Vision vision;
     ColoredAnimator buttonAnimator;
     SpriteRenderer spriteRenderer;
     Animator animator;
@@ -47,17 +46,13 @@ public class Button : MonoBehaviour, IColored
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        vision = GetComponent<Vision>();
-
         buttonAnimator = GetComponent<ColoredAnimator>();
     }
 
     void Update()
     {
-        if (vision.CanSeeCollider(Player.Instance.Collider))
-        {
-            
-        }
+        if (!GameManager.Instance.IsLevelPlaying)
+            return;
 
         CheckAnimations();
     }

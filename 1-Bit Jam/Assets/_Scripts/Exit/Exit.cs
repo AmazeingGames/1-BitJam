@@ -58,6 +58,9 @@ public class Exit : MonoBehaviour, IColored
 
     void Update()
     {
+        if (!GameManager.Instance.IsLevelPlaying)
+            return;
+
         CheckAnimations();
     }
     void CheckAnimations()

@@ -25,7 +25,6 @@ public class PlayerAnimator : MonoBehaviour
     static readonly int jump = Animator.StringToHash(jumpName);
     static readonly int idle = Animator.StringToHash(idleName);
 
-
     void Start()
     {
         animator = GetComponent<Animator>();

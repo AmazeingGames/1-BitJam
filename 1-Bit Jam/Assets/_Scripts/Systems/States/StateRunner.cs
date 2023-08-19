@@ -29,6 +29,9 @@ public class StateRunner<T> : MonoBehaviour where T : MonoBehaviour
 
     void Update()
     {
+        if (!GameManager.Instance.IsLevelPlaying)
+            return;
+
         activeState.CaptureInput();
         activeState.Update();
         activeState.ChangeState();
@@ -36,6 +39,9 @@ public class StateRunner<T> : MonoBehaviour where T : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!GameManager.Instance.IsLevelPlaying)
+            return;
+
         activeState.FixedUpdate();    
     }
 }

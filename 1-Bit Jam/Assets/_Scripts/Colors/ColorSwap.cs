@@ -43,12 +43,12 @@ public class ColorSwap : Singleton<ColorSwap>
     {
         if (whiteListed.Contains(callingObject))
         {
-            DebugHelper.ShouldLog($"Set background to {newColor}", showDebug);
-
             BackgroundColor = newColor;
 
             OnColorChange?.Invoke(newColor);
         }
+        else
+            Debug.LogWarning("Calling script doesn't have access to this function.");
     }
 
     public Color OppositeColor() => OppositeColor(BackgroundColor);

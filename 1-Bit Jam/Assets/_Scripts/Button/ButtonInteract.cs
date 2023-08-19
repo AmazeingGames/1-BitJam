@@ -16,6 +16,14 @@ public class ButtonInteract : Interactable
         base.Start();
     }
 
+    private void Update()
+    {
+        if (!GameManager.Instance.IsLevelPlaying)
+            return;
+
+        base.Update();
+    }
+
     protected override void GetInput()
     {
         base.GetInput();

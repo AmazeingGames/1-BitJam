@@ -24,10 +24,6 @@ public class Player : Singleton<Player>
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G)) 
-        { 
-            gameObject.SetActive(false);
-        }
     }
 
     IEnumerator GroundCheck()

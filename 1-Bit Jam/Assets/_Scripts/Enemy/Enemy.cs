@@ -60,6 +60,9 @@ public class Enemy : MonoBehaviour, IColored
 
     void Update()
     {
+        if (!GameManager.Instance.IsLevelPlaying)
+            return;
+
         CheckAnimations();
     }
 

@@ -17,6 +17,9 @@ public class ExitInteraction : Interactable
     // Update is called once per frame
     void Update()
     {
+        if (!GameManager.Instance.IsLevelPlaying)
+            return;
+
         base.Update();
     }
 
@@ -36,7 +39,7 @@ public class ExitInteraction : Interactable
     {
         base.Interaction();
 
-        Debug.Log("We outta here!");
+        GameManager.Instance.UpdateGameState(GameManager.GameState.LevelFinish);
     }
 
     protected override void SetVision()
