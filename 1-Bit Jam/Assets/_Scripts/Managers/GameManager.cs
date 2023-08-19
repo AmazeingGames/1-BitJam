@@ -63,7 +63,7 @@ public class GameManager : PersistentSingleton<GameManager>
         levelSelect.gameObject.SetActive(false);
     }
 
-    void OnLodaingEnter()
+    void OnLoadingEnter()
     {
         Debug.Log("Level Loading");
     }
@@ -172,7 +172,7 @@ public class GameManager : PersistentSingleton<GameManager>
                 break;
 
             case GameState.Loading:
-                OnLodaingEnter();
+                OnLoadingEnter();
                 break;
 
             case GameState.LevelStart:

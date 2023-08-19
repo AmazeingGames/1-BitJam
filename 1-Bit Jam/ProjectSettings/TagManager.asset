@@ -44,7 +44,10 @@ TagManager:
   - name: Background
     uniqueID: 3405149455
     locked: 0
-  - name: Terrain
+  - name: InactiveTerrain
+    uniqueID: 2565603259
+    locked: 0
+  - name: ActiveTerrain
     uniqueID: 1588486537
     locked: 0
   - name: Objects
