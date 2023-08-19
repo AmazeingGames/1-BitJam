@@ -95,9 +95,24 @@ public class GameManager : PersistentSingleton<GameManager>
         Time.timeScale = 0;
     }
 
+    void OnGamePause()
+    {
+        Debug.Log("Game Puased");
+    }
+
+    void OnGameResume()
+    {
+        Debug.Log("Game Resumed");
+    }
+
     void OnLevelFinish()
     {
         Debug.Log("Level Finish");
+
+        if (!LoadLevel(levelData.Level + 1))
+        {
+            UpdateGameState(GameState.MainMenu);
+        }
     }
 
     void OnLevelLose()
@@ -131,13 +146,11 @@ public class GameManager : PersistentSingleton<GameManager>
                 break;
 
             case GameState.GamePause:
-                Debug.Log("Left game pause");
+                OnGameResume();
                 break;
 
             case GameState.LevelFinish:
-                Debug.Log("Left level finish state");
                 break;
-
 
             case GameState.Lose:
                 break;
@@ -167,7 +180,7 @@ public class GameManager : PersistentSingleton<GameManager>
                 break;
 
             case GameState.GamePause:
-                Debug.Log("game paused");
+                OnGamePause();
                 break;
 
             case GameState.Lose:
@@ -185,12 +198,38 @@ public class GameManager : PersistentSingleton<GameManager>
         OnStateChanged?.Invoke(newState);
     }
 
-    public void LoadLevel(int level)
+    public bool LoadLevel(int level)
     {
-        Debug.Log($"changed scene to level {level}");
+        string levelName = $"Level_{level}";
+
+        if (!DoesSceneExist(levelName))
+            return false;
+
+        Debug.Log($"changed scene to {levelName}");
 
         UpdateGameState(GameState.Loading);
 
-        SceneManager.LoadScene($"Level_{level}");
+        SceneManager.LoadScene(levelName);
+
+        return true;
+    }
+
+    public static bool DoesSceneExist(string sceneName)
+    {
+        int buildIndex = SceneUtility.GetBuildIndexByScenePath(sceneName);
+
+        if (buildIndex == -1)
+        {
+            Debug.Log("Scene does not exist");
+            return false;
+        }
+        return true;
+    }
+
+    public static bool DoesLevelExist(int level)
+    {
+        string levelName = $"Level_{level}";
+
+        return DoesSceneExist(levelName);
     }
 }

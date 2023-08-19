@@ -4,27 +4,29 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-[ExecuteInEditMode]
 public class LevelSelector : UIButtonBase
 {
-    [SerializeField] bool isPlayable = true;
     [SerializeField] int levelToLoad;
     [SerializeField] List<Sprite> levelIcons;
     
     Image image;
 
+    bool levelExists;
+
     void Start()
     {
-        image = GetComponent<Image>();
+        SetSprite();
 
-        gameObject.SetActive(isPlayable);
+        levelExists = GameManager.DoesLevelExist(levelToLoad);
 
-        image.sprite = levelIcons[levelToLoad - 1];
+        gameObject.SetActive(levelExists);
+
     }
+
 
     public override void OnClick()
     {
-        if (isPlayable)
+        if (levelExists)
         {
             Debug.Log($"Loaded level {levelToLoad}");
 
@@ -32,9 +34,18 @@ public class LevelSelector : UIButtonBase
         }
         else
         {
-            Debug.Log("Not");
+            Debug.Log("Not Playable");
         }
         
+    }
+
+    public void SetSprite()
+    {
+        if (image == null)
+            image = GetComponent<Image>();
+
+        image.sprite = levelIcons[levelToLoad - 1];
+
     }
 
     public override void OnEnter()

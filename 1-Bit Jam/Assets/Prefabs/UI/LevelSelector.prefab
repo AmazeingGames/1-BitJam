@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 900194765132164098}
   - component: {fileID: 900194765132164096}
   - component: {fileID: 900194765132164099}
+  - component: {fileID: 6077609376188911598}
   m_Layer: 0
   m_Name: LevelSelector
   m_TagString: Untagged
@@ -90,7 +91,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2926c65ecf0249146ba0219058d13397, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPlayable: 1
   levelToLoad: 1
   levelIcons:
   - {fileID: 1247703166, guid: 042a1eb84721eda4a8cf141454ca2a2a, type: 3}
@@ -143,3 +143,15 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6077609376188911598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900194765132164101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c78fd174543cfd94497fc2b9d80c575b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
