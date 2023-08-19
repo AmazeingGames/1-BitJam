@@ -48,6 +48,7 @@ public class Vision : MonoBehaviour
 
     protected void OnDrawGizmos()
     {
+    #if UNITY_EDITOR
         if (!showGizmos)
             return;
 
@@ -59,6 +60,7 @@ public class Vision : MonoBehaviour
             Gizmos.color = Color.red;
             Gizmos.DrawLine(transform.position, collider.transform.position);
         }
+    #endif
     }
 
     protected Vector2 DirectionFromAngle(float eulerY, float angleInDegrees)

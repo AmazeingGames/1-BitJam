@@ -23,6 +23,10 @@ public class Walk : State<CharacterController>
     [Header("Fall")]
     [SerializeField] float maxFallVelocity;
 
+    [Header("Sound FX")]
+    [SerializeField] AudioClip heavenWalk, hellWalk;
+
+
     Rigidbody2D rigidbody;
     PlayerAnimator playerAnimator;
     Player player;

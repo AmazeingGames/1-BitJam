@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class ColorSwap : Singleton<ColorSwap>
 {
+    [SerializeField] AudioClip colorSwapSF;
+
     [SerializeField] bool showDebug = true;
 
     readonly List<GameObject> whiteListed = new();
@@ -29,6 +31,7 @@ public class ColorSwap : Singleton<ColorSwap>
 
     void Update()
     {
+        /*
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             ChangeColor(Color.White, gameObject);
@@ -37,6 +40,7 @@ public class ColorSwap : Singleton<ColorSwap>
         {
             ChangeColor(Color.Black, gameObject);
         }
+        */
     }
 
     public void ChangeColor(Color newColor, GameObject callingObject)
@@ -46,6 +50,9 @@ public class ColorSwap : Singleton<ColorSwap>
             BackgroundColor = newColor;
 
             OnColorChange?.Invoke(newColor);
+
+            AudioManager.Instance.PlayAudioClip(colorSwapSF);
+
         }
         else
             Debug.LogWarning("Calling script doesn't have access to this function.");

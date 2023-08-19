@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : PersistentSingleton<GameManager>
 {
     [SerializeField] GameState levelStartingState;
-    [SerializeField] LevelData levelData;
+    [field: SerializeField] public LevelData LevelData { get; private set; }
 
     [SerializeField] Canvas mainMenu;
     [SerializeField] Canvas levelSelect;
@@ -77,10 +77,10 @@ public class GameManager : PersistentSingleton<GameManager>
     {
         Debug.Log("On level start");
 
-        if (levelData == null)
+        if (LevelData == null)
             throw new Exception("Level data not set.");
 
-        ColorSwap.Instance.ChangeColor(levelData.StartingColor, gameObject);
+        ColorSwap.Instance.ChangeColor(LevelData.StartingColor, gameObject);
 
         IsLevelPlaying = true;
         Time.timeScale = 1.0f;
@@ -109,7 +109,7 @@ public class GameManager : PersistentSingleton<GameManager>
     {
         Debug.Log("Level Finish");
 
-        if (!LoadLevel(levelData.Level + 1))
+        if (!LoadLevel(LevelData.Level + 1))
         {
             UpdateGameState(GameState.MainMenu);
         }
@@ -117,7 +117,7 @@ public class GameManager : PersistentSingleton<GameManager>
 
     void OnLevelLose()
     {
-
+        ReloadLevel();
     }
 
 
@@ -196,6 +196,11 @@ public class GameManager : PersistentSingleton<GameManager>
         }
 
         OnStateChanged?.Invoke(newState);
+    }
+
+    public void ReloadLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public bool LoadLevel(int level)

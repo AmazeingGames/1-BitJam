@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ad72a23a77ebc042838deac0d92f924, type: 3}
   m_Name: Level_2
   m_EditorClassIdentifier: 
-  <StartingColor>k__BackingField: 0
+  <StartingColor>k__BackingField: 1
   <Level>k__BackingField: 2

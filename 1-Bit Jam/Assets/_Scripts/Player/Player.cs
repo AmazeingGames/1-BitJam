@@ -22,10 +22,6 @@ public class Player : Singleton<Player>
         StartCoroutine(GroundCheck());
     }
 
-    private void Update()
-    {
-    }
-
     IEnumerator GroundCheck()
     {
         while (true)

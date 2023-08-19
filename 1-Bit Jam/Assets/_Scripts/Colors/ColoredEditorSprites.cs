@@ -15,6 +15,7 @@ public class ColoredEditorSprites : MonoBehaviour
     //Awake is only called when the script is instanced.
     void Awake()
     {
+        #if UNITY_EDITOR
         runInEditMode = true;
 
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -22,16 +23,19 @@ public class ColoredEditorSprites : MonoBehaviour
         enemy = GetComponent<Enemy>();
         button = GetComponent<Button>();
         exit = GetComponent<Exit>();
+        #endif 
 
     }
 
     //Update is only called when something in the Scene changed.
     void Update()
     {
+        #if UNITY_EDITOR
         if (!Application.isPlaying)
         {
             SetSprite();
         }
+        #endif
     }
 
     //This code, obviously, is pretty bad and would be drastically improved if both Enemy and Button inherited logic from the same script or if I could just grab SpriteData directly

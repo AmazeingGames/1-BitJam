@@ -500,7 +500,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelStartingState: 0
-  levelData: {fileID: 0}
+  <LevelData>k__BackingField: {fileID: 0}
   mainMenu: {fileID: 1325421539}
   levelSelect: {fileID: 1026540482}
   loadingCanvas: {fileID: 682658358}

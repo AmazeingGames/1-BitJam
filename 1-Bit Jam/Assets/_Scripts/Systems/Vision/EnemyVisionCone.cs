@@ -5,16 +5,16 @@ using UnityEngine;
 
 public class EnemyVisionCone : Vision
 {
+    [SerializeField] AlertConsequence alertConsequence;
     [SerializeField] GameObject alertIcon;
     [SerializeField] [Range(1, 360)] protected float visionAngle = 45;
+
+
+    public enum AlertConsequence { Warning, Lose }
+
     public bool CanSeePlayer { get; private set; }
 
-    Enemy enemy;
-
-    void Awake()
-    {
-        enemy = transform.parent.GetComponent<Enemy>();
-    }
+    [SerializeField] Enemy enemy;
 
     // Start is called before the first frame update
     void Start()
@@ -36,7 +36,16 @@ public class EnemyVisionCone : Vision
     {
         CanSeePlayer = VisibleTargets.Contains(Player.Instance.Collider);
 
-        alertIcon.SetActive(CanSeePlayer);
+        switch (alertConsequence)
+        {
+            case AlertConsequence.Warning:
+                alertIcon.SetActive(CanSeePlayer);
+                break;
+            case AlertConsequence.Lose:
+                if (CanSeePlayer)
+                    GameManager.Instance.UpdateGameState(GameManager.GameState.Lose);
+                break;
+        }
     }
 
 
@@ -78,6 +87,8 @@ public class EnemyVisionCone : Vision
 
     private new void OnDrawGizmos()
     {
+    #if UNITY_EDITOR
+
         if (!showGizmos)
             return;
 
@@ -89,6 +100,6 @@ public class EnemyVisionCone : Vision
         Gizmos.color = Color.yellow;
         Gizmos.DrawLine(transform.position, transform.position + angle1 * visionRadius);
         Gizmos.DrawLine(transform.position, transform.position + angle2 * visionRadius);
-
+    #endif
     }
 }

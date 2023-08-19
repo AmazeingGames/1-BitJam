@@ -5,7 +5,7 @@ using UnityEngine;
 public class Background : MonoBehaviour, IColored
 {
     [SerializeField] GameObject backgroundObject;
-    [SerializeField] ColorSwap.Color color;
+    [field: SerializeField] public ColorSwap.Color color { get; private set; }
 
     [SerializeField] bool showDebug = true;
 

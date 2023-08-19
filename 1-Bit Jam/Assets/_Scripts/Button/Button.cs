@@ -111,6 +111,7 @@ public class Button : MonoBehaviour, IColored
             newSprite = SpriteData.InactiveSprite;
         }
 
+
         spriteRenderer.sprite = newSprite;
 
         playPhaseAnimation = true;
