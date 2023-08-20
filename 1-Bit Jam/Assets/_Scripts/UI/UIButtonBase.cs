@@ -6,6 +6,10 @@ using UnityEngine.UI;
 
 public abstract class UIButtonBase : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler
 {
+    [SerializeField] AudioClip buttonClick;
+
+    AudioClip buttonClickPlay;
+
     public void OnPointerClick(PointerEventData eventData)
     {
         OnClick();
@@ -16,6 +20,18 @@ public abstract class UIButtonBase : MonoBehaviour, IPointerClickHandler, IPoint
         OnEnter();
     }
 
-    public abstract void OnClick();
-    public abstract void OnEnter();
+    protected void Start()
+    {
+        buttonClickPlay = buttonClick;
+    }
+
+    public virtual void OnClick()
+    {
+        AudioManager.Instance.PlayAudioClip(buttonClickPlay);
+    }
+
+    public virtual void OnEnter()
+    {
+
+    }
 }

@@ -17,17 +17,18 @@ public class AudioManager : Singleton<AudioManager>
 
     public void PlayAudioClip(AudioClip clip)
     {
+        if (clip == null)
+        {
+            Debug.LogWarning("Clip is null!");
+            return;
+        }
+        Debug.Log($"Played SFX : {clip.name}");
         sfxSouce.PlayOneShot(clip);
     }
 
     public void SetMasterVolume(float volume)
     {
         AudioListener.volume = volume;
-    }
-
-    void Start()
-    {
-
     }
 
     public IEnumerator FadeTracks(bool playHeavenly, bool fadeSimultaneously)

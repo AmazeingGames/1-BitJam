@@ -78,7 +78,7 @@ public class TileController : MonoBehaviour, IColored
             inactiveHellTiles.SetActive(false);
 
             activeHeavenTiles.SetActive(false);
-            inactiveHellTiles.SetActive(true);
+            inactiveHeavenTiles.SetActive(true);
         }
         else
             throw new NotImplementedException();

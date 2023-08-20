@@ -27,8 +27,6 @@ public abstract class Interactable : MonoBehaviour
 
     protected void Start()
     {
-        Debug.Log("start is called");
-
         SetVision();
             
         SetInteractIconActive(false);

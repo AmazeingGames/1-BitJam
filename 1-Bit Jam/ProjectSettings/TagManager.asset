@@ -47,9 +47,6 @@ TagManager:
   - name: InactiveTerrain
     uniqueID: 2565603259
     locked: 0
-  - name: ActiveTerrain
-    uniqueID: 1588486537
-    locked: 0
   - name: Objects
     uniqueID: 2171781197
     locked: 0
@@ -61,6 +58,9 @@ TagManager:
     locked: 0
   - name: Exit
     uniqueID: 3483200191
+    locked: 0
+  - name: ActiveTerrain
+    uniqueID: 1588486537
     locked: 0
   - name: Game Icons
     uniqueID: 3520683733

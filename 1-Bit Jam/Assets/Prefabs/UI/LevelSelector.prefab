@@ -91,6 +91,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2926c65ecf0249146ba0219058d13397, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonClick: {fileID: 8300000, guid: 1589d66314ef70f418b373fa47b64d4f, type: 3}
   levelToLoad: 1
   levelIcons:
   - {fileID: 1247703166, guid: 042a1eb84721eda4a8cf141454ca2a2a, type: 3}

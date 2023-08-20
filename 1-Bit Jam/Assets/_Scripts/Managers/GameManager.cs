@@ -20,7 +20,7 @@ public class GameManager : PersistentSingleton<GameManager>
     public GameState State { get; private set; }
     public bool IsLevelPlaying { get; private set; }
 
-    public enum GameState { MainMenu, LevelSelectMenu, Loading, LevelStart, GamePause, CreditsMenu, LevelFinish, Lose }
+    public enum GameState { MainMenu, LevelSelectMenu, Loading, LevelStart, GamePause, CreditsMenu, LevelFinish, Lose, GameFinish }
 
     CanSwapColor canSwapColor;
 
@@ -35,7 +35,7 @@ public class GameManager : PersistentSingleton<GameManager>
 
     void OnMainMenuEnter()
     {
-        Debug.Log("MainMenu Enter");
+        //Debug.Log("MainMenu Enter");
 
         mainMenu.gameObject.SetActive(true);
         levelSelect.gameObject.SetActive(false);
@@ -44,38 +44,38 @@ public class GameManager : PersistentSingleton<GameManager>
 
     void OnMainMenuExit()
     {
-        Debug.Log("MainMenu Exit");
+        //Debug.Log("MainMenu Exit");
 
         mainMenu.gameObject.SetActive(false);
     }
 
     void OnLevelSelectMenuEnter()
     {
-        Debug.Log("Level Select Enter");
+       //Debug.Log("Level Select Enter");
 
         levelSelect.gameObject.SetActive(true);
     }
 
     void OnLevelSelectMenuExit()
     {
-        Debug.Log("Level Select Exit");
+        //Debug.Log("Level Select Exit");
 
         levelSelect.gameObject.SetActive(false);
     }
 
     void OnLoadingEnter()
     {
-        Debug.Log("Level Loading");
+        //Debug.Log("Level Loading");
     }
 
     void OnLoadingExit()
     {
-        Debug.Log("Loading finished");
+        //Debug.Log("Loading finished");
     }
 
     void OnLevelStart()
     {
-        Debug.Log("On level start");
+        //Debug.Log("On level start");
 
         if (LevelData == null)
             throw new Exception("Level data not set.");
@@ -88,7 +88,7 @@ public class GameManager : PersistentSingleton<GameManager>
 
     void OnLevelStop()
     {
-        Debug.Log("Level paused or finished");
+        //Debug.Log("Level paused or finished");
 
         IsLevelPlaying = false;
 
@@ -97,27 +97,32 @@ public class GameManager : PersistentSingleton<GameManager>
 
     void OnGamePause()
     {
-        Debug.Log("Game Puased");
+        //Debug.Log("Game Puased");
     }
 
     void OnGameResume()
     {
-        Debug.Log("Game Resumed");
+        //Debug.Log("Game Resumed");
     }
 
     void OnLevelFinish()
     {
-        Debug.Log("Level Finish");
+        //Debug.Log("Level Finish");
 
         if (!LoadLevel(LevelData.Level + 1))
         {
-            UpdateGameState(GameState.MainMenu);
+            UpdateGameState(GameState.GameFinish);
         }
     }
 
     void OnLevelLose()
     {
         ReloadLevel();
+    }
+
+    void OnGameFinish()
+    {
+        LoadScene("_MainMenu");
     }
 
 
@@ -153,6 +158,9 @@ public class GameManager : PersistentSingleton<GameManager>
                 break;
 
             case GameState.Lose:
+                break;
+
+            case GameState.GameFinish:
                 break;
 
             default:
@@ -191,6 +199,10 @@ public class GameManager : PersistentSingleton<GameManager>
                 OnLevelFinish();
                 break;
 
+            case GameState.GameFinish:
+                OnGameFinish();
+                break;
+
             default:
                 throw new NotImplementedException();
         }
@@ -203,21 +215,28 @@ public class GameManager : PersistentSingleton<GameManager>
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public bool LoadLevel(int level)
+    public bool LoadLevel(int level) => LoadScene($"Level_{level}");
+
+    public bool LoadScene(string sceneName)
     {
-        string levelName = $"Level_{level}";
+        loadingCanvas.gameObject.SetActive(true);
 
-        if (!DoesSceneExist(levelName))
+        if (!DoesSceneExist(sceneName))
+        {
+            loadingCanvas.gameObject.SetActive(false);
             return false;
+        }
 
-        Debug.Log($"changed scene to {levelName}");
+        Debug.Log($"changed scene to {sceneName}");
 
         UpdateGameState(GameState.Loading);
 
-        SceneManager.LoadScene(levelName);
+        SceneManager.LoadScene(sceneName);
 
         return true;
     }
+
+    public static bool DoesLevelExist(int level) => DoesSceneExist($"Level_{level}");
 
     public static bool DoesSceneExist(string sceneName)
     {
@@ -229,12 +248,5 @@ public class GameManager : PersistentSingleton<GameManager>
             return false;
         }
         return true;
-    }
-
-    public static bool DoesLevelExist(int level)
-    {
-        string levelName = $"Level_{level}";
-
-        return DoesSceneExist(levelName);
     }
 }

@@ -15,6 +15,8 @@ public class LevelSelector : UIButtonBase
 
     void Start()
     {
+        base.Start();
+
         SetSprite();
 
         levelExists = GameManager.DoesLevelExist(levelToLoad);
@@ -26,6 +28,8 @@ public class LevelSelector : UIButtonBase
 
     public override void OnClick()
     {
+        base.OnClick();
+
         if (levelExists)
         {
             Debug.Log($"Loaded level {levelToLoad}");

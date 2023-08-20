@@ -24,18 +24,20 @@ public class Walk : State<CharacterController>
     [SerializeField] float maxFallVelocity;
 
     [Header("Sound FX")]
-    [SerializeField] AudioClip heavenWalk, hellWalk;
+    [SerializeField] float timeBetweenWalkSound;
+    [SerializeField] AudioClip heavenWalk;
+    [SerializeField] AudioClip hellWalk;
 
 
     Rigidbody2D rigidbody;
     PlayerAnimator playerAnimator;
     Player player;
 
+    float walkSoundTimer;
     float jumpTimer;
     float groundedTimer;
 
     float horizontalInput;
-    float delayedVelocity;
 
     float maxVerticalVelocity;
 
@@ -66,6 +68,7 @@ public class Walk : State<CharacterController>
         if (!GameManager.Instance.IsLevelPlaying)
             return;
 
+        walkSoundTimer -= Time.deltaTime;
         groundedTimer -= Time.deltaTime;
         jumpTimer -= Time.deltaTime;
 
@@ -76,6 +79,8 @@ public class Walk : State<CharacterController>
 
         CheckAnimations();
 
+        CheckSounds();
+
         FlipPlayer();
     }
 
@@ -83,6 +88,38 @@ public class Walk : State<CharacterController>
     {
         playerAnimator.ShouldPlayWalk(rigidbody.velocity.x);
         playerAnimator.ShouldPlayIdle(rigidbody.velocity.x);
+    }
+
+    void CheckSounds()
+    {
+        CheckWalkSound();
+    }
+
+    void CheckWalkSound()
+    {
+        if (!player.IsGrounded)
+            return;
+
+        if (Mathf.Abs(rigidbody.velocity.x) < 0.1f)
+            return;
+
+        if (Mathf.Abs(horizontalInput) < .1f)
+            return;
+
+        if (walkSoundTimer > 0)
+            return;
+
+        Debug.Log(Mathf.Abs(rigidbody.velocity.x));
+
+        AudioClip audioClip = ColorSwap.Instance.BackgroundColor switch
+        {
+            ColorSwap.Color.White => heavenWalk,
+            ColorSwap.Color.Black => hellWalk,
+            _ => throw new System.NotImplementedException()
+        };
+
+        walkSoundTimer = timeBetweenWalkSound;
+        AudioManager.Instance.PlayAudioClip(audioClip);
     }
 
 

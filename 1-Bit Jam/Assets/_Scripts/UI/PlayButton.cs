@@ -8,10 +8,13 @@ public class PlayButton : UIButtonBase
 {
     public override void OnClick()
     {
+        base.OnClick();
+
         GameManager.Instance.UpdateGameState(GameManager.GameState.LevelSelectMenu);
     }
 
     public override void OnEnter()
     {
+
     }
 }
