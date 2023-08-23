@@ -109,10 +109,12 @@ public class Enemy : MonoBehaviour, IColored
         if (IsActiveProperty)
         {
             newSprite = Sprites.ActiveSprite;
+            spriteRenderer.sortingOrder = 1;
         }
         else
         {
             newSprite = Sprites.InactiveSprite;
+            spriteRenderer.sortingOrder = 0;
         }
 
         spriteRenderer.sprite = newSprite;

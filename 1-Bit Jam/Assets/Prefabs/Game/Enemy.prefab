@@ -83,8 +83,8 @@ MonoBehaviour:
     m_Bits: 64
   obstructionLayerMask:
     serializedVersion: 2
-    m_Bits: 256
-  visionRadius: 4.5
+    m_Bits: 768
+  visionRadius: 4.6
   timeBetweenCalls: 0.2
   showDebugLogs: 0
   showGizmos: 1
@@ -278,8 +278,8 @@ MonoBehaviour:
     m_Bits: 64
   obstructionLayerMask:
     serializedVersion: 2
-    m_Bits: 256
-  visionRadius: 3.5
+    m_Bits: 768
+  visionRadius: 3.6
   timeBetweenCalls: 0.1
   showDebugLogs: 0
   showGizmos: 1
