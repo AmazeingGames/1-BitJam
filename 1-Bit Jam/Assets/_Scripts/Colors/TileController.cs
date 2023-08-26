@@ -60,4 +60,9 @@ public class TileController : Colored
     {
         throw new System.NotImplementedException();
     }
+
+    protected override void OnStart()
+    {
+        throw new NotImplementedException();
+    }
 }

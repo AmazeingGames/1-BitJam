@@ -18,6 +18,10 @@ public abstract class Colored : MonoBehaviour
 
     public abstract bool IsActiveCheck(ColorSwap.Color backgroundColor);
 
+    protected virtual void OnStart()
+    {
+    }
+
     public void SubscribeToColorSwap(bool isSubscribing)
     {
         if (ColorSwap.Instance == null)

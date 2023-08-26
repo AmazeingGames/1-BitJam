@@ -27,4 +27,9 @@ public class Background : Colored
     }
 
     public override bool IsActiveCheck(ColorSwap.Color backgroundColor) => backgroundColor == color;
+
+    protected override void OnStart()
+    {
+        throw new System.NotImplementedException();
+    }
 }

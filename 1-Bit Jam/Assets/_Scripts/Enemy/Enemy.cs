@@ -9,54 +9,16 @@ using UnityEngine.UI;
 //TO DO: Make changes to reduce repeated code.
 public class Enemy : ColoredObject
 {
-    [field: SerializeField] public ColorSwap.Color Color { get; private set; }
-
-    [field: SerializeField] public SpriteData DarkSpriteData { get; private set; }
-    [field: SerializeField] public SpriteData LightSpriteData { get; private set; }
-
-    public SpriteData SpriteData { get; private set; }
-
     [SerializeField] bool showDebug;
-
-    SpriteRenderer spriteRenderer;
-    ColoredAnimator enemyAnimator;
-    Animator animator;
-
-    public bool IsActiveProperty { get; private set; }
-
-    bool playPhaseAnimation;
     
     void Awake()
     {
         SetSpriteData();
     }
 
-    void SetSpriteData()
-    {
-        SpriteData = Color switch
-        {
-            ColorSwap.Color.White => LightSpriteData,
-            ColorSwap.Color.Black => DarkSpriteData,
-            ColorSwap.Color.Neutral => throw new NotImplementedException(),
-            _ => throw new Exception(),
-        };
-    }
-
-    public SpriteData GetCurrentSpriteData()
-    {
-        if (SpriteData == null)
-            SetSpriteData();
-
-        return SpriteData;
-    }
-
     void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        enemyAnimator = GetComponent<ColoredAnimator>();
-        animator = GetComponent<Animator>();
-
-        animator.runtimeAnimatorController = SpriteData.Controller;
+        OnStart();
     }
 
     void Update()
@@ -67,42 +29,11 @@ public class Enemy : ColoredObject
         CheckAnimations();
     }
 
-    void CheckAnimations()
-    {
-        if (playPhaseAnimation)
-        {
-            enemyAnimator.ShouldPlayPhaseIn(true, IsActiveProperty);
-            playPhaseAnimation = false;
-        }
-        else
-        {
-            enemyAnimator.ShouldPlayIdle(IsActiveProperty);
-            enemyAnimator.ShouldPlayInactive(IsActiveProperty);
-        }
-    }
-
     public override void HandleColorSwap(ColorSwap.Color newColor)
     {
         IsActiveProperty = IsActiveCheck(newColor);
 
-        Sprite newSprite;
-
-        DebugHelper.ShouldLog($"Set enemy sprite active : {IsActiveProperty}", showDebug);
-
-        if (IsActiveProperty)
-        {
-            newSprite = SpriteData.ActiveSprite;
-            spriteRenderer.sortingOrder = 1;
-        }
-        else
-        {
-            newSprite = SpriteData.InactiveSprite;
-            spriteRenderer.sortingOrder = 0;
-        }
-
-        spriteRenderer.sprite = newSprite;
-
-        playPhaseAnimation = true;
+        base.HandleColorSwap(newColor);
     }
 
     public override bool IsActiveCheck(ColorSwap.Color backgroundColor)

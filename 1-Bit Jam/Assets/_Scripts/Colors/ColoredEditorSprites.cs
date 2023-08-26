@@ -8,6 +8,7 @@ using UnityEngine;
 public class ColoredEditorSprites : MonoBehaviour
 {
     SpriteRenderer spriteRenderer;
+    
     Enemy enemy;
     Button button;
     Exit exit;
@@ -42,7 +43,6 @@ public class ColoredEditorSprites : MonoBehaviour
     //However, we are on a time crunch here
     void SetSprite()
     {
-
         Sprite newSprite = null;
 
         if (enemy != null)
