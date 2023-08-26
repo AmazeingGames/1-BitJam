@@ -7,12 +7,12 @@ using UnityEngine;
 
 //This, Button, and Enemy clearly share some repeating qualities.
 //TO DO: Make changes to reduce repeated code.
-public class Button : MonoBehaviour, IColored
+public class Button : ColoredObject
 {
     [field: SerializeField] public ColorSwap.Color Color { get; private set; }
 
-    [field: SerializeField] public ButtonData DarkButtonData { get; private set; }
-    [field: SerializeField] public ButtonData LightButtonData { get; private set; }
+    [field: SerializeField] public SpriteData DarkSpriteData { get; private set; }
+    [field: SerializeField] public SpriteData LightSpriteData { get; private set; }
 
     [SerializeField] bool showDebug;
 
@@ -20,8 +20,7 @@ public class Button : MonoBehaviour, IColored
     SpriteRenderer spriteRenderer;
     Animator animator;
 
-    public ButtonData ButtonData { get; private set; }
-    public SpriteData SpriteData { get => ButtonData.SpriteData; }
+    public SpriteData SpriteData { get; private set; }
 
     public bool IsActiveProperty { get; private set; }
 
@@ -29,17 +28,30 @@ public class Button : MonoBehaviour, IColored
 
     void Awake()
     {
-        ButtonData = Color switch
-        {
-            ColorSwap.Color.White => LightButtonData,
-            ColorSwap.Color.Black => DarkButtonData,
-            ColorSwap.Color.Neutral => throw new NotImplementedException(),
-            _ => throw new Exception(),
-        };
+        SetSpriteData();
 
         animator = GetComponent<Animator>();
 
         animator.runtimeAnimatorController = SpriteData.Controller;
+    }
+
+    void SetSpriteData()
+    {
+        SpriteData = Color switch
+        {
+            ColorSwap.Color.White => LightSpriteData,
+            ColorSwap.Color.Black => DarkSpriteData,
+            ColorSwap.Color.Neutral => throw new NotImplementedException(),
+            _ => throw new Exception(),
+        };
+    }
+
+    public SpriteData GetCurrentSpriteData()
+    {
+        if (SpriteData == null)
+            SetSpriteData();
+
+        return SpriteData;
     }
 
     void Start()
@@ -71,32 +83,7 @@ public class Button : MonoBehaviour, IColored
         }
     }
 
-    private void OnEnable()
-    {
-        SubscribeToColorSwap(true);
-    }
-
-    private void OnDisable()
-    {
-        SubscribeToColorSwap(false);
-    }
-
-    void SubscribeToColorSwap(bool isSubscribing)
-    {
-        if (ColorSwap.Instance == null)
-        {
-            Debug.LogWarning("ColorSwap.Instance is null");
-            return;
-        }
-
-        if (isSubscribing)
-            ColorSwap.Instance.OnColorChange += HandleColorSwap;
-        else
-            ColorSwap.Instance.OnColorChange -= HandleColorSwap;
-    }
-
-
-    public void HandleColorSwap(ColorSwap.Color newColor)
+    public override void HandleColorSwap(ColorSwap.Color newColor)
     {
         IsActiveProperty = IsActiveCheck(newColor);
 
@@ -117,7 +104,7 @@ public class Button : MonoBehaviour, IColored
         playPhaseAnimation = true;
     }
 
-    public bool IsActiveCheck(ColorSwap.Color backgroundColor)
+    public override bool IsActiveCheck(ColorSwap.Color backgroundColor)
     {
         if (Color == ColorSwap.Color.Neutral)
             return true;

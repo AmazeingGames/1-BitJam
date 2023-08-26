@@ -125,7 +125,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -774283563
-  m_SortingLayer: 7
+  m_SortingLayer: 8
   m_SortingOrder: 0
   m_Sprite: {fileID: 248310967, guid: 042a1eb84721eda4a8cf141454ca2a2a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -288,8 +288,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Color>k__BackingField: 1
-  <DarkExitData>k__BackingField: {fileID: 11400000, guid: 765123db264863042a4b255e5bf90acc, type: 2}
-  <LightExitData>k__BackingField: {fileID: 11400000, guid: 1c0b94104d934d246b4d527c034369db, type: 2}
+  <DarkSpriteData>k__BackingField: {fileID: 11400000, guid: 765123db264863042a4b255e5bf90acc, type: 2}
+  <LightSpriteData>k__BackingField: {fileID: 11400000, guid: 1c0b94104d934d246b4d527c034369db, type: 2}
   showDebug: 1
 --- !u!114 &6202378364288839434
 MonoBehaviour:

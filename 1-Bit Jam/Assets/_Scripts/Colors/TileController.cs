@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
-public class TileController : MonoBehaviour, IColored
+public class TileController : Colored
 {
     GameObject activeHeavenTiles;
     GameObject inactiveHeavenTiles;
@@ -14,16 +14,6 @@ public class TileController : MonoBehaviour, IColored
     GameObject inactiveHellTiles;
 
     GameObject tileMaps;
-
-    void OnEnable()
-    {
-        SubscribeToColorSwap(true);
-    }
-
-    void OnDisable()
-    {
-        SubscribeToColorSwap(false);
-    }
 
     void Start()
     {
@@ -38,26 +28,8 @@ public class TileController : MonoBehaviour, IColored
         SetTilesActive(ColorSwap.Instance.BackgroundColor);
     }
 
-    void SubscribeToColorSwap(bool isSubscribing)
-    {
-        if (ColorSwap.Instance == null)
-        {
-            Debug.LogWarning("ColorSwap.Instance is null");
-            return;
-        }
 
-        if (isSubscribing)
-        {
-            ColorSwap.Instance.OnColorChange += HandleColorSwap;
-        }
-        else
-        {
-            ColorSwap.Instance.OnColorChange -= HandleColorSwap;
-        }
-    }
-
-
-    public void HandleColorSwap(ColorSwap.Color newColor)
+    public override void HandleColorSwap(ColorSwap.Color newColor)
     {
         SetTilesActive(newColor);
     }
@@ -84,7 +56,7 @@ public class TileController : MonoBehaviour, IColored
             throw new NotImplementedException();
     }
 
-    public bool IsActiveCheck(ColorSwap.Color backgroundColor)
+    public override bool IsActiveCheck(ColorSwap.Color backgroundColor)
     {
         throw new System.NotImplementedException();
     }

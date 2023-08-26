@@ -2,36 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Background : MonoBehaviour, IColored
+public class Background : Colored
 {
     [SerializeField] GameObject backgroundObject;
     [field: SerializeField] public ColorSwap.Color color { get; private set; }
 
     [SerializeField] bool showDebug = true;
-
-    private void OnEnable()
-    {
-        SubscribeToColorSwap(true);
-    }
-
-    private void OnDisable()
-    {
-        SubscribeToColorSwap(false);
-    }
-
-    void SubscribeToColorSwap(bool isSubscribing)
-    {
-        if (ColorSwap.Instance == null)
-        {
-            Debug.LogWarning("ColorSwap.Instance is null");
-            return;
-        }
-
-        if (isSubscribing)
-            ColorSwap.Instance.OnColorChange += HandleColorSwap;
-        else
-            ColorSwap.Instance.OnColorChange -= HandleColorSwap;
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -41,7 +17,7 @@ public class Background : MonoBehaviour, IColored
 
     void SetSize() => backgroundObject.transform.localScale = new Vector3(1000, 1000);
 
-    public void HandleColorSwap(ColorSwap.Color newColor)
+    public override void HandleColorSwap(ColorSwap.Color newColor)
     {
         bool setActive = IsActiveCheck(newColor);
 
@@ -50,5 +26,5 @@ public class Background : MonoBehaviour, IColored
         backgroundObject.SetActive(setActive);
     }
 
-    public bool IsActiveCheck(ColorSwap.Color backgroundColor) => backgroundColor == color;
+    public override bool IsActiveCheck(ColorSwap.Color backgroundColor) => backgroundColor == color;
 }

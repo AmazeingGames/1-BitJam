@@ -442,8 +442,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Color>k__BackingField: 0
-  <DarkEnemyData>k__BackingField: {fileID: 11400000, guid: 0835359f679b55d4ba71f15fc847ea93, type: 2}
-  <LightEnemyData>k__BackingField: {fileID: 11400000, guid: eaffdf910703b1d49a5310d97228ab8f, type: 2}
+  <DarkSpriteData>k__BackingField: {fileID: 11400000, guid: f154b076afdcbb740ad41248b8958f7d, type: 2}
+  <LightSpriteData>k__BackingField: {fileID: 11400000, guid: d56e2a2d82a81ef45aa2738252e74a80, type: 2}
   showDebug: 0
 --- !u!114 &2064210426772977098
 MonoBehaviour:

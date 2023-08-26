@@ -7,16 +7,14 @@ using UnityEngine.UI;
 
 //This, Button, and Enemy clearly share some repeating qualities.
 //TO DO: Make changes to reduce repeated code.
-public class Enemy : MonoBehaviour, IColored
+public class Enemy : ColoredObject
 {
     [field: SerializeField] public ColorSwap.Color Color { get; private set; }
 
-    [field: SerializeField] public EnemyData DarkEnemyData { get; private set; }
-    [field: SerializeField] public EnemyData LightEnemyData { get; private set; }
+    [field: SerializeField] public SpriteData DarkSpriteData { get; private set; }
+    [field: SerializeField] public SpriteData LightSpriteData { get; private set; }
 
-    public EnemyData EnemyData { get; private set; }
-
-    public SpriteData Sprites { get => EnemyData.SpriteData; }
+    public SpriteData SpriteData { get; private set; }
 
     [SerializeField] bool showDebug;
 
@@ -27,26 +25,29 @@ public class Enemy : MonoBehaviour, IColored
     public bool IsActiveProperty { get; private set; }
 
     bool playPhaseAnimation;
-
-    void OnEnable()
-    {
-        SubscribeToColorSwap(true);
-    }
-
-    void OnDisable()
-    {
-        SubscribeToColorSwap(false);
-    }
     
     void Awake()
     {
-        EnemyData = Color switch
+        SetSpriteData();
+    }
+
+    void SetSpriteData()
+    {
+        SpriteData = Color switch
         {
-            ColorSwap.Color.White => LightEnemyData,
-            ColorSwap.Color.Black => DarkEnemyData,
+            ColorSwap.Color.White => LightSpriteData,
+            ColorSwap.Color.Black => DarkSpriteData,
             ColorSwap.Color.Neutral => throw new NotImplementedException(),
             _ => throw new Exception(),
         };
+    }
+
+    public SpriteData GetCurrentSpriteData()
+    {
+        if (SpriteData == null)
+            SetSpriteData();
+
+        return SpriteData;
     }
 
     void Start()
@@ -55,7 +56,7 @@ public class Enemy : MonoBehaviour, IColored
         enemyAnimator = GetComponent<ColoredAnimator>();
         animator = GetComponent<Animator>();
 
-        animator.runtimeAnimatorController = Sprites.Controller;
+        animator.runtimeAnimatorController = SpriteData.Controller;
     }
 
     void Update()
@@ -80,25 +81,7 @@ public class Enemy : MonoBehaviour, IColored
         }
     }
 
-    void SubscribeToColorSwap(bool isSubscribing)
-    {
-        if (ColorSwap.Instance == null)
-        {
-            Debug.LogWarning("ColorSwap.Instance is null");
-            return;
-        }
-
-        if (isSubscribing)
-        {
-            ColorSwap.Instance.OnColorChange += HandleColorSwap;
-        }
-        else
-        {
-            ColorSwap.Instance.OnColorChange -= HandleColorSwap;
-        }
-    }
-
-    public void HandleColorSwap(ColorSwap.Color newColor)
+    public override void HandleColorSwap(ColorSwap.Color newColor)
     {
         IsActiveProperty = IsActiveCheck(newColor);
 
@@ -108,12 +91,12 @@ public class Enemy : MonoBehaviour, IColored
 
         if (IsActiveProperty)
         {
-            newSprite = Sprites.ActiveSprite;
+            newSprite = SpriteData.ActiveSprite;
             spriteRenderer.sortingOrder = 1;
         }
         else
         {
-            newSprite = Sprites.InactiveSprite;
+            newSprite = SpriteData.InactiveSprite;
             spriteRenderer.sortingOrder = 0;
         }
 
@@ -122,7 +105,7 @@ public class Enemy : MonoBehaviour, IColored
         playPhaseAnimation = true;
     }
 
-    public bool IsActiveCheck(ColorSwap.Color backgroundColor)
+    public override bool IsActiveCheck(ColorSwap.Color backgroundColor)
     {
         if (Color == ColorSwap.Color.Neutral)
             return true;

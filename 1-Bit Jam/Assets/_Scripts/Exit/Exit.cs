@@ -5,14 +5,14 @@ using UnityEngine;
 
 //This, Button, and Enemy clearly share some repeating qualities.
 //TO DO: Make changes to reduce repeated code.
-public class Exit : MonoBehaviour, IColored
+public class Exit : ColoredObject
 {
     [field: SerializeField] public ColorSwap.Color Color { get; private set; }
 
-    [field: SerializeField] public SpriteData DarkExitData { get; private set; }
-    [field: SerializeField] public SpriteData LightExitData { get; private set; }
+    [field: SerializeField] public SpriteData DarkSpriteData { get; private set; }
+    [field: SerializeField] public SpriteData LightSpriteData { get; private set; }
 
-    public SpriteData Sprites { get; private set; }
+    public SpriteData SpriteData { get; private set; }
 
     [SerializeField] bool showDebug;
 
@@ -24,26 +24,29 @@ public class Exit : MonoBehaviour, IColored
 
     bool playPhaseAnimation;
 
-    void OnEnable()
-    {
-        SubscribeToColorSwap(true);
-    }
-
-    void OnDisable()
-    {
-        SubscribeToColorSwap(false);
-    }
-
     // Start is called before the first frame update
     void Awake()
     {
-        Sprites = Color switch
+        SetSpriteData();
+    }
+
+    void SetSpriteData()
+    {
+        SpriteData = Color switch
         {
-            ColorSwap.Color.White => LightExitData,
-            ColorSwap.Color.Black => DarkExitData,
+            ColorSwap.Color.White => LightSpriteData,
+            ColorSwap.Color.Black => DarkSpriteData,
             ColorSwap.Color.Neutral => throw new NotImplementedException(),
             _ => throw new Exception(),
         };
+    }
+
+    public SpriteData GetCurrentSpriteData()
+    {
+        if (SpriteData == null)
+            SetSpriteData();
+
+        return SpriteData;
     }
 
     void Start()
@@ -52,7 +55,7 @@ public class Exit : MonoBehaviour, IColored
         exitAnimator = GetComponent<ColoredAnimator>();
         animator = GetComponent<Animator>();
 
-        animator.runtimeAnimatorController = Sprites.Controller;
+        animator.runtimeAnimatorController = SpriteData.Controller;
     }
 
 
@@ -78,25 +81,7 @@ public class Exit : MonoBehaviour, IColored
         }
     }
 
-    void SubscribeToColorSwap(bool isSubscribing)
-    {
-        if (ColorSwap.Instance == null)
-        {
-            Debug.LogWarning("ColorSwap.Instance is null");
-            return;
-        }
-
-        if (isSubscribing)
-        {
-            ColorSwap.Instance.OnColorChange += HandleColorSwap;
-        }
-        else
-        {
-            ColorSwap.Instance.OnColorChange -= HandleColorSwap;
-        }
-    }
-
-    public void HandleColorSwap(ColorSwap.Color newColor)
+    public override void HandleColorSwap(ColorSwap.Color newColor)
     {
         IsActiveProperty = IsActiveCheck(newColor);
 
@@ -106,11 +91,11 @@ public class Exit : MonoBehaviour, IColored
 
         if (IsActiveProperty)
         {
-            newSprite = Sprites.ActiveSprite;
+            newSprite = SpriteData.ActiveSprite;
         }
         else
         {
-            newSprite = Sprites.InactiveSprite;
+            newSprite = SpriteData.InactiveSprite;
         }
 
         spriteRenderer.sprite = newSprite;
@@ -118,7 +103,7 @@ public class Exit : MonoBehaviour, IColored
         playPhaseAnimation = true;
     }
 
-    public bool IsActiveCheck(ColorSwap.Color backgroundColor)
+    public override bool IsActiveCheck(ColorSwap.Color backgroundColor)
     {
         if (Color == ColorSwap.Color.Neutral)
             return true;

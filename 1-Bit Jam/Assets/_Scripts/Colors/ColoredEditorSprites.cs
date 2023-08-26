@@ -47,35 +47,17 @@ public class ColoredEditorSprites : MonoBehaviour
 
         if (enemy != null)
         {
-            newSprite = enemy.Color switch
-            {
-                ColorSwap.Color.White => enemy.LightEnemyData.SpriteData.ActiveSprite,
-                ColorSwap.Color.Black => enemy.DarkEnemyData.SpriteData.ActiveSprite,
-                ColorSwap.Color.Neutral => throw new NotImplementedException(),
-                _ => throw new Exception(),
-            };
+            newSprite = enemy.GetCurrentSpriteData().ActiveSprite;
         }
 
         else if (button != null)
         {
-            newSprite = button.Color switch
-            {
-                ColorSwap.Color.White => button.LightButtonData.SpriteData.ActiveSprite,
-                ColorSwap.Color.Black => button.DarkButtonData.SpriteData.ActiveSprite,
-                ColorSwap.Color.Neutral => throw new NotImplementedException(),
-                _ => throw new Exception(),
-            };
+            newSprite = button.GetCurrentSpriteData().ActiveSprite;
         }
 
         else if (exit != null)
         {
-            newSprite = exit.Color switch
-            {
-                ColorSwap.Color.White => exit.LightExitData.ActiveSprite,
-                ColorSwap.Color.Black => exit.DarkExitData.ActiveSprite,
-                ColorSwap.Color.Neutral => throw new NotImplementedException(),
-                _ => throw new Exception(),
-            };
+            newSprite = exit.GetCurrentSpriteData().ActiveSprite;
         }
 
         if (newSprite != null)

@@ -211,8 +211,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Color>k__BackingField: 0
-  <DarkButtonData>k__BackingField: {fileID: 11400000, guid: 46cd14bfa9d424c4d8934bcb8c3641e1, type: 2}
-  <LightButtonData>k__BackingField: {fileID: 11400000, guid: 5c01ce9b80d9d65419f052e5b88f8f68, type: 2}
+  <DarkSpriteData>k__BackingField: {fileID: 11400000, guid: 8e977ad1791bd8445924143ca20e045d, type: 2}
+  <LightSpriteData>k__BackingField: {fileID: 11400000, guid: e5a40b6e44add57489ad26fe929bed1e, type: 2}
   showDebug: 1
 --- !u!114 &2530605025879922481
 MonoBehaviour:
