@@ -65,13 +65,9 @@ public abstract class ColoredObject : Colored
         Sprite newSprite;
 
         if (IsActiveProperty)
-        {
             newSprite = SpriteData.ActiveSprite;
-        }
         else
-        {
             newSprite = SpriteData.InactiveSprite;
-        }
 
         spriteRenderer.sprite = newSprite;
 
