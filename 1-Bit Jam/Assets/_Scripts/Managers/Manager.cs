@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Manager : PersistentSingleton<Manager>
+public class Manager : Singleton<Manager>
 { 
 }
 

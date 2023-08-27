@@ -4,63 +4,38 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : PersistentSingleton<GameManager>
+public class GameManager : Singleton<GameManager>
 {
-    [SerializeField] GameState levelStartingState;
-    [field: SerializeField] public LevelData LevelData { get; private set; }
+    [SerializeField] List<LevelData> levelData = new();
 
-    [SerializeField] Canvas mainMenu;
-    [SerializeField] Canvas levelSelect;
-    [SerializeField] Canvas loadingCanvas;
+    public LevelData LevelDataCurrent { get; private set; }
 
     public static event Action<GameState> OnStateLeave;
-    public static event Action<GameState> OnStateChanged;
+    public static event Action<GameState> OnStateEnter;
 
     public GameState PreviousState { get; private set; }
     public GameState State { get; private set; }
     public bool IsLevelPlaying { get; private set; }
 
-    public enum GameState { MainMenu, LevelSelectMenu, Loading, LevelStart, GamePause, CreditsMenu, LevelFinish, Lose, GameFinish }
+    public enum GameState { MainMenu, Loading, LevelStart, GamePause, CreditsMenu, LevelFinish, Lose, GameFinish }
 
-    CanSwapColor canSwapColor;
+    string sceneToUnload = null;
 
-    IEnumerator Start()
+    void Start()
     {
-        canSwapColor = gameObject.AddComponent<CanSwapColor>();
-
-        yield return null;
-
-        UpdateGameState(levelStartingState);
+        UpdateGameState(GameState.MainMenu);
     }
 
     void OnMainMenuEnter()
     {
         //Debug.Log("MainMenu Enter");
 
-        mainMenu.gameObject.SetActive(true);
-        levelSelect.gameObject.SetActive(false);
-        loadingCanvas.gameObject.SetActive(false);
+        LoadScene("_MainMenu");
     }
 
     void OnMainMenuExit()
     {
         //Debug.Log("MainMenu Exit");
-
-        mainMenu.gameObject.SetActive(false);
-    }
-
-    void OnLevelSelectMenuEnter()
-    {
-       //Debug.Log("Level Select Enter");
-
-        levelSelect.gameObject.SetActive(true);
-    }
-
-    void OnLevelSelectMenuExit()
-    {
-        //Debug.Log("Level Select Exit");
-
-        levelSelect.gameObject.SetActive(false);
     }
 
     void OnLoadingEnter()
@@ -73,14 +48,11 @@ public class GameManager : PersistentSingleton<GameManager>
         //Debug.Log("Loading finished");
     }
 
-    void OnLevelStart()
+    void OnLevelLoad(int levelToLoad)
     {
-        //Debug.Log("On level start");
+        LevelDataCurrent = levelData[levelToLoad - 1];
 
-        if (LevelData == null)
-            throw new Exception("Level data not set.");
-
-        ColorSwap.Instance.ChangeColor(LevelData.StartingColor, gameObject);
+        LoadLevel(levelToLoad);
 
         IsLevelPlaying = true;
         Time.timeScale = 1.0f;
@@ -109,7 +81,11 @@ public class GameManager : PersistentSingleton<GameManager>
     {
         //Debug.Log("Level Finish");
 
-        if (!LoadLevel(LevelData.Level + 1))
+        if (DoesLevelExist(LevelDataCurrent.Level + 1))
+        {
+            UpdateGameState(GameState.LevelStart, LevelDataCurrent.Level + 1); 
+        }
+        else
         {
             UpdateGameState(GameState.GameFinish);
         }
@@ -125,21 +101,73 @@ public class GameManager : PersistentSingleton<GameManager>
         LoadScene("_MainMenu");
     }
 
-
-    public void UpdateGameState(GameState newState)
+    void ReloadLevel()
     {
-        OnStateLeave?.Invoke(newState);
+        UpdateGameState(GameState.LevelStart, LevelDataCurrent.Level);
+    }
 
-        PreviousState = State;
+    bool LoadLevel(int level) => LoadScene($"Level_{level}");
 
+    bool LoadScene(string sceneName)
+    {
+        //loadingCanvas.gameObject.SetActive(true);
+
+        if (!DoesSceneExist(sceneName))
+        {
+            //loadingCanvas.gameObject.SetActive(false);
+            return false;
+        }
+
+        UnloadScene(sceneToUnload);
+        
+        sceneToUnload = sceneName;
+
+        UpdateGameState(GameState.Loading);
+
+        Debug.Log($"Loading Scene: {sceneName}");
+
+        SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+
+        return true;
+    }
+
+    bool UnloadScene(string sceneName)
+    {
+        if (!DoesSceneExist(sceneName))
+            return false;
+
+        if (sceneToUnload == null)
+            return false;
+
+        Debug.Log($"Unloaded scene : {sceneName}");
+
+        SceneManager.UnloadSceneAsync(sceneName);
+
+        return true;
+    }
+
+    public static bool DoesLevelExist(int level) => DoesSceneExist($"Level_{level}");
+
+    public static bool DoesSceneExist(string sceneName)
+    {
+        int buildIndex = SceneUtility.GetBuildIndexByScenePath(sceneName);
+
+        if (buildIndex == -1)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public void UpdateGameState(GameState newState, int levelToLoad = -1)
+    {
+        OnStateLeave?.Invoke(State);
+
+        //Not sure if this is an issue, but this is always called the first time we exit a state, even when we haven't technically 'left' any states. This also happens in the main menu manager.
         switch (State)
         {
             case GameState.MainMenu:
                 OnMainMenuExit();
-                break;
-
-            case GameState.LevelSelectMenu:
-                OnLevelSelectMenuExit();
                 break;
 
             case GameState.Loading:
@@ -169,14 +197,12 @@ public class GameManager : PersistentSingleton<GameManager>
 
         State = newState;
 
+        Debug.Log($"Change State | New State: {newState}");
+
         switch (newState)
         {
             case GameState.MainMenu:
                 OnMainMenuEnter();
-                break;
-
-            case GameState.LevelSelectMenu:
-                OnLevelSelectMenuEnter();
                 break;
 
             case GameState.Loading:
@@ -184,7 +210,12 @@ public class GameManager : PersistentSingleton<GameManager>
                 break;
 
             case GameState.LevelStart:
-                OnLevelStart();
+                Debug.Log("level Start");
+
+                if (levelToLoad == -1)
+                    throw new NotImplementedException();
+
+                OnLevelLoad(levelToLoad);
                 break;
 
             case GameState.GamePause:
@@ -206,47 +237,6 @@ public class GameManager : PersistentSingleton<GameManager>
             default:
                 throw new NotImplementedException();
         }
-
-        OnStateChanged?.Invoke(newState);
-    }
-
-    public void ReloadLevel()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
-    public bool LoadLevel(int level) => LoadScene($"Level_{level}");
-
-    public bool LoadScene(string sceneName)
-    {
-        loadingCanvas.gameObject.SetActive(true);
-
-        if (!DoesSceneExist(sceneName))
-        {
-            loadingCanvas.gameObject.SetActive(false);
-            return false;
-        }
-
-        Debug.Log($"changed scene to {sceneName}");
-
-        UpdateGameState(GameState.Loading);
-
-        SceneManager.LoadScene(sceneName);
-
-        return true;
-    }
-
-    public static bool DoesLevelExist(int level) => DoesSceneExist($"Level_{level}");
-
-    public static bool DoesSceneExist(string sceneName)
-    {
-        int buildIndex = SceneUtility.GetBuildIndexByScenePath(sceneName);
-
-        if (buildIndex == -1)
-        {
-            Debug.Log("Scene does not exist");
-            return false;
-        }
-        return true;
+        OnStateEnter?.Invoke(newState);
     }
 }

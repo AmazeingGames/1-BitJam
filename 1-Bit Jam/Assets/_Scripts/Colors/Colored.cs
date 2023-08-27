@@ -14,7 +14,7 @@ public abstract class Colored : MonoBehaviour
         SubscribeToColorSwap(false);
     }
 
-    public abstract void HandleColorSwap(ColorSwap.Color newColor);
+    protected abstract void HandleColorSwap(ColorSwap.Color newColor);
 
     public abstract bool IsActiveCheck(ColorSwap.Color backgroundColor);
 

@@ -17,7 +17,7 @@ public class Background : Colored
 
     void SetSize() => backgroundObject.transform.localScale = new Vector3(1000, 1000);
 
-    public override void HandleColorSwap(ColorSwap.Color newColor)
+    protected override void HandleColorSwap(ColorSwap.Color newColor)
     {
         bool setActive = IsActiveCheck(newColor);
 

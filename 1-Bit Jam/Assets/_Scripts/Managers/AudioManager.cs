@@ -22,7 +22,8 @@ public class AudioManager : Singleton<AudioManager>
             Debug.LogWarning("Clip is null!");
             return;
         }
-        Debug.Log($"Played SFX : {clip.name}");
+
+        //Debug.Log($"Played SFX : {clip.name}");
         sfxSouce.PlayOneShot(clip);
     }
 

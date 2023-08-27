@@ -33,7 +33,7 @@ public class Exit : ColoredObject
 
     
 
-    public override void HandleColorSwap(ColorSwap.Color newColor)
+    protected override void HandleColorSwap(ColorSwap.Color newColor)
     {
         IsActiveProperty = IsActiveCheck(newColor);
 

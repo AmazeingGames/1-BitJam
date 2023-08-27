@@ -11,8 +11,6 @@ public class ButtonInteract : Interactable
     {
         button = GetComponent<Button>();
 
-        Debug.Log($"button is null : {button == null}");
-
         base.Start();
     }
 

@@ -15,8 +15,36 @@ public class TileController : Colored
 
     GameObject tileMaps;
 
+    bool needsToSetup = true;
+
     void Start()
     {
+        GameManager.OnStateEnter += HandleLevelLoad;
+    }
+
+    void HandleLevelLoad(GameManager.GameState gameState)
+    {
+        if (gameState != GameManager.GameState.LevelStart)
+            return;
+
+        StartCoroutine(Setup());
+
+        Debug.Log("Handled level load");
+    }
+
+    protected override void HandleColorSwap(ColorSwap.Color newColor)
+    {
+        SetTilesActive(newColor);
+    }
+
+    IEnumerator Setup()
+    {
+        //Gives time to unload the current level
+        yield return null;
+
+        //Gives time to load the next level
+        yield return new WaitWhile(IsTileMapsNull);
+
         tileMaps = GameObject.Find("TileMaps");
 
         activeHeavenTiles = tileMaps.transform.Find("Heaven Active").gameObject;
@@ -24,15 +52,27 @@ public class TileController : Colored
         activeHellTiles = tileMaps.transform.Find("Hell Active").gameObject;
         inactiveHellTiles = tileMaps.transform.Find("Hell Inactive").gameObject;
 
-
+        ColorSwap.Instance.ChangeColor(GameManager.Instance.LevelDataCurrent.StartingColor, gameObject);
+        
         SetTilesActive(ColorSwap.Instance.BackgroundColor);
+
+        yield break;
     }
 
-
-    public override void HandleColorSwap(ColorSwap.Color newColor)
+    bool IsTileMapsNull()
     {
-        SetTilesActive(newColor);
+        bool isNull = GameObject.Find("TileMaps") == null;
+
+        if (isNull)
+        {
+            Debug.Log("waiting");
+        }
+
+        return isNull;
     }
+
+
+
 
     void SetTilesActive(ColorSwap.Color newColor)
     {

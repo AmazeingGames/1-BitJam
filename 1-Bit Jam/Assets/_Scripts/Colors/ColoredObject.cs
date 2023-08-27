@@ -60,7 +60,7 @@ public abstract class ColoredObject : Colored
         }
     }
 
-    public override void HandleColorSwap(ColorSwap.Color newColor)
+    protected override void HandleColorSwap(ColorSwap.Color newColor)
     {
         Sprite newSprite;
 

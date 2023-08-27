@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[ExecuteInEditMode]
+//[ExecuteInEditMode]
 public class ColoredEditorBackground : MonoBehaviour
 {
     ColorSwap.Color gameObjectColor;
@@ -41,7 +41,7 @@ public class ColoredEditorBackground : MonoBehaviour
             child = transform.GetChild(0).gameObject;
         }
 
-        bool setActive = gameObjectColor == manager.LevelData.StartingColor;
+        bool setActive = gameObjectColor == manager.LevelDataCurrent.StartingColor;
 
         child.SetActive(setActive);
     #endif

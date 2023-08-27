@@ -41,6 +41,8 @@ public abstract class Singleton<T> : StaticInstance<T> where T : MonoBehaviour
     }
 }
 
+/*
+
 /// <summary>
 /// Finally we have a persistent version of the singleton. This will survive through scene
 /// loads. Perfect for system calsses which require stateful, persisten data. Or aduio sources
@@ -55,3 +57,4 @@ public abstract class PersistentSingleton<T> : Singleton<T> where T : MonoBehavi
         DontDestroyOnLoad(gameObject);
     }
 }
+*/

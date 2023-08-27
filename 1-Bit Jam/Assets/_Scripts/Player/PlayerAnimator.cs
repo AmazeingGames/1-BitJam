@@ -6,6 +6,7 @@ using UnityEngine;
 //Create a base class that this and Colored Animator both derive from
 public class PlayerAnimator : MonoBehaviour
 {    
+
     [Header("Jump")]
     [SerializeField] float jumpAnimationLength;
 

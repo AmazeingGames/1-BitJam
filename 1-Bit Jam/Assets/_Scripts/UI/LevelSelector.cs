@@ -32,9 +32,7 @@ public class LevelSelector : UIButtonBase
 
         if (levelExists)
         {
-            Debug.Log($"Loaded level {levelToLoad}");
-
-            GameManager.Instance.LoadLevel(levelToLoad);
+            GameManager.Instance.UpdateGameState(GameManager.GameState.LevelStart, levelToLoad);
         }
         else
         {
