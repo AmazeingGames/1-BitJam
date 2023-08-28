@@ -174,7 +174,10 @@ MonoBehaviour:
   MasterBanks:
   - Master
   Banks:
-  - SFX
+  - Heaven
+  - Hell
+  - Player
+  - UI
   BanksToLoad: []
   LiveUpdatePort: 9264
   EnableMemoryTracking: 0
