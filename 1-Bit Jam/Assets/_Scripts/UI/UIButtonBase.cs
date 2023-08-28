@@ -1,14 +1,12 @@
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-
+using static AudioManager.EventSounds;
 public abstract class UIButtonBase : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler
 {
-    [SerializeField] AudioClip buttonClick;
-
-    AudioClip buttonClickPlay;
 
     public void OnPointerClick(PointerEventData eventData)
     {
@@ -22,12 +20,12 @@ public abstract class UIButtonBase : MonoBehaviour, IPointerClickHandler, IPoint
 
     protected void Start()
     {
-        buttonClickPlay = buttonClick;
+         
     }
 
     public virtual void OnClick()
     {
-        AudioManager.Instance.PlayAudioClip(buttonClickPlay);
+        AudioManager.Instance.PlayAudioClip(UIClick, transform.position);
     }
 
     public virtual void OnEnter()

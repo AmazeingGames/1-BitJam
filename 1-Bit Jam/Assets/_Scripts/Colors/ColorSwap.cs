@@ -1,13 +1,14 @@
+using FMODUnity;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static AudioManager;
+using static AudioManager;
 
 public class ColorSwap : Singleton<ColorSwap>
 {
-    [SerializeField] AudioClip colorSwapSF;
-
     [SerializeField] bool showDebug = true;
 
     readonly List<GameObject> whiteListed = new();
@@ -51,8 +52,15 @@ public class ColorSwap : Singleton<ColorSwap>
 
             OnColorChange?.Invoke(newColor);
 
-            AudioManager.Instance.PlayAudioClip(colorSwapSF);
+            AudioManager.Instance.PlayAudioClip(EventSounds.ColorSwap, callingObject.transform.position);
 
+            float isHeaven = 0f;
+
+            if (BackgroundColor == Color.White)
+                isHeaven = 1f;
+
+            AudioManager.Instance.SetAmbienceParameter(EventInstances.HeavenAmbience, "IsHeaven", isHeaven);
+            AudioManager.Instance.SetAmbienceParameter(EventInstances.DevilishAmbience, "IsHeaven", isHeaven);
         }
         else
             Debug.LogWarning("Calling script doesn't have access to this function.");
