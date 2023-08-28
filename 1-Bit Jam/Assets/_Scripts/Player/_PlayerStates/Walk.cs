@@ -109,7 +109,7 @@ public class Walk : State<CharacterController>
         if (walkSoundTimer > 0)
             return;
 
-        Debug.Log(Mathf.Abs(rigidbody.velocity.x));
+        //Debug.Log(Mathf.Abs(rigidbody.velocity.x));
 
         AudioClip audioClip = ColorSwap.Instance.BackgroundColor switch
         {
