@@ -1,9 +1,22 @@
+using FMOD.Studio;
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
+using System.Dynamic;
 using UnityEngine;
 
 public class AudioManager : Singleton<AudioManager>
 {
+    [field: Header("SFX")]
+    [field: SerializeField] public EventReference ColorSwapSound { get; private set; }
+    [field: SerializeField] public EventReference HeavenlyWalkSound { get; private set; }
+    [field: SerializeField] public EventReference DevilishWalkSound { get; private set; }
+    [field: SerializeField] public EventReference UIClickSound { get; private set; }
+    [field: SerializeField] public EventReference HeavenlyAmbience { get; private set; }
+    [field: SerializeField] public EventReference DevilishAmbience { get; private set; }
+
+
+    [Header("Music")]
     [SerializeField] float fadeInTime;
     [SerializeField] float fadeOutTime;
 
@@ -13,23 +26,76 @@ public class AudioManager : Singleton<AudioManager>
 
     [SerializeField] AudioSource sfxSouce;
 
+    EventInstance heavenAmbience;
+    EventInstance hellAmbience;
+
+    public enum EventSounds { ColorSwap, UIClick, HeavenlyWalk, DevilishWalk, HeavenAmbience, DevilishAmbience }
+
+    public enum EventInstances { HeavenAmbience,  DevilishAmbience }
+
     bool isFading = false;
 
-    public void PlayAudioClip(AudioClip clip)
-    {
-        if (clip == null)
-        {
-            Debug.LogWarning("Clip is null!");
-            return;
-        }
+    Dictionary<EventSounds, EventReference> SoundTypeToReference;
+    Dictionary<EventInstances, EventInstance> SoundTypeToInstance;
 
-        //Debug.Log($"Played SFX : {clip.name}");
-        sfxSouce.PlayOneShot(clip);
+    List<EventInstance> eventInstances = new();
+
+    bool initializedAmbience;
+
+    void OnEnable()
+    {
+        GameManager.OnStateEnter += HandleLevelStart;
     }
 
-    public void SetMasterVolume(float volume)
+    void OnDisable()
     {
-        AudioListener.volume = volume;
+        GameManager.OnStateEnter -= HandleLevelStart;
+    }
+
+    void Start()
+    {
+        SoundTypeToReference = new()
+        {
+            { EventSounds.ColorSwap,        ColorSwapSound },
+            { EventSounds.UIClick,          UIClickSound},
+            { EventSounds.DevilishWalk,     DevilishWalkSound },
+            { EventSounds.HeavenlyWalk,     HeavenlyWalkSound },
+            { EventSounds.HeavenAmbience,   HeavenlyAmbience },
+            { EventSounds.DevilishAmbience, DevilishAmbience },
+        };
+
+        SoundTypeToInstance = new()
+        {
+            { EventInstances.HeavenAmbience,    heavenAmbience },
+            { EventInstances.DevilishAmbience,  hellAmbience },
+        };
+    }
+
+    public void PlayAudioClip(EventSounds sound, Vector3 origin)
+    {
+        PlayAudioClip(SoundTypeToReference[sound], origin);
+    }
+
+    public void PlayAudioClip(EventReference sound, Vector3 origin)
+    {
+        RuntimeManager.PlayOneShot(sound, origin);
+    }
+ 
+    public void SetAmbienceParameter(EventInstances instance, string instanceParameterName, float value)
+    {
+        SetAmbienceParameter(SoundTypeToInstance[instance], instanceParameterName, value);
+    }
+
+    //Not sure why but this function doesn't work at all
+    public void SetAmbienceParameter(EventInstance instance, string instanceParameterName, float value)
+    {
+
+        instance.setParameterByName(instanceParameterName, value);
+
+        instance.getParameterByName(instanceParameterName, out float realValue);
+
+        Debug.Log($"Set (instance) {instance} (parameter) {instanceParameterName} to (value) {value} | (real value) {realValue}");
+
     }
 
     public IEnumerator FadeTracks(bool playHeavenly, bool fadeSimultaneously)
@@ -65,6 +131,30 @@ public class AudioManager : Singleton<AudioManager>
 
             yield return null;
         }
+    }
+
+    void HandleLevelStart(GameManager.GameState gameState)
+    {
+        if (gameState != GameManager.GameState.LevelStart)
+            return;
+
+        InitializeAmbience();
+    }
+
+    void InitializeAmbience()
+    {
+        if (initializedAmbience)
+            return;
+
+        Debug.Log("Initialized Audio");
+
+        initializedAmbience = true;
+
+        heavenAmbience = CreateEventInstance(EventSounds.HeavenAmbience);
+        hellAmbience = CreateEventInstance(EventSounds.DevilishAmbience);
+
+        heavenAmbience.start();
+        hellAmbience.start();
     }
 
     void StartTrackFade(bool fadeTrackIn, AudioSource trackToFade)
@@ -117,5 +207,32 @@ public class AudioManager : Singleton<AudioManager>
         };
 
         StartTrackFade(fadeIn, trackToFade);
+    }
+
+    public EventInstance CreateEventInstance(EventSounds sound) => CreateEventInstance(SoundTypeToReference[sound]);
+
+    public EventInstance CreateEventInstance(EventReference sound)
+    {
+        EventInstance eventInstance = RuntimeManager.CreateInstance(sound);
+
+        eventInstances.Add(eventInstance);
+
+        return eventInstance;
+    }
+
+    void CleanUp()
+    {
+        Debug.Log("Cleanup");
+
+        foreach (var eventInstance in eventInstances)
+        {
+            eventInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            eventInstance.release();
+        }
+    }
+
+    void OnDestroy()
+    {
+        CleanUp();
     }
 }

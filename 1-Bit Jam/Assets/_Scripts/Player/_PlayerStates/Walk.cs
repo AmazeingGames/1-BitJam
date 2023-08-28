@@ -1,8 +1,10 @@
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Animations;
+using static AudioManager.EventSounds;
 
 [CreateAssetMenu(menuName = "States/Player/Walk")]
 public class Walk : State<CharacterController>
@@ -25,10 +27,8 @@ public class Walk : State<CharacterController>
 
     [Header("Sound FX")]
     [SerializeField] float timeBetweenWalkSound;
-    [SerializeField] AudioClip heavenWalk;
-    [SerializeField] AudioClip hellWalk;
 
-
+    Transform transform;
     Rigidbody2D rigidbody;
     PlayerAnimator playerAnimator;
     Player player;
@@ -51,6 +51,8 @@ public class Walk : State<CharacterController>
             rigidbody = parent.GetComponent<Rigidbody2D>();
         if (playerAnimator == null)
             playerAnimator = parent.GetComponent<PlayerAnimator>();
+        if (transform == null)
+            transform = parent.GetComponent<Transform>();
 
         maxVerticalVelocity = rigidbody.velocity.y;
     }
@@ -111,15 +113,15 @@ public class Walk : State<CharacterController>
 
         //Debug.Log(Mathf.Abs(rigidbody.velocity.x));
 
-        AudioClip audioClip = ColorSwap.Instance.BackgroundColor switch
+        AudioManager.EventSounds walkAudioClip = ColorSwap.Instance.BackgroundColor switch
         {
-            ColorSwap.Color.White => heavenWalk,
-            ColorSwap.Color.Black => hellWalk,
+            ColorSwap.Color.White => HeavenlyWalk,
+            ColorSwap.Color.Black => DevilishWalk,
             _ => throw new System.NotImplementedException()
         };
 
         walkSoundTimer = timeBetweenWalkSound;
-        AudioManager.Instance.PlayAudioClip(audioClip);
+        AudioManager.Instance.PlayAudioClip(walkAudioClip, transform.position);
     }
 
 
