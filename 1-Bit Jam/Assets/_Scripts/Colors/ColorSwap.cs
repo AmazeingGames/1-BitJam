@@ -58,9 +58,6 @@ public class ColorSwap : Singleton<ColorSwap>
 
             if (BackgroundColor == Color.White)
                 isHeaven = 1f;
-
-            AudioManager.Instance.SetAmbienceParameter(EventInstances.HeavenAmbience, "IsHeaven", isHeaven);
-            AudioManager.Instance.SetAmbienceParameter(EventInstances.DevilishAmbience, "IsHeaven", isHeaven);
         }
         else
             Debug.LogWarning("Calling script doesn't have access to this function.");
