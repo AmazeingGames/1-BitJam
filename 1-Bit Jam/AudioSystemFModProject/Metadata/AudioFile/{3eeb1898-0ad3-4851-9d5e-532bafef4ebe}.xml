@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{3eeb1898-0ad3-4851-9d5e-532bafef4ebe}">
+		<property name="assetPath">
+			<value>Hell/Player_FS_03.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>0.24445833333333333</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{8f43f7ce-55d3-46b2-aecc-03b23dcd17eb}</destination>
+		</relationship>
+	</object>
+</objects>

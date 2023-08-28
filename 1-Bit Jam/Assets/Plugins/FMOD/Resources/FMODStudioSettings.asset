@@ -149,8 +149,8 @@ MonoBehaviour:
   switchSettingsMigration: 1
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: ../../../FMod/Life Swap/AudioSystemFModProject/AudioSystemFModProject.fspro
-  sourceBankPath: ../../../FMod/Life Swap/AudioSystemFModProject/Build
+  sourceProjectPath: AudioSystemFModProject/AudioSystemFModProject.fspro
+  sourceBankPath: AudioSystemFModProject/Build
   sourceBankPathUnformatted: 
   BankRefreshCooldown: 5
   ShowBankRefreshWindow: 1

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{94107bcb-c4b2-48fd-9577-203722b5945f}">
+		<property name="assetPath">
+			<value>Heaven/Heaven_Amb_01.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>14</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{8f43f7ce-55d3-46b2-aecc-03b23dcd17eb}</destination>
+		</relationship>
+	</object>
+</objects>
