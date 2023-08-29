@@ -18,4 +18,17 @@ public class SettingsButton : UIButtonBase
     {
         base.OnEnter();
     }
+
+    void Update()
+    {
+        if (Input.GetButtonDown("Settings") && CanBeClicked())
+        {
+            OnClick();
+        }
+    }
+
+    public override bool CanBeClicked()
+    {
+        return GameScreensManager.Instance.GameSettingsBarCanvas.gameObject.activeInHierarchy && gameObject.activeInHierarchy;
+    }
 }

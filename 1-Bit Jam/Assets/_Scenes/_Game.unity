@@ -3864,7 +3864,7 @@ MonoBehaviour:
   gameOver: {fileID: 1635438032}
   loadingMenu: {fileID: 659987394}
   settingsMenu: {fileID: 139189414}
-  gameSettingsBarCanvas: {fileID: 731625628}
+  <GameSettingsBarCanvas>k__BackingField: {fileID: 731625628}
   gameSettingsBarLayout: {fileID: 714968818}
   creditsMenu: {fileID: 1185645354}
   menuCamera: {fileID: 1285360279}

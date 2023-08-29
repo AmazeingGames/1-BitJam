@@ -8,7 +8,7 @@ public class GameScreensManager : Singleton<GameScreensManager>
     [SerializeField] Canvas gameOver;
     [SerializeField] Canvas loadingMenu;
     [SerializeField] Canvas settingsMenu;
-    [SerializeField] Canvas gameSettingsBarCanvas;
+    [field: SerializeField] public Canvas GameSettingsBarCanvas { get; private set; }
     [SerializeField] GameObject gameSettingsBarLayout;
     [SerializeField] Canvas creditsMenu;
 
@@ -47,8 +47,8 @@ public class GameScreensManager : Singleton<GameScreensManager>
         gameOver.enabled = false;
         gameOver.gameObject.SetActive(true);
 
-        gameSettingsBarCanvas.enabled = false;
-        gameSettingsBarCanvas.gameObject.SetActive(true);
+        GameSettingsBarCanvas.enabled = true;
+        GameSettingsBarCanvas.gameObject.SetActive(false);
 
         settingsMenu.enabled = false;
         settingsMenu.gameObject.SetActive(true);
@@ -62,13 +62,13 @@ public class GameScreensManager : Singleton<GameScreensManager>
     void HandleGameStart()
     {
         Debug.Log("Handled game start");
-        gameSettingsBarCanvas.enabled = true;
+        GameSettingsBarCanvas.gameObject.SetActive(true);
     }
 
     void HandleGameStop()
     {
         Debug.Log("Handled game stop");
-        gameSettingsBarCanvas.enabled = false;
+        GameSettingsBarCanvas.gameObject.SetActive(false);
     }
 
     void HandleSettings()

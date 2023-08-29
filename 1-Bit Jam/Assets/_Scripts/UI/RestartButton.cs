@@ -21,4 +21,16 @@ public class RestartButton : UIButtonBase
         base.OnEnter();
     }
 
+    void Update()
+    {
+        if (Input.GetButtonDown("Restart") && CanBeClicked())
+        {
+            OnClick();
+        }
+    }
+
+    public override bool CanBeClicked()
+    {
+        return GameScreensManager.Instance.GameSettingsBarCanvas.gameObject.activeInHierarchy && gameObject.activeInHierarchy;
+    }
 }

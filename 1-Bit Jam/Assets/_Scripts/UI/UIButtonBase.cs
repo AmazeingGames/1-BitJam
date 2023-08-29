@@ -20,11 +20,17 @@ public abstract class UIButtonBase : MonoBehaviour, IPointerClickHandler, IPoint
 
     public virtual void OnClick()
     {
-        AudioManager.Instance.PlayAudioClip(UIClick, transform.position);
+        if (CanBeClicked())
+            AudioManager.Instance.PlayAudioClip(UIClick, transform.position);
     }
 
     public virtual void OnEnter()
     {
 
+    }
+
+    public virtual bool CanBeClicked()
+    {
+        return true;
     }
 }
