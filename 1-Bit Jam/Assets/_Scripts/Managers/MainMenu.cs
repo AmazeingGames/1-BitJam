@@ -12,9 +12,26 @@ public class MainMenu : Singleton<MainMenu>
 
     public MenuState CurrentState { get; private set; }
 
+    void OnEnable()
+    {
+        MainMenuBackButton.OnBack += HandleOnBack;
+    }
+
+    void OnDisable()
+    {
+        MainMenuBackButton.OnBack -= HandleOnBack;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
+        UpdatState(MenuState.MainMenu);
+    }
+
+    void HandleOnBack()
+    {
+        Debug.Log("Pressed back");
+
         UpdatState(MenuState.MainMenu);
     }
 

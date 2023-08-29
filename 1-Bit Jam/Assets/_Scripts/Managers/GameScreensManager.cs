@@ -3,10 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameScreensManager : MonoBehaviour
+public class GameScreensManager : Singleton<GameScreensManager>
 {
     [SerializeField] Canvas gameOver;
     [SerializeField] Canvas loadingMenu;
+    [SerializeField] Canvas settingsMenu;
+    [SerializeField] Canvas gameSettingsBarCanvas;
+    [SerializeField] GameObject gameSettingsBarLayout;
+    [SerializeField] Canvas creditsMenu;
+
     [SerializeField] Camera menuCamera;
 
     void OnEnable()
@@ -14,8 +19,13 @@ public class GameScreensManager : MonoBehaviour
         GameManager.OnLoadStart += HandleLoadStart;
         GameManager.OnStateEnter += HandleLevelLose;
 
+        GameManager.GameStart += HandleGameStart;
+        GameManager.GameStop += HandleGameStop;
+
         RestartButton.OnRestart += HandleLevelRestart;
         ExitToMenuButton.OnExit += HandleExitToMenu;
+        CreditsButton.OnCredits += HandleCredits;
+        SettingsButton.OnSettings += HandleSettings;
     }
 
     void OnDisable()
@@ -23,13 +33,61 @@ public class GameScreensManager : MonoBehaviour
         GameManager.OnLoadStart -= HandleLoadStart;
         GameManager.OnStateEnter -= HandleLevelLose;
 
+        GameManager.GameStart -= HandleGameStart;
+        GameManager.GameStop -= HandleGameStop;
+
         RestartButton.OnRestart -= HandleLevelRestart;
         ExitToMenuButton.OnExit -= HandleExitToMenu;
+        CreditsButton.OnCredits -= HandleCredits;
+        SettingsButton.OnSettings -= HandleSettings;
     }
 
     void Start()
     {
         gameOver.enabled = false;
+        gameOver.gameObject.SetActive(true);
+
+        gameSettingsBarCanvas.enabled = false;
+        gameSettingsBarCanvas.gameObject.SetActive(true);
+
+        settingsMenu.enabled = false;
+        settingsMenu.gameObject.SetActive(true);
+
+        creditsMenu.enabled = false;
+        creditsMenu.gameObject.SetActive(true);
+
+        
+    }
+
+    void HandleGameStart()
+    {
+        Debug.Log("Handled game start");
+        gameSettingsBarCanvas.enabled = true;
+    }
+
+    void HandleGameStop()
+    {
+        Debug.Log("Handled game stop");
+        gameSettingsBarCanvas.enabled = false;
+    }
+
+    void HandleSettings()
+    {
+        Debug.Log("Handled Settings");
+
+        gameSettingsBarLayout.SetActive(!gameSettingsBarLayout.activeSelf);
+    }
+    
+    void HandleCredits()
+    {
+        Debug.Log("Handled Credits");
+
+        creditsMenu.enabled = !creditsMenu.enabled;
+
+        if (creditsMenu.enabled)
+            GameManager.Instance.StopGame();
+        else
+            GameManager.Instance.StartGame();
     }
 
     void HandleLevelLose(GameManager.GameState gameState)
@@ -57,14 +115,14 @@ public class GameScreensManager : MonoBehaviour
         gameOver.enabled = false;
     }
 
-    void HandleLoadStart(AsyncOperation loadingTask)
+    void HandleLoadStart(AsyncOperation loadingTask, bool startGame)
     {
         Debug.Log("Enter loading menu");
 
-        StartCoroutine(Loading(loadingTask));
+        StartCoroutine(Loading(loadingTask, startGame));
     }
 
-    IEnumerator Loading(AsyncOperation loadingTask)
+    IEnumerator Loading(AsyncOperation loadingTask, bool startGame)
     {
         loadingMenu.gameObject.SetActive(true);
         menuCamera.gameObject.SetActive(true);
@@ -79,7 +137,8 @@ public class GameScreensManager : MonoBehaviour
                 menuCamera.gameObject.SetActive(false);
                 Debug.Log("Finished loading");
 
-                GameManager.Instance.StartGame();
+                if (startGame)
+                    GameManager.Instance.StartGame();
 
                 yield break;
             }

@@ -14,7 +14,10 @@ public class GameManager : Singleton<GameManager>
     public static event Action<GameState> OnStateLeave;
     public static event Action<GameState> OnStateEnter;
 
-    public static event Action<AsyncOperation> OnLoadStart;
+    public static event Action<AsyncOperation, bool> OnLoadStart;
+
+    public static event Action GameStart;
+    public static event Action GameStop;
 
     public GameState PreviousState { get; private set; } = GameState.None;
     public GameState State { get; private set; } = GameState.None;
@@ -62,12 +65,16 @@ public class GameManager : Singleton<GameManager>
     {
         IsGameRunning = false;
         //Time.timeScale = 0;
+
+        GameStop?.Invoke();
     }
 
     public void StartGame()
     {
         IsGameRunning = true;
         //Time.timeScale = 1;
+
+        GameStart?.Invoke();
     }
 
     void OnLevelFinish()
@@ -94,7 +101,7 @@ public class GameManager : Singleton<GameManager>
         UpdateGameState(GameState.LevelStart, LevelDataCurrent.Level);
     }
 
-    bool LoadLevel(int level) => LoadScene($"Level_{level}");
+    bool LoadLevel(int level) => LoadScene($"Level_{level}", true);
 
 
     //Discrete Scene Load
@@ -102,7 +109,7 @@ public class GameManager : Singleton<GameManager>
     //No load screen
     //Game Paused
 
-    bool LoadScene(string sceneName)
+    bool LoadScene(string sceneName, bool isLevel = false)
     {
         //loadingCanvas.gameObject.SetActive(true);
 
@@ -122,7 +129,7 @@ public class GameManager : Singleton<GameManager>
 
         var load = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
 
-        OnLoadStart?.Invoke(load);
+        OnLoadStart?.Invoke(load, isLevel);
 
         return true;
     }
