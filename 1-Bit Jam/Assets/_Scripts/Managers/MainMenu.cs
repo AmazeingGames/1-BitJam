@@ -7,7 +7,6 @@ public class MainMenu : Singleton<MainMenu>
 {
     [SerializeField] Canvas mainMenu;
     [SerializeField] Canvas levelSelect;
-    [SerializeField] Canvas loadingCanvas;
 
     public enum MenuState { MainMenu, LevelSelectMenu }
 
@@ -52,7 +51,6 @@ public class MainMenu : Singleton<MainMenu>
     {
         mainMenu.gameObject.SetActive(true);
         levelSelect.gameObject.SetActive(false);
-        loadingCanvas.gameObject.SetActive(false);
     }
 
     void OnMainMenuExit()

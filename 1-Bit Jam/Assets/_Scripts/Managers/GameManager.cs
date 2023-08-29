@@ -14,11 +14,13 @@ public class GameManager : Singleton<GameManager>
     public static event Action<GameState> OnStateLeave;
     public static event Action<GameState> OnStateEnter;
 
-    //public GameState PreviousState { get; private set; }
-    public GameState State { get; private set; }
+    public static event Action<AsyncOperation> OnLoadStart;
+
+    public GameState PreviousState { get; private set; } = GameState.None;
+    public GameState State { get; private set; } = GameState.None;
     public bool IsLevelPlaying { get; private set; }
 
-    public enum GameState { MainMenu, Loading, LevelStart, GamePause, CreditsMenu, LevelFinish, Lose, GameFinish }
+    public enum GameState { None, MainMenu, Loading, LevelStart, GamePause, CreditsMenu, LevelFinish, Lose, GameFinish }
 
     string sceneToUnload = null;
 
@@ -29,11 +31,11 @@ public class GameManager : Singleton<GameManager>
     #if DEBUG
         if (testLevel != 0 && DoesLevelExist(testLevel))
             UpdateGameState(GameState.LevelStart, testLevel);
-        else
+        else if (testLevel != -1)
             UpdateGameState(GameState.MainMenu);
-#else
+    #else
         UpdateGameState(GameState.MainMenu);
-#endif
+    #endif
     }
 
     void OnMainMenuEnter()
@@ -48,14 +50,12 @@ public class GameManager : Singleton<GameManager>
         //Debug.Log("MainMenu Exit");
     }
 
-    void OnLoadingEnter()
+    void OnLoadingEnter(GameState loadingState)
     {
-        //Debug.Log("Level Loading");
     }
 
-    void OnLoadingExit()
+    void OnLoadingFinish(GameState nextState)
     {
-        //Debug.Log("Loading finished");
     }
 
     void OnLevelLoad(int levelToLoad)
@@ -136,7 +136,9 @@ public class GameManager : Singleton<GameManager>
 
         Debug.Log($"Loading Scene: {sceneName}");
 
-        SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+        var load = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+
+        OnLoadStart?.Invoke(load);
 
         return true;
     }
@@ -173,17 +175,24 @@ public class GameManager : Singleton<GameManager>
     {
         OnStateLeave?.Invoke(State);
 
+        PreviousState = State;
+        State = newState;
+
         //Not sure if this is an issue, but this is always called the first time we exit a state, even when we haven't technically 'left' any states. This also happens in the main menu manager.
 
+        Debug.Log($"Change State | New State: {newState} | Previous State: {PreviousState}");
         //State leave
-        switch (State)
+        switch (PreviousState)
         {
+            case GameState.None: 
+                break;
+
             case GameState.MainMenu:
                 OnMainMenuExit();
                 break;
 
             case GameState.Loading:
-                OnLoadingExit();
+                OnLoadingFinish(PreviousState);
                 break;
 
             case GameState.LevelStart:
@@ -207,19 +216,18 @@ public class GameManager : Singleton<GameManager>
                 throw new NotImplementedException();
         }
 
-        State = newState;
-
-        Debug.Log($"Change State | New State: {newState}");
-
         //State Enter
         switch (newState)
         {
+            case GameState.None:
+                break;
+
             case GameState.MainMenu:
                 OnMainMenuEnter();
                 break;
 
             case GameState.Loading:
-                OnLoadingEnter();
+                OnLoadingEnter(PreviousState);
                 break;
 
             case GameState.LevelStart:
@@ -250,6 +258,7 @@ public class GameManager : Singleton<GameManager>
             default:
                 throw new NotImplementedException();
         }
+
         OnStateEnter?.Invoke(newState);
     }
 }
