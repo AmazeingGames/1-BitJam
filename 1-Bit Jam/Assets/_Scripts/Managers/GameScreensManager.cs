@@ -15,6 +15,7 @@ public class GameScreensManager : MonoBehaviour
         GameManager.OnStateEnter += HandleLevelLose;
 
         RestartButton.OnRestart += HandleLevelRestart;
+        ExitToMenuButton.OnExit += HandleExitToMenu;
     }
 
     void OnDisable()
@@ -23,6 +24,7 @@ public class GameScreensManager : MonoBehaviour
         GameManager.OnStateEnter -= HandleLevelLose;
 
         RestartButton.OnRestart -= HandleLevelRestart;
+        ExitToMenuButton.OnExit -= HandleExitToMenu;
     }
 
     void Start()
@@ -47,6 +49,14 @@ public class GameScreensManager : MonoBehaviour
         gameOver.enabled = false;
     }
 
+    void HandleExitToMenu()
+    {
+        Debug.Log("Handle Menu Exit");
+
+        GameManager.Instance.UpdateGameState(GameManager.GameState.MainMenu);
+        gameOver.enabled = false;
+    }
+
     void HandleLoadStart(AsyncOperation loadingTask)
     {
         Debug.Log("Enter loading menu");
@@ -58,6 +68,8 @@ public class GameScreensManager : MonoBehaviour
     {
         loadingMenu.gameObject.SetActive(true);
         menuCamera.gameObject.SetActive(true);
+
+        GameManager.Instance.StopGame();
 
         while (true)
         {

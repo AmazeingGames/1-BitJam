@@ -58,7 +58,7 @@ public class GameManager : Singleton<GameManager>
         LoadLevel(levelToLoad);
     }
 
-    void StopGame()
+    public void StopGame()
     {
         IsGameRunning = false;
         //Time.timeScale = 0;

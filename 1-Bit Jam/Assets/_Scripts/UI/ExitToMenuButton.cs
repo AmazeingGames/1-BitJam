@@ -1,24 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class ExitToMenuButton : UIButtonBase
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public static event Action OnExit;
 
     public override void OnClick()
     {
         base.OnClick();
+
+        OnExit?.Invoke();
 
         Debug.Log("Exit to Menu");
     }
