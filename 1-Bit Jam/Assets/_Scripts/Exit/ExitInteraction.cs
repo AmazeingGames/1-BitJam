@@ -17,7 +17,7 @@ public class ExitInteraction : Interactable
     // Update is called once per frame
     void Update()
     {
-        if (!GameManager.Instance.IsLevelPlaying)
+        if (!GameManager.Instance.IsGameRunning)
             return;
 
         base.Update();

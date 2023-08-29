@@ -67,7 +67,7 @@ public class Walk : State<CharacterController>
 
     public override void Update()
     {
-        if (!GameManager.Instance.IsLevelPlaying)
+        if (!GameManager.Instance.IsGameRunning)
             return;
 
         walkSoundTimer -= Time.deltaTime;

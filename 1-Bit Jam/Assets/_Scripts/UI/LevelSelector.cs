@@ -15,8 +15,6 @@ public class LevelSelector : UIButtonBase
 
     void Start()
     {
-        base.Start();
-
         SetSprite();
 
         levelExists = GameManager.DoesLevelExist(levelToLoad);

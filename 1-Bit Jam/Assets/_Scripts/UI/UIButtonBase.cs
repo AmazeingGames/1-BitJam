@@ -18,11 +18,6 @@ public abstract class UIButtonBase : MonoBehaviour, IPointerClickHandler, IPoint
         OnEnter();
     }
 
-    protected void Start()
-    {
-         
-    }
-
     public virtual void OnClick()
     {
         AudioManager.Instance.PlayAudioClip(UIClick, transform.position);

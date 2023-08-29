@@ -18,9 +18,9 @@ public class GameManager : Singleton<GameManager>
 
     public GameState PreviousState { get; private set; } = GameState.None;
     public GameState State { get; private set; } = GameState.None;
-    public bool IsLevelPlaying { get; private set; }
+    public bool IsGameRunning { get; private set; }
 
-    public enum GameState { None, MainMenu, Loading, LevelStart, GamePause, CreditsMenu, LevelFinish, Lose, GameFinish }
+    public enum GameState { None, MainMenu, Loading, LevelStart, LevelRestart, GamePause, CreditsMenu, LevelFinish, Lose, GameFinish }
 
     string sceneToUnload = null;
 
@@ -45,46 +45,29 @@ public class GameManager : Singleton<GameManager>
         LoadScene("_MainMenu");
     }
 
-    void OnMainMenuExit()
-    {
-        //Debug.Log("MainMenu Exit");
-    }
-
-    void OnLoadingEnter(GameState loadingState)
-    {
-    }
-
-    void OnLoadingFinish(GameState nextState)
-    {
-    }
 
     void OnLevelLoad(int levelToLoad)
     {
+        Debug.Log("level Start");
+
+        if (levelToLoad == -1)
+            throw new NotImplementedException();
+
         LevelDataCurrent = levelData[levelToLoad - 1];
 
         LoadLevel(levelToLoad);
-
-        IsLevelPlaying = true;
-        Time.timeScale = 1.0f;
     }
 
-    void OnLevelStop()
+    void StopGame()
     {
-        //Debug.Log("Level paused or finished");
-
-        IsLevelPlaying = false;
-
-        Time.timeScale = 0;
+        IsGameRunning = false;
+        //Time.timeScale = 0;
     }
 
-    void OnGamePause()
+    public void StartGame()
     {
-        //Debug.Log("Game Puased");
-    }
-
-    void OnGameResume()
-    {
-        //Debug.Log("Game Resumed");
+        IsGameRunning = true;
+        //Time.timeScale = 1;
     }
 
     void OnLevelFinish()
@@ -101,11 +84,6 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    void OnLevelLose()
-    {
-        ReloadLevel();
-    }
-
     void OnGameFinish()
     {
         LoadScene("_MainMenu");
@@ -117,6 +95,12 @@ public class GameManager : Singleton<GameManager>
     }
 
     bool LoadLevel(int level) => LoadScene($"Level_{level}");
+
+
+    //Discrete Scene Load
+    //Load scene in the background
+    //No load screen
+    //Game Paused
 
     bool LoadScene(string sceneName)
     {
@@ -180,71 +164,31 @@ public class GameManager : Singleton<GameManager>
 
         //Not sure if this is an issue, but this is always called the first time we exit a state, even when we haven't technically 'left' any states. This also happens in the main menu manager.
 
-        Debug.Log($"Change State | New State: {newState} | Previous State: {PreviousState}");
+        Debug.Log($"Change State | Previous State: {PreviousState} | New State: {newState}");
         //State leave
         switch (PreviousState)
         {
-            case GameState.None: 
-                break;
-
-            case GameState.MainMenu:
-                OnMainMenuExit();
-                break;
-
-            case GameState.Loading:
-                OnLoadingFinish(PreviousState);
-                break;
-
-            case GameState.LevelStart:
-                OnLevelStop();
-                break;
-
-            case GameState.GamePause:
-                OnGameResume();
-                break;
-
-            case GameState.LevelFinish:
-                break;
-
-            case GameState.Lose:
-                break;
-
-            case GameState.GameFinish:
-                break;
-
             default:
-                throw new NotImplementedException();
+                break;
         }
 
         //State Enter
         switch (newState)
         {
-            case GameState.None:
-                break;
-
             case GameState.MainMenu:
                 OnMainMenuEnter();
                 break;
 
-            case GameState.Loading:
-                OnLoadingEnter(PreviousState);
-                break;
-
             case GameState.LevelStart:
-                Debug.Log("level Start");
-
-                if (levelToLoad == -1)
-                    throw new NotImplementedException();
-
                 OnLevelLoad(levelToLoad);
                 break;
 
-            case GameState.GamePause:
-                OnGamePause();
+            case GameState.Lose:
+                StopGame();
                 break;
 
-            case GameState.Lose:
-                OnLevelLose();
+            case GameState.LevelRestart:
+                ReloadLevel();
                 break;
 
             case GameState.LevelFinish:
@@ -254,9 +198,6 @@ public class GameManager : Singleton<GameManager>
             case GameState.GameFinish:
                 OnGameFinish();
                 break;
-
-            default:
-                throw new NotImplementedException();
         }
 
         OnStateEnter?.Invoke(newState);

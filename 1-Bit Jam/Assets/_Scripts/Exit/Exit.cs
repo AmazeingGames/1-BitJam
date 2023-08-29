@@ -25,7 +25,7 @@ public class Exit : ColoredObject
 
     void Update()
     {
-        if (!GameManager.Instance.IsLevelPlaying)
+        if (!GameManager.Instance.IsGameRunning)
             return;
 
         CheckAnimations();

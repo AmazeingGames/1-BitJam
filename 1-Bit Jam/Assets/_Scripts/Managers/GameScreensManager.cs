@@ -5,17 +5,46 @@ using UnityEngine;
 
 public class GameScreensManager : MonoBehaviour
 {
+    [SerializeField] Canvas gameOver;
     [SerializeField] Canvas loadingMenu;
     [SerializeField] Camera menuCamera;
 
-    private void OnEnable()
+    void OnEnable()
     {
         GameManager.OnLoadStart += HandleLoadStart;
+        GameManager.OnStateEnter += HandleLevelLose;
+
+        RestartButton.OnRestart += HandleLevelRestart;
     }
 
-    private void OnDisable()
+    void OnDisable()
     {
         GameManager.OnLoadStart -= HandleLoadStart;
+        GameManager.OnStateEnter -= HandleLevelLose;
+
+        RestartButton.OnRestart -= HandleLevelRestart;
+    }
+
+    void Start()
+    {
+        gameOver.enabled = false;
+    }
+
+    void HandleLevelLose(GameManager.GameState gameState)
+    {
+        if (gameState == GameManager.GameState.Lose)
+        {
+            Debug.Log("Handled Level Lose");
+            gameOver.enabled = true;
+        }
+    }
+
+    void HandleLevelRestart()
+    {
+        Debug.Log("Handled Game Restart");
+
+        GameManager.Instance.UpdateGameState(GameManager.GameState.LevelRestart);
+        gameOver.enabled = false;
     }
 
     void HandleLoadStart(AsyncOperation loadingTask)
@@ -32,12 +61,14 @@ public class GameScreensManager : MonoBehaviour
 
         while (true)
         {
-            Debug.Log("loading");
             if (loadingTask.isDone)
             {
                 loadingMenu.gameObject.SetActive(false);
                 menuCamera.gameObject.SetActive(false);
                 Debug.Log("Finished loading");
+
+                GameManager.Instance.StartGame();
+
                 yield break;
             }
             
