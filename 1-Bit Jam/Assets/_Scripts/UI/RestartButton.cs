@@ -31,6 +31,6 @@ public class RestartButton : UIButtonBase
 
     public override bool CanBeClicked()
     {
-        return GameScreensManager.Instance.GameSettingsBarCanvas.gameObject.activeInHierarchy && gameObject.activeInHierarchy;
+        return ((GameScreensManager.Instance.GameSettingsBarCanvas.gameObject.activeInHierarchy && gameObject.activeInHierarchy) || GameScreensManager.Instance.GameOver.enabled && gameObject.activeInHierarchy);
     }
 }

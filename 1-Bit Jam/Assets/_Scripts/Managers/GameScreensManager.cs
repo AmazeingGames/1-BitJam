@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GameScreensManager : Singleton<GameScreensManager>
 {
-    [SerializeField] Canvas gameOver;
+    [field: SerializeField] public Canvas GameOver { get; private set; }
     [SerializeField] Canvas loadingMenu;
     [SerializeField] Canvas settingsMenu;
     [field: SerializeField] public Canvas GameSettingsBarCanvas { get; private set; }
@@ -44,8 +44,8 @@ public class GameScreensManager : Singleton<GameScreensManager>
 
     void Start()
     {
-        gameOver.enabled = false;
-        gameOver.gameObject.SetActive(true);
+        GameOver.enabled = false;
+        GameOver.gameObject.SetActive(true);
 
         GameSettingsBarCanvas.enabled = true;
         GameSettingsBarCanvas.gameObject.SetActive(false);
@@ -95,7 +95,7 @@ public class GameScreensManager : Singleton<GameScreensManager>
         if (gameState == GameManager.GameState.Lose)
         {
             Debug.Log("Handled Level Lose");
-            gameOver.enabled = true;
+            GameOver.enabled = true;
         }
     }
 
@@ -104,7 +104,7 @@ public class GameScreensManager : Singleton<GameScreensManager>
         Debug.Log("Handled Game Restart");
 
         GameManager.Instance.UpdateGameState(GameManager.GameState.LevelRestart);
-        gameOver.enabled = false;
+        GameOver.enabled = false;
     }
 
     void HandleExitToMenu()
@@ -112,7 +112,7 @@ public class GameScreensManager : Singleton<GameScreensManager>
         Debug.Log("Handle Menu Exit");
 
         GameManager.Instance.UpdateGameState(GameManager.GameState.MainMenu);
-        gameOver.enabled = false;
+        GameOver.enabled = false;
     }
 
     void HandleLoadStart(AsyncOperation loadingTask, bool startGame)

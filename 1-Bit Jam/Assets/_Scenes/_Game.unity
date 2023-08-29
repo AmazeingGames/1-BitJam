@@ -3861,7 +3861,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f3d8e4f03b45bd46a13c07b7f565657, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameOver: {fileID: 1635438032}
+  <GameOver>k__BackingField: {fileID: 1635438032}
   loadingMenu: {fileID: 659987394}
   settingsMenu: {fileID: 139189414}
   <GameSettingsBarCanvas>k__BackingField: {fileID: 731625628}
