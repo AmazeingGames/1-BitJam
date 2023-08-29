@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
+    [SerializeField] int testLevel;
     [SerializeField] List<LevelData> levelData = new();
 
     public LevelData LevelDataCurrent { get; private set; }
@@ -13,7 +14,7 @@ public class GameManager : Singleton<GameManager>
     public static event Action<GameState> OnStateLeave;
     public static event Action<GameState> OnStateEnter;
 
-    public GameState PreviousState { get; private set; }
+    //public GameState PreviousState { get; private set; }
     public GameState State { get; private set; }
     public bool IsLevelPlaying { get; private set; }
 
@@ -21,9 +22,18 @@ public class GameManager : Singleton<GameManager>
 
     string sceneToUnload = null;
 
-    void Start()
+    IEnumerator Start()
     {
+        yield return null;
+
+    #if DEBUG
+        if (testLevel != 0 && DoesLevelExist(testLevel))
+            UpdateGameState(GameState.LevelStart, testLevel);
+        else
+            UpdateGameState(GameState.MainMenu);
+#else
         UpdateGameState(GameState.MainMenu);
+#endif
     }
 
     void OnMainMenuEnter()
@@ -164,6 +174,8 @@ public class GameManager : Singleton<GameManager>
         OnStateLeave?.Invoke(State);
 
         //Not sure if this is an issue, but this is always called the first time we exit a state, even when we haven't technically 'left' any states. This also happens in the main menu manager.
+
+        //State leave
         switch (State)
         {
             case GameState.MainMenu:
@@ -199,6 +211,7 @@ public class GameManager : Singleton<GameManager>
 
         Debug.Log($"Change State | New State: {newState}");
 
+        //State Enter
         switch (newState)
         {
             case GameState.MainMenu:
