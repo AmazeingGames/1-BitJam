@@ -462,7 +462,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1913454442237593714, guid: 4472002805e99794082f0f032a26d82c, type: 3}
       propertyPath: <Color>k__BackingField
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3916307789024822964, guid: 4472002805e99794082f0f032a26d82c, type: 3}
       propertyPath: obstructionLayerMask.m_Bits
@@ -487,7 +487,7 @@ PrefabInstance:
     - target: {fileID: 4882659650190347893, guid: 4472002805e99794082f0f032a26d82c, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -397223924, guid: 8a570f1f1e4d77e44bd93cd4a72d83fb, type: 3}
+      objectReference: {fileID: 1029920835, guid: 8a570f1f1e4d77e44bd93cd4a72d83fb, type: 3}
     - target: {fileID: 7175838120904118241, guid: 4472002805e99794082f0f032a26d82c, type: 3}
       propertyPath: m_RootOrder
       value: 4
