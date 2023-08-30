@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{97af851c-9be6-47e1-ad9b-68a8b98932ce}">
+		<property name="color">
+			<value>Green</value>
+		</property>
 		<property name="name">
 			<value>Player_Land</value>
 		</property>
@@ -76,6 +79,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{24221ee9-20b9-4009-8d02-7f5b62b558ea}">
+		<property name="volume">
+			<value>-6</value>
+		</property>
 		<relationship name="effectChain">
 			<destination>{896553db-4257-49d9-ac8c-51e068ede2e6}</destination>
 		</relationship>
