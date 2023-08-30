@@ -805,13 +805,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abd025d5a0b9f4e4d87ff23b0ba15c5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <ColorSwapSound>k__BackingField:
+  <SwapToHeavenSound>k__BackingField:
     Guid:
-      Data1: -1750104804
-      Data2: 1205967846
-      Data3: -1469539411
-      Data4: -835548743
-    Path: event:/Player/Player_Land
+      Data1: 1616714685
+      Data2: 1100275502
+      Data3: -1188260445
+      Data4: -1257424382
+    Path: event:/Heaven/Heaven_Trans
+  <SwapToHellSound>k__BackingField:
+    Guid:
+      Data1: -1215550483
+      Data2: 1335417130
+      Data3: 1124238726
+      Data4: -786384413
+    Path: event:/Hell/Hell_Trans
   <HeavenlyWalkSound>k__BackingField:
     Guid:
       Data1: -597712320
@@ -832,7 +839,7 @@ MonoBehaviour:
       Data2: 1254964429
       Data3: 2099160974
       Data4: 906564601
-    Path: event:/UI_Select
+    Path: event:/Neutral/UI_Select
   <HeavenlyAmbience>k__BackingField:
     Guid:
       Data1: -597712320
@@ -850,8 +857,6 @@ MonoBehaviour:
   fadeInTime: 2
   fadeOutTime: 2
   heavenlyMusicSource: {fileID: 0}
-  baseMusicSource: {fileID: 0}
-  devilishMusicSource: {fileID: 0}
   sfxSouce: {fileID: 0}
 --- !u!1 &288348787
 GameObject:

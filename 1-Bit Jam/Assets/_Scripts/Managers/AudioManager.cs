@@ -22,26 +22,39 @@ public class AudioManager : Singleton<AudioManager>
     [SerializeField] float fadeOutTime;
 
     [SerializeField] AudioSource heavenlyMusicSource;
-    [SerializeField] AudioSource baseMusicSource;
-    [SerializeField] AudioSource devilishMusicSource;
 
     [SerializeField] AudioSource sfxSouce;
 
-    public enum EventSounds { ColorSwap, UIClick, HeavenlyWalk, DevilishWalk, HeavenAmbience, DevilishAmbience }
+    public enum EventSounds { SwapToHell, SwapToHeaven, UIClick, HeavenlyWalk, DevilishWalk, HeavenAmbience, DevilishAmbience }
 
     Dictionary<EventSounds, EventReference> SoundTypeToReference;
+
+    public EventInstance HeavenAmbienceInstance { get; private set; }
+    public EventInstance DevilishAmbienceInstance { get; private set; }
+
+    readonly List<EventInstance> EventInstances = new();
 
     void Start()
     {
         SoundTypeToReference = new()
         {
-            { EventSounds.ColorSwap,        ColorSwapSound },
+            { EventSounds.SwapToHell,       SwapToHellSound },
+            { EventSounds.SwapToHeaven,     SwapToHeavenSound },
             { EventSounds.UIClick,          UIClickSound},
             { EventSounds.DevilishWalk,     DevilishWalkSound },
             { EventSounds.HeavenlyWalk,     HeavenlyWalkSound },
             { EventSounds.HeavenAmbience,   HeavenlyAmbience },
             { EventSounds.DevilishAmbience, DevilishAmbience },
         };
+
+        //Creates the instance
+        HeavenAmbienceInstance = CreateEventInstance(EventSounds.HeavenAmbience);
+        DevilishAmbienceInstance = CreateEventInstance(EventSounds.DevilishAmbience);
+    }
+
+    void OnDestroy()
+    {
+        CleanUp();    
     }
 
     public void PlayAudioClip(EventSounds sound, Vector3 origin)
@@ -52,5 +65,26 @@ public class AudioManager : Singleton<AudioManager>
     public void PlayAudioClip(EventReference sound, Vector3 origin)
     {
         RuntimeManager.PlayOneShot(sound, origin);
+    }
+
+    //Creates the instance
+    EventInstance CreateEventInstance(EventSounds eventSound) => CreateEventInstance(SoundTypeToReference[eventSound]);
+
+    EventInstance CreateEventInstance(EventReference eventReference)
+    {
+        EventInstance eventInstance = RuntimeManager.CreateInstance(eventReference);
+        
+        EventInstances.Add(eventInstance);
+
+        return eventInstance;
+    }
+
+    void CleanUp()
+    {
+        foreach (var eventInstance in EventInstances)
+        {
+            eventInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            eventInstance.release();
+        }
     }
 }

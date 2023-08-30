@@ -122,7 +122,7 @@ public class GameScreensManager : Singleton<GameScreensManager>
         StartCoroutine(Loading(loadingTask, startGame));
     }
 
-    IEnumerator Loading(AsyncOperation loadingTask, bool startGame)
+    IEnumerator Loading(AsyncOperation loadingTask, bool loadingLevel)
     {
         loadingMenu.gameObject.SetActive(true);
         menuCamera.gameObject.SetActive(true);
@@ -133,12 +133,32 @@ public class GameScreensManager : Singleton<GameScreensManager>
         {
             if (loadingTask.isDone)
             {
+                yield return null;
+
                 loadingMenu.gameObject.SetActive(false);
                 menuCamera.gameObject.SetActive(false);
                 Debug.Log("Finished loading");
 
-                if (startGame)
+                if (loadingLevel)
+                {
+                    
+                    switch (ColorSwap.Instance.BackgroundColor)
+                    {
+                        case ColorSwap.Color.Black:
+                            Debug.Log("Started Devilish ambience");
+                            AudioManager.Instance.PlayAudioClip(AudioManager.EventSounds.DevilishAmbience, gameObject.transform.position);
+                            //AudioManager.Instance.DevilishAmbienceInstance.start();
+                            break;
+
+                        case ColorSwap.Color.White:
+                            Debug.Log("Started Heavenly ambience");
+                            AudioManager.Instance.PlayAudioClip(AudioManager.EventSounds.HeavenAmbience, gameObject.transform.position);
+                            //AudioManager.Instance.HeavenAmbienceInstance.start();
+                            break;
+                    }
+
                     GameManager.Instance.StartGame();
+                }
 
                 yield break;
             }
