@@ -8,7 +8,8 @@ using UnityEngine;
 public class AudioManager : Singleton<AudioManager>
 {
     [field: Header("SFX")]
-    [field: SerializeField] public EventReference ColorSwapSound { get; private set; }
+    [field: SerializeField] public EventReference SwapToHeavenSound { get; private set; }
+    [field: SerializeField] public EventReference SwapToHellSound { get; private set; }
     [field: SerializeField] public EventReference HeavenlyWalkSound { get; private set; }
     [field: SerializeField] public EventReference DevilishWalkSound { get; private set; }
     [field: SerializeField] public EventReference UIClickSound { get; private set; }
