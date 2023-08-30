@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="EncodableAsset" id="{42526966-f018-4b13-8232-2462cfc2059e}">
+		<property name="assetPath">
+			<value>Hell/</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{fc0e9cfb-ea53-401c-80dc-ca0025e8b1cf}</destination>
+		</relationship>
+	</object>
+</objects>
