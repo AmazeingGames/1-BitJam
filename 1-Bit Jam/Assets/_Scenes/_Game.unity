@@ -842,18 +842,18 @@ MonoBehaviour:
     Path: event:/Neutral/UI_Select
   <HeavenlyAmbience>k__BackingField:
     Guid:
-      Data1: -597712320
-      Data2: 1302949923
-      Data3: -1758493267
-      Data4: 216922979
-    Path: event:/Player/Player_FS
+      Data1: 1388291358
+      Data2: 1280417598
+      Data3: -235955796
+      Data4: -1586369712
+    Path: event:/Heaven/Heaven_Amb
   <DevilishAmbience>k__BackingField:
     Guid:
-      Data1: -597712320
-      Data2: 1302949923
-      Data3: -1758493267
-      Data4: 216922979
-    Path: event:/Player/Player_FS
+      Data1: -1459879542
+      Data2: 1310695612
+      Data3: -766482793
+      Data4: 1606826051
+    Path: event:/Hell/Hell_Amb
   fadeInTime: 2
   fadeOutTime: 2
   heavenlyMusicSource: {fileID: 0}

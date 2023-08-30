@@ -141,22 +141,6 @@ public class GameScreensManager : Singleton<GameScreensManager>
 
                 if (loadingLevel)
                 {
-                    
-                    switch (ColorSwap.Instance.BackgroundColor)
-                    {
-                        case ColorSwap.Color.Black:
-                            Debug.Log("Started Devilish ambience");
-                            AudioManager.Instance.PlayAudioClip(AudioManager.EventSounds.DevilishAmbience, gameObject.transform.position);
-                            //AudioManager.Instance.DevilishAmbienceInstance.start();
-                            break;
-
-                        case ColorSwap.Color.White:
-                            Debug.Log("Started Heavenly ambience");
-                            AudioManager.Instance.PlayAudioClip(AudioManager.EventSounds.HeavenAmbience, gameObject.transform.position);
-                            //AudioManager.Instance.HeavenAmbienceInstance.start();
-                            break;
-                    }
-
                     GameManager.Instance.StartGame();
                 }
 
