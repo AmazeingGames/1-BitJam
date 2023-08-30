@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{30fef0b0-97af-4305-a541-27f853d0fb4d}">
+		<property name="assetPath">
+			<value>Heaven/Heaven_Trans_01.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.5205833333333334</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{fc0e9cfb-ea53-401c-80dc-ca0025e8b1cf}</destination>
+		</relationship>
+	</object>
+</objects>

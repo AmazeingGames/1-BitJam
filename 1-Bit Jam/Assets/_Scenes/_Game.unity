@@ -169,46 +169,46 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ColorSwapSound>k__BackingField:
     Guid:
-      Data1: -2079231733
-      Data2: 1292030349
-      Data3: -1794361160
-      Data4: -1352944297
-    Path: event:/ColorSwap
+      Data1: -1215550483
+      Data2: 1335417130
+      Data3: 1124238726
+      Data4: -786384413
+    Path: event:/Hell/Hell_Trans
   <HeavenlyWalkSound>k__BackingField:
     Guid:
-      Data1: -2003636718
-      Data2: 1272870212
-      Data3: 64490383
-      Data4: -951068889
-    Path: event:/HeavenlySteps
+      Data1: -597712320
+      Data2: 1302949923
+      Data3: -1758493267
+      Data4: 216922979
+    Path: event:/Player/Player_FS
   <DevilishWalkSound>k__BackingField:
     Guid:
-      Data1: 912509671
-      Data2: 1087420484
-      Data3: 925556656
-      Data4: -1123349654
-    Path: event:/DevilishSteps
+      Data1: -597712320
+      Data2: 1302949923
+      Data3: -1758493267
+      Data4: 216922979
+    Path: event:/Player/Player_FS
   <UIClickSound>k__BackingField:
     Guid:
-      Data1: 166381729
-      Data2: 1261503512
-      Data3: 1468527262
-      Data4: -661352460
-    Path: event:/UIClick
+      Data1: 1423659735
+      Data2: 1254964429
+      Data3: 2099160974
+      Data4: 906564601
+    Path: event:/Neutral/UI_Select
   <HeavenlyAmbience>k__BackingField:
     Guid:
-      Data1: -594192488
-      Data2: 1161749464
-      Data3: -2017584767
-      Data4: -1075750826
-    Path: event:/HeavenAmbience
+      Data1: 1388291358
+      Data2: 1280417598
+      Data3: -235955796
+      Data4: -1586369712
+    Path: event:/Heaven/Heaven_Amb
   <DevilishAmbience>k__BackingField:
     Guid:
-      Data1: -1985943839
-      Data2: 1338815537
-      Data3: -563798340
-      Data4: -123516105
-    Path: event:/HellAmbience
+      Data1: -1459879542
+      Data2: 1310695612
+      Data3: -766482793
+      Data4: 1606826051
+    Path: event:/Hell/Hell_Amb
   fadeInTime: 2
   fadeOutTime: 2
   heavenlyMusicSource: {fileID: 0}

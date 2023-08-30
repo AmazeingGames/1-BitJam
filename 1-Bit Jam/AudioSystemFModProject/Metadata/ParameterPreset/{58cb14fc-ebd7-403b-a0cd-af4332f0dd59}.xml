@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{58cb14fc-ebd7-403b-a0cd-af4332f0dd59}">
+		<property name="name">
+			<value>InHell</value>
+		</property>
+		<relationship name="folder">
+			<destination>{6cd1cf6c-ba70-4d4f-86d5-90fb4150493c}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{21da8def-7d68-4464-8f45-d4a86d656fc3}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{21da8def-7d68-4464-8f45-d4a86d656fc3}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

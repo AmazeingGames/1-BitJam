@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{234a623d-2a73-4c1a-9d98-b0072dc69cb9}">
+		<property name="assetPath">
+			<value>Neutral/Vocalizations/Caught_Vocalizations_02.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>0.29895833333333333</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{fc0e9cfb-ea53-401c-80dc-ca0025e8b1cf}</destination>
+		</relationship>
+	</object>
+</objects>
