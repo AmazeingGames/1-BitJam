@@ -39,18 +39,38 @@ public class TileController : Colored
 
     IEnumerator Setup()
     {
+        Debug.Log("Setup");
+
+        while (true)
+        {
+            yield return null;
+
+            yield return new WaitWhile(IsTileMapsNull);
+            
+            var findTilemaps = GameObject.Find("TileMaps");
+
+            if (findTilemaps != null)
+                break;
+        }
+
+        /*
         //Gives time to unload the current level
         yield return null;
 
         //Gives time to load the next level
         yield return new WaitWhile(IsTileMapsNull);
+        */
 
         tileMaps = GameObject.Find("TileMaps");
+
+        Debug.Log($"Are tileMaps null : {tileMaps == null}");
 
         activeHeavenTiles = tileMaps.transform.Find("Heaven Active").gameObject;
         inactiveHeavenTiles = tileMaps.transform.Find("Heaven Inactive").gameObject;
         activeHellTiles = tileMaps.transform.Find("Hell Active").gameObject;
         inactiveHellTiles = tileMaps.transform.Find("Hell Inactive").gameObject;
+
+        Debug.Log("TileMaps doene");
 
         ColorSwap.Instance.ChangeColor(GameManager.Instance.LevelDataCurrent.StartingColor, gameObject);
         
@@ -61,6 +81,8 @@ public class TileController : Colored
 
     bool IsTileMapsNull()
     {
+        Debug.Log("Checked tile maps");
+
         bool isNull = GameObject.Find("TileMaps") == null;
 
         if (isNull)
