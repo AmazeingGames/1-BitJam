@@ -84,7 +84,7 @@ MonoBehaviour:
   obstructionLayerMask:
     serializedVersion: 2
     m_Bits: 768
-  visionRadius: 5
+  visionRadius: 5.6
   timeBetweenCalls: 0.2
   showDebugLogs: 0
   showGizmos: 1
