@@ -19,14 +19,11 @@ public class TileController : Colored
 
     void Start()
     {
-        GameManager.OnStateEnter += HandleLevelLoad;
+        GameManager.GameStart += HandleLevelLoad;
     }
 
-    void HandleLevelLoad(GameManager.GameState gameState)
+    void HandleLevelLoad()
     {
-        if (gameState != GameManager.GameState.LevelStart)
-            return;
-
         StartCoroutine(Setup());
 
         Debug.Log("Handled level load");
@@ -45,32 +42,44 @@ public class TileController : Colored
         {
             yield return null;
 
-            yield return new WaitWhile(IsTileMapsNull);
-            
-            var findTilemaps = GameObject.Find("TileMaps");
+            tileMaps = GameObject.Find("TileMaps");
 
-            if (findTilemaps != null)
+            if (tileMaps != null)
                 break;
+
+            Debug.Log("waiting");
         }
-
-        /*
-        //Gives time to unload the current level
-        yield return null;
-
-        //Gives time to load the next level
-        yield return new WaitWhile(IsTileMapsNull);
-        */
-
-        tileMaps = GameObject.Find("TileMaps");
-
+        
         Debug.Log($"Are tileMaps null : {tileMaps == null}");
 
-        activeHeavenTiles = tileMaps.transform.Find("Heaven Active").gameObject;
-        inactiveHeavenTiles = tileMaps.transform.Find("Heaven Inactive").gameObject;
-        activeHellTiles = tileMaps.transform.Find("Hell Active").gameObject;
-        inactiveHellTiles = tileMaps.transform.Find("Hell Inactive").gameObject;
+        for (int i = 0; i < tileMaps.transform.childCount; i++)
+        {
+            var child = tileMaps.transform.GetChild(i).gameObject;
+            
+            switch (child.name)
+            {
+                case "Heaven Active":
+                    activeHeavenTiles = child;
+                    break;
 
-        Debug.Log("TileMaps doene");
+                case "Heaven Inactive":
+                    inactiveHeavenTiles = child;
+                    break;
+
+                case "Hell Active":
+                    activeHellTiles = child;
+                    break;
+
+                case "Hell Inactive":
+                    inactiveHellTiles = child;
+                    break;
+
+                default:
+                    throw new Exception("Name not recognized.");
+            }
+        }
+
+        Debug.Log("TileMaps done");
 
         ColorSwap.Instance.ChangeColor(GameManager.Instance.LevelDataCurrent.StartingColor, gameObject);
         
@@ -78,22 +87,6 @@ public class TileController : Colored
 
         yield break;
     }
-
-    bool IsTileMapsNull()
-    {
-        Debug.Log("Checked tile maps");
-
-        bool isNull = GameObject.Find("TileMaps") == null;
-
-        if (isNull)
-        {
-            Debug.Log("waiting");
-        }
-
-        return isNull;
-    }
-
-
 
 
     void SetTilesActive(ColorSwap.Color newColor)
