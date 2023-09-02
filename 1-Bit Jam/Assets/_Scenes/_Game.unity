@@ -854,6 +854,13 @@ MonoBehaviour:
       Data3: -766482793
       Data4: 1606826051
     Path: event:/Hell/Hell_Amb
+  <DoorExit>k__BackingField:
+    Guid:
+      Data1: -40936468
+      Data2: 1234683625
+      Data3: -1329356156
+      Data4: -1510700315
+    Path: event:/Neutral/Door_Enter
   fadeInTime: 2
   fadeOutTime: 2
   heavenlyMusicSource: {fileID: 0}

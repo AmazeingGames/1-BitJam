@@ -10,11 +10,15 @@ public class AudioManager : Singleton<AudioManager>
     [field: Header("SFX")]
     [field: SerializeField] public EventReference SwapToHeavenSound { get; private set; }
     [field: SerializeField] public EventReference SwapToHellSound { get; private set; }
+
+    //Current these reference the same thing; don't worry about it
     [field: SerializeField] public EventReference HeavenlyWalkSound { get; private set; }
     [field: SerializeField] public EventReference DevilishWalkSound { get; private set; }
+
     [field: SerializeField] public EventReference UIClickSound { get; private set; }
     [field: SerializeField] public EventReference HeavenlyAmbience { get; private set; }
     [field: SerializeField] public EventReference DevilishAmbience { get; private set; }
+    [field: SerializeField] public EventReference DoorEnter { get; private set; }
 
 
     [Header("Music")]
@@ -25,7 +29,7 @@ public class AudioManager : Singleton<AudioManager>
 
     [SerializeField] AudioSource sfxSouce;
 
-    public enum EventSounds { SwapToHell, SwapToHeaven, UIClick, HeavenlyWalk, DevilishWalk, HeavenAmbience, DevilishAmbience }
+    public enum EventSounds { SwapToHell, SwapToHeaven, UIClick, HeavenlyWalk, DevilishWalk, HeavenAmbience, DevilishAmbience, DoorEnter, Null }
 
     Dictionary<EventSounds, EventReference> SoundTypeToReference;
 
@@ -45,6 +49,7 @@ public class AudioManager : Singleton<AudioManager>
             { EventSounds.HeavenlyWalk,     HeavenlyWalkSound },
             { EventSounds.HeavenAmbience,   HeavenlyAmbience },
             { EventSounds.DevilishAmbience, DevilishAmbience },
+            { EventSounds.DoorEnter,        DoorEnter }
         };
 
         //Creates the instance
@@ -57,12 +62,25 @@ public class AudioManager : Singleton<AudioManager>
         CleanUp();    
     }
 
-    public void PlayAudioClip(EventSounds sound, Vector3 origin)
+    public void TriggerAudioClip(EventSounds sound, GameObject origin)
     {
-        PlayAudioClip(SoundTypeToReference[sound], origin);
+        Debug.Log($"Triggered Audio Clip: {sound}");
+        TriggerAudioClip(SoundTypeToReference[sound], origin.transform.position);
     }
 
-    public void PlayAudioClip(EventReference sound, Vector3 origin)
+    public void TriggerAudioClip(EventSounds sound, Transform origin)
+    {
+        Debug.Log($"Triggered Audio Clip: {sound}");
+        TriggerAudioClip(SoundTypeToReference[sound], origin.position);
+    }
+
+    public void TriggerAudioClip(EventSounds sound, Vector3 origin)
+    {
+        Debug.Log($"Triggered Audio Clip: {sound}");
+        TriggerAudioClip(SoundTypeToReference[sound], origin);
+    }
+
+    void TriggerAudioClip(EventReference sound, Vector3 origin)
     {
         RuntimeManager.PlayOneShot(sound, origin);
     }

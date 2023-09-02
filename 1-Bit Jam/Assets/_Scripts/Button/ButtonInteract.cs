@@ -22,6 +22,11 @@ public class ButtonInteract : Interactable
         base.Update();
     }
 
+    protected override void SetInteractSound()
+    {
+        interactSound = AudioManager.EventSounds.Null;
+    }
+
     protected override void GetInput()
     {
         base.GetInput();

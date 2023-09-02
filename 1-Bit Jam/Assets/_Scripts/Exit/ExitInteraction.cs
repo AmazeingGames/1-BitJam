@@ -42,6 +42,11 @@ public class ExitInteraction : Interactable
         GameManager.Instance.UpdateGameState(GameManager.GameState.LevelFinish);
     }
 
+    protected override void SetInteractSound()
+    {
+        interactSound = AudioManager.EventSounds.DoorEnter;
+    }
+
     protected override void SetVision()
     {
         vison = transform.GetChild(0).GetComponent<Vision>();

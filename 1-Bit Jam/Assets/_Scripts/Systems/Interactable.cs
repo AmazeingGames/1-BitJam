@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public abstract class Interactable : MonoBehaviour
 {
@@ -25,12 +26,18 @@ public abstract class Interactable : MonoBehaviour
 
     float cooldownTimer;
 
+    protected AudioManager.EventSounds interactSound = AudioManager.EventSounds.Null;
+
     protected void Start()
     {
         SetVision();
             
         SetInteractIconActive(false);
+
+        SetInteractSound();
     }
+
+    protected abstract void SetInteractSound();
 
     protected virtual void SetVision()
     {
@@ -118,5 +125,11 @@ public abstract class Interactable : MonoBehaviour
     protected virtual void Interaction()
     {
         cooldownTimer = interactionCooldownLength;
+
+        if (interactSound != AudioManager.EventSounds.Null)
+        {
+            Debug.Log("Played Interact Trigger");
+            AudioManager.Instance.TriggerAudioClip(interactSound, gameObject);
+        }
     }
 }

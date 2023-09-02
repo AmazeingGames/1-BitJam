@@ -121,7 +121,7 @@ public class Walk : State<CharacterController>
         };
 
         walkSoundTimer = timeBetweenWalkSound;
-        AudioManager.Instance.PlayAudioClip(walkAudioClip, transform.position);
+        AudioManager.Instance.TriggerAudioClip(walkAudioClip, transform);
     }
 
 

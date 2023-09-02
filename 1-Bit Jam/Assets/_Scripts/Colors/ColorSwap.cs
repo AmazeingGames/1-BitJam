@@ -71,13 +71,13 @@ public class ColorSwap : Singleton<ColorSwap>
                     //Now, all the clip related to transferring to heaven will play
 
                     //This code will play the one shot for the transferring to HeavenSound
-                    AudioManager.Instance.PlayAudioClip(EventSounds.SwapToHeaven, callingObject.transform.position);
+                    AudioManager.Instance.TriggerAudioClip(EventSounds.SwapToHeaven, callingObject);
                     break;
 
                 //Otherwise, If we're swapping to the color black, or Hell, we're going to enter the code inside of this case instead 
                 case Color.Black:
                     //Then this code will run, playing the HellSwap audio clip trigger
-                    AudioManager.Instance.PlayAudioClip(EventSounds.SwapToHell, callingObject.transform.position);
+                    AudioManager.Instance.TriggerAudioClip(EventSounds.SwapToHell, callingObject);
                     break;
 
                 //However, if we're swapping to something not listed in the previous cases, i.e. neither Heaven nor Hell, this code will run
