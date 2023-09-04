@@ -73,6 +73,4 @@ public abstract class ColoredObject : Colored
 
         playPhaseAnimation = true;
     }
-
-    
 }
