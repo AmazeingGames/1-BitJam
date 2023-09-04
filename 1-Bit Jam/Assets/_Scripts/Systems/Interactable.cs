@@ -129,7 +129,6 @@ public abstract class Interactable : MonoBehaviour
         if (interactSound != AudioManager.EventSounds.Null)
         {
             Debug.Log("Played Interact Trigger");
-            AudioManager.Instance.TriggerAudioClip(interactSound, gameObject);
         }
     }
 }

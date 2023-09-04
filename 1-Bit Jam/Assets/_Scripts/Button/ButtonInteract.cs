@@ -36,7 +36,7 @@ public class ButtonInteract : Interactable
     {
         base.Interaction();
 
-        ColorSwap.Instance.ChangeColor(ColorSwap.Instance.OppositeColor(), gameObject);
+        ColorSwap.Instance.ChangeColor(ColorSwap.Instance.OppositeColor(), gameObject, triggerSwapSounds: true);
     }
 
     protected override void FillExtraCaseguards()

@@ -40,6 +40,9 @@ public class ExitInteraction : Interactable
         base.Interaction();
 
         GameManager.Instance.UpdateGameState(GameManager.GameState.LevelFinish);
+
+        Debug.LogWarning("Interacted with door");
+        AudioManager.Instance.TriggerAudioClip(AudioManager.EventSounds.DoorEnter, gameObject);
     }
 
     protected override void SetInteractSound()
