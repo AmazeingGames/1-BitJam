@@ -18,11 +18,18 @@ public class Fountain : ColoredObject
         base.OnStart();    
     }
 
+    void Update()
+    {
+        CheckAnimations();    
+    }
+
     protected override void HandleColorSwap(ColorSwap.Color newColor)
     {
         CurrentState = newColor;
 
         SetSpriteData();
+        
+        animator.runtimeAnimatorController = SpriteData.Controller;
 
         spriteRenderer.sprite = SpriteData.ActiveSprite;
 
