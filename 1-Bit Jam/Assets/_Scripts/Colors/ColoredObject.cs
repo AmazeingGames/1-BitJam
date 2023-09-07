@@ -28,7 +28,7 @@ public abstract class ColoredObject : Colored
         animator.runtimeAnimatorController = SpriteData.Controller;
     }
 
-    protected void SetSpriteData()
+    protected virtual void SetSpriteData()
     {
         SpriteData = Color switch
         {
@@ -48,6 +48,12 @@ public abstract class ColoredObject : Colored
 
     protected void CheckAnimations()
     {
+        if (coloredAnimator == null)
+        {
+            Debug.LogWarning("Colored Animator null");
+            return;
+        }
+
         if (playPhaseAnimation)
         {
             coloredAnimator.ShouldPlayPhaseIn(true, IsActiveProperty);
@@ -73,6 +79,4 @@ public abstract class ColoredObject : Colored
 
         playPhaseAnimation = true;
     }
-
-    
 }

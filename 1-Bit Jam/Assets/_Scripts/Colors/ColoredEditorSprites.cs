@@ -8,10 +8,8 @@ using UnityEngine;
 public class ColoredEditorSprites : MonoBehaviour
 {
     SpriteRenderer spriteRenderer;
-    
-    Enemy enemy;
-    Button button;
-    Exit exit;
+
+    ColoredObject coloredObject;
 
     //Awake is only called when the script is instanced.
     void Awake()
@@ -21,9 +19,10 @@ public class ColoredEditorSprites : MonoBehaviour
 
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        enemy = GetComponent<Enemy>();
-        button = GetComponent<Button>();
-        exit = GetComponent<Exit>();
+        coloredObject = GetComponent<ColoredObject>();
+
+        Debug.Log($"Colored object null : {coloredObject == null}");
+
         #endif 
 
     }
@@ -43,27 +42,12 @@ public class ColoredEditorSprites : MonoBehaviour
     //However, we are on a time crunch here
     void SetSprite()
     {
-        Sprite newSprite = null;
+        if (coloredObject == null)
+            return;
 
-        if (enemy != null)
-        {
-            newSprite = enemy.GetCurrentSpriteData().ActiveSprite;
-        }
-
-        else if (button != null)
-        {
-            newSprite = button.GetCurrentSpriteData().ActiveSprite;
-        }
-
-        else if (exit != null)
-        {
-            newSprite = exit.GetCurrentSpriteData().ActiveSprite;
-        }
+        Sprite newSprite = coloredObject.GetCurrentSpriteData().ActiveSprite;
 
         if (newSprite != null)
-        {
             spriteRenderer.sprite = newSprite;
-        }
-
     }
 }

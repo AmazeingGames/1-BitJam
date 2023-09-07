@@ -32,7 +32,7 @@ public class ColorSwap : Singleton<ColorSwap>
 
     void Update()
     {
-        /*
+    #if DEBUG
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             ChangeColor(Color.White, gameObject);
@@ -41,7 +41,7 @@ public class ColorSwap : Singleton<ColorSwap>
         {
             ChangeColor(Color.Black, gameObject);
         }
-        */
+    #endif
     }
 
     public void ChangeColor(Color newColor, GameObject callingObject, bool triggerSwapSounds = false, bool triggerAmbienceSounds = false)

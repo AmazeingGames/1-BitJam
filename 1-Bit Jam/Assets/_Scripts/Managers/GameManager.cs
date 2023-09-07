@@ -61,6 +61,11 @@ public class GameManager : Singleton<GameManager>
         LoadLevel(levelToLoad);
     }
 
+    void OnLose()
+    {
+        StopGame();
+    }
+
     public void StopGame()
     {
         IsGameRunning = false;
@@ -191,7 +196,7 @@ public class GameManager : Singleton<GameManager>
                 break;
 
             case GameState.Lose:
-                StopGame();
+                OnLose();
                 break;
 
             case GameState.LevelRestart:

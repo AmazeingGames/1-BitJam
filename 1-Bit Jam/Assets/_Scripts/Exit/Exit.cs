@@ -9,8 +9,6 @@ public class Exit : ColoredObject
 {
     [SerializeField] bool showDebug;
 
-
-
     // Start is called before the first frame update
     void Awake()
     {

@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2f01bc83bf9bf749b54ed4f136d72ac, type: 3}
+  m_Name: LightFountainSprite
+  m_EditorClassIdentifier: 
+  <Controller>k__BackingField: {fileID: 9100000, guid: f4032220d1a7ec6418dffd47f0419f9a, type: 2}
+  <ActiveSprite>k__BackingField: {fileID: -557619351, guid: 158aea134e4ab5a4c8a3005262282d3f, type: 3}
+  <InactiveSprite>k__BackingField: {fileID: 0}
