@@ -138,7 +138,7 @@
 	</object>
 	<object class="CommandSound" id="{8fa681a6-5783-48d5-8ea9-3ae3f619c355}">
 		<property name="length">
-			<value>0.10000000000000001</value>
+			<value>0</value>
 		</property>
 		<property name="commandType">
 			<value>1</value>
@@ -163,7 +163,7 @@
 	</object>
 	<object class="CommandSound" id="{d9de5438-fef6-4b4f-8b35-c6863d68d36b}">
 		<property name="length">
-			<value>0.10000000000000001</value>
+			<value>0</value>
 		</property>
 		<property name="commandType">
 			<value>1</value>

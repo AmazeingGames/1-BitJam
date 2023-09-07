@@ -62,21 +62,17 @@ public class AudioManager : Singleton<AudioManager>
         CleanUp();    
     }
 
-    public void TriggerAudioClip(EventSounds sound, GameObject origin)
-    {
-        Debug.Log($"Triggered Audio Clip: {sound}");
-        TriggerAudioClip(SoundTypeToReference[sound], origin.transform.position);
-    }
+    public void TriggerAudioClip(EventSounds sound, GameObject origin) => TriggerAudioClip(sound, origin.transform.position);
 
-    public void TriggerAudioClip(EventSounds sound, Transform origin)
-    {
-        Debug.Log($"Triggered Audio Clip: {sound}");
-        TriggerAudioClip(SoundTypeToReference[sound], origin.position);
-    }
+    public void TriggerAudioClip(EventSounds sound, Transform origin) => TriggerAudioClip(sound, origin.position);
 
     public void TriggerAudioClip(EventSounds sound, Vector3 origin)
     {
         Debug.Log($"Triggered Audio Clip: {sound}");
+
+        if (sound == EventSounds.Null)
+            return;
+
         TriggerAudioClip(SoundTypeToReference[sound], origin);
     }
 

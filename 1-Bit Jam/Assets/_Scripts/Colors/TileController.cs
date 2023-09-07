@@ -81,7 +81,7 @@ public class TileController : Colored
 
         Debug.Log("TileMaps done");
 
-        ColorSwap.Instance.ChangeColor(GameManager.Instance.LevelDataCurrent.StartingColor, gameObject);
+        ColorSwap.Instance.ChangeColor(GameManager.Instance.LevelDataCurrent.StartingColor, gameObject, triggerAmbienceSounds: true);
         
         SetTilesActive(ColorSwap.Instance.BackgroundColor);
 
