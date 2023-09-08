@@ -2,6 +2,7 @@ using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Animations;
 using static AudioManager.EventSounds;
@@ -208,8 +209,4 @@ public class Walk : State<CharacterController>
     public override void Exit()
     {
     }
-
-    
-
-    
 }

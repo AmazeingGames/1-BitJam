@@ -17,6 +17,7 @@ public class GameManager : Singleton<GameManager>
     public static event Action<AsyncOperation, bool> OnLoadStart;
 
     public static event Action GameStart;
+    public static event Action GameResume;
     public static event Action GameStop;
 
     public GameState PreviousState { get; private set; } = GameState.None;
@@ -72,6 +73,13 @@ public class GameManager : Singleton<GameManager>
         //Time.timeScale = 0;
 
         GameStop?.Invoke();
+    }
+
+    public void ResumeGame()
+    {
+        IsGameRunning = true;
+
+        GameResume.Invoke();
     }
 
     public void StartGame()

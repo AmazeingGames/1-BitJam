@@ -11,6 +11,7 @@ public class Player : Singleton<Player>
     [SerializeField] bool showGroundCheckDebug;
 
     public CircleCollider2D Collider { get; private set; }
+    Rigidbody2D rigidbody;
 
     public bool IsGrounded { get; private set; }
 
@@ -18,9 +19,41 @@ public class Player : Singleton<Player>
     void Start()
     {
         Collider = GetComponent<CircleCollider2D>();
+        rigidbody = GetComponent<Rigidbody2D>();
 
         StartCoroutine(GroundCheck());
     }
+
+
+    void OnEnable()
+    {
+        GameManager.GameStart += HandleGameStart;
+        GameManager.GameResume += HandleGameStart;
+
+        GameManager.GameStop += HandleGameStop;
+    }
+
+    void OnDisable()
+    {
+        GameManager.GameStart -= HandleGameStart;
+        GameManager.GameResume -= HandleGameStart;
+
+        GameManager.GameStop -= HandleGameStop;
+    }
+
+    void HandleGameStart()
+    {
+        Debug.Log($"Player handled game start");
+        rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
+    }
+
+    void HandleGameStop()
+    {
+        Debug.Log($"Player handled game stop");
+        rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
+    }
+
+    
 
     IEnumerator GroundCheck()
     {

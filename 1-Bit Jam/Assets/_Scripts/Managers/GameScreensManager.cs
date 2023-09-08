@@ -20,6 +20,7 @@ public class GameScreensManager : Singleton<GameScreensManager>
         GameManager.OnStateEnter += HandleLevelLose;
 
         GameManager.GameStart += HandleGameStart;
+        GameManager.GameResume += HandleGameStart;
         GameManager.GameStop += HandleGameStop;
 
         RestartButton.OnRestart += HandleLevelRestart;
@@ -34,6 +35,7 @@ public class GameScreensManager : Singleton<GameScreensManager>
         GameManager.OnStateEnter -= HandleLevelLose;
 
         GameManager.GameStart -= HandleGameStart;
+        GameManager.GameResume -= HandleGameStart;
         GameManager.GameStop -= HandleGameStop;
 
         RestartButton.OnRestart -= HandleLevelRestart;
@@ -87,7 +89,7 @@ public class GameScreensManager : Singleton<GameScreensManager>
         if (creditsMenu.enabled)
             GameManager.Instance.StopGame();
         else
-            GameManager.Instance.StartGame();
+            GameManager.Instance.ResumeGame();
     }
 
     void HandleLevelLose(GameManager.GameState gameState)
