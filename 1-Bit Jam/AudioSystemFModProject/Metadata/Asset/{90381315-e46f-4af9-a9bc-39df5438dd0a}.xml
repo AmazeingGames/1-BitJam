@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.02.00">
 	<object class="EncodableAsset" id="{90381315-e46f-4af9-a9bc-39df5438dd0a}">
+		<property name="color">
+			<value>Green</value>
+		</property>
 		<property name="assetPath">
-			<value>Neutral/Vocalizations/</value>
+			<value>Player/Vocalizations/</value>
 		</property>
 		<relationship name="masterAssetFolder">
 			<destination>{fc0e9cfb-ea53-401c-80dc-ca0025e8b1cf}</destination>

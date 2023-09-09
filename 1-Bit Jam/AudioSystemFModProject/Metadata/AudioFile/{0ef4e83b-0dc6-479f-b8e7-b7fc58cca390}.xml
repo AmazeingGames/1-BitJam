@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.02.00">
 	<object class="AudioFile" id="{0ef4e83b-0dc6-479f-b8e7-b7fc58cca390}">
+		<property name="color">
+			<value>Green</value>
+		</property>
 		<property name="assetPath">
 			<value>Player/Player_FS/Player_FS_02.wav</value>
 		</property>

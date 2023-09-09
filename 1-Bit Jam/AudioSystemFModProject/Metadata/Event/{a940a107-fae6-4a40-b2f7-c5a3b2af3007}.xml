@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{a940a107-fae6-4a40-b2f7-c5a3b2af3007}">
 		<property name="color">
-			<value>Red Light 1</value>
+			<value>Green</value>
 		</property>
 		<property name="name">
 			<value>Player_Caught</value>
@@ -11,7 +11,7 @@
 			<value>0</value>
 		</property>
 		<relationship name="folder">
-			<destination>{3cb6c984-f6d7-480f-85bf-3074a43a1e93}</destination>
+			<destination>{ea15f1a4-6b02-4f92-9035-24024ef4af38}</destination>
 		</relationship>
 		<relationship name="mixer">
 			<destination>{c1aea54e-905e-4a1b-ae01-8cf5b45d5865}</destination>

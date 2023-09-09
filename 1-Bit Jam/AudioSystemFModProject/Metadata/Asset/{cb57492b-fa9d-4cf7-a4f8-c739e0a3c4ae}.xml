@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.02.00">
 	<object class="EncodableAsset" id="{cb57492b-fa9d-4cf7-a4f8-c739e0a3c4ae}">
+		<property name="color">
+			<value>Cyan</value>
+		</property>
 		<property name="assetPath">
 			<value>Heaven/</value>
 		</property>

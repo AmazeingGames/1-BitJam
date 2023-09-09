@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.02.00">
 	<object class="AudioFile" id="{98a076ea-4fd3-4834-ac3c-b83780d7ea80}">
+		<property name="color">
+			<value>Green</value>
+		</property>
 		<property name="assetPath">
-			<value>Neutral/Vocalizations/Caught_Vocalizations_01.wav</value>
+			<value>Player/Vocalizations/Caught_Vocalizations_01.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>48</value>
