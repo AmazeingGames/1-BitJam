@@ -2,10 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using FMODUnity;
 
 public class Fountain : ColoredObject
 {
     [SerializeField] new BoxCollider2D collider;
+
+    [Header("Sounds")]
+    [SerializeField] bool overrideAttenuation;
+    [SerializeField] float min;
+    [SerializeField] float max;
+
+    [SerializeField] GameObject heavenEmmitterChild;
+    [SerializeField] GameObject hellEmmitterChild;
+
+
+    StudioEventEmitter heavenEmmitter;
+    StudioEventEmitter hellEmmitter;
+
     public ColorSwap.Color CurrentState { get; private set; }
 
     private void Awake()
@@ -15,7 +29,13 @@ public class Fountain : ColoredObject
 
     void Start()
     {
-        base.OnStart();    
+        heavenEmmitter = AudioManager.Instance.InitializeEventEmitter(AudioManager.EventSounds.HeavenlyFountain, heavenEmmitterChild);
+        hellEmmitter = AudioManager.Instance.InitializeEventEmitter(AudioManager.EventSounds.HellishFountain, hellEmmitterChild);
+
+        heavenEmmitter.Play();
+        hellEmmitter.Play();
+
+        base.OnStart();
     }
 
     void Update()
@@ -28,7 +48,23 @@ public class Fountain : ColoredObject
         CurrentState = newColor;
 
         SetSpriteData();
-        
+
+        switch (newColor)
+        {
+            case ColorSwap.Color.White:
+                heavenEmmitter.Play();
+                //hellEmmitter.Stop();
+                break;
+
+            case ColorSwap.Color.Black:
+                //heavenEmmitter.Stop();
+                hellEmmitter.Play();
+                break;
+
+            default:
+                throw new NotImplementedException();
+        }
+
         animator.runtimeAnimatorController = SpriteData.Controller;
 
         spriteRenderer.sprite = SpriteData.ActiveSprite;

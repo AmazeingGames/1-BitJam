@@ -19,6 +19,9 @@ public class AudioManager : Singleton<AudioManager>
     [field: SerializeField] public EventReference HeavenlyAmbience { get; private set; }
     [field: SerializeField] public EventReference DevilishAmbience { get; private set; }
     [field: SerializeField] public EventReference DoorEnter { get; private set; }
+    [field: SerializeField] public EventReference HeavenlyFountainAmbience { get; private set; }
+    [field: SerializeField] public EventReference HellishFountainAmbience { get; private set; }
+
 
 
     [Header("Music")]
@@ -29,7 +32,7 @@ public class AudioManager : Singleton<AudioManager>
 
     [SerializeField] AudioSource sfxSouce;
 
-    public enum EventSounds { SwapToHell, SwapToHeaven, UIClick, HeavenlyWalk, DevilishWalk, HeavenAmbience, DevilishAmbience, DoorEnter, Null }
+    public enum EventSounds { SwapToHell, SwapToHeaven, UIClick, HeavenlyWalk, DevilishWalk, HeavenAmbience, DevilishAmbience, DoorEnter, HeavenlyFountain, HellishFountain, Null }
 
     Dictionary<EventSounds, EventReference> SoundTypeToReference;
 
@@ -37,6 +40,7 @@ public class AudioManager : Singleton<AudioManager>
     public EventInstance DevilishAmbienceInstance { get; private set; }
 
     readonly List<EventInstance> EventInstances = new();
+    readonly List<StudioEventEmitter> EventEmitters = new();
 
     void Start()
     {
@@ -49,7 +53,9 @@ public class AudioManager : Singleton<AudioManager>
             { EventSounds.HeavenlyWalk,     HeavenlyWalkSound },
             { EventSounds.HeavenAmbience,   HeavenlyAmbience },
             { EventSounds.DevilishAmbience, DevilishAmbience },
-            { EventSounds.DoorEnter,        DoorEnter }
+            { EventSounds.DoorEnter,        DoorEnter },
+            { EventSounds.HeavenlyFountain, HeavenlyFountainAmbience },
+            { EventSounds.HellishFountain,  HellishFountainAmbience},
         };
 
         //Creates the instance
@@ -93,12 +99,28 @@ public class AudioManager : Singleton<AudioManager>
         return eventInstance;
     }
 
+    public StudioEventEmitter InitializeEventEmitter(EventSounds eventSound, GameObject source) => InitializeEventEmitter(SoundTypeToReference[eventSound], source);
+
+    StudioEventEmitter InitializeEventEmitter(EventReference eventReference, GameObject source)
+    {
+        var emmiter = source.GetComponent<StudioEventEmitter>();
+        emmiter.EventReference = eventReference;
+
+        EventEmitters.Add(emmiter);
+        return emmiter;
+    }
+
     void CleanUp()
     {
         foreach (var eventInstance in EventInstances)
         {
             eventInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             eventInstance.release();
+        }
+
+        foreach (var emitter in EventEmitters)
+        {
+            emitter.Stop();
         }
     }
 }
