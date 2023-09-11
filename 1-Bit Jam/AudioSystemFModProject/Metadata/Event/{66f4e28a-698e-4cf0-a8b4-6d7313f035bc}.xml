@@ -50,6 +50,9 @@
 		</relationship>
 	</object>
 	<object class="MixerInput" id="{443d140e-788b-409e-bee0-21eba67d7e0f}">
+		<property name="color">
+			<value>Blue</value>
+		</property>
 		<relationship name="effectChain">
 			<destination>{5875ac97-f341-46e4-b0d3-2691d3c34d20}</destination>
 		</relationship>
@@ -57,7 +60,7 @@
 			<destination>{5ed9dbe5-eab8-4bd4-bcff-4faaa8832fd6}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{ae258c29-10bd-4de9-8b2c-ef316941831d}</destination>
+			<destination>{3343bc34-bb23-4537-b08f-8e1ec5c36669}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{c1894428-ad9c-427f-b3ac-41e20ecbcdb2}" />
@@ -216,7 +219,23 @@
 	</object>
 	<object class="MixerBusPanner" id="{370b386a-37be-4446-8815-3e968ec886f9}" />
 	<object class="MixerBusFader" id="{71829d0e-3cbc-460e-830f-93f0de74e4e1}" />
-	<object class="SpatialiserEffect" id="{8d72d404-69fb-4a97-ad06-dc293258a63a}" />
+	<object class="SpatialiserEffect" id="{8d72d404-69fb-4a97-ad06-dc293258a63a}">
+		<property name="maximumDistance">
+			<value>8.60000038</value>
+		</property>
+		<property name="overrideRange">
+			<value>true</value>
+		</property>
+		<property name="extentMode">
+			<value>1</value>
+		</property>
+		<property name="soundSize">
+			<value>3.60000014</value>
+		</property>
+		<property name="minimumExtent">
+			<value>300</value>
+		</property>
+	</object>
 	<object class="MultibandEqEffect" id="{73ddd79a-71c2-4330-b2fd-d2fe31af2dc8}">
 		<property name="frequencyA">
 			<value>3408.66455</value>

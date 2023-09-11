@@ -49,6 +49,9 @@
 		</relationship>
 	</object>
 	<object class="MixerInput" id="{0a2ade6f-9f31-49de-adfc-c26be7d488fe}">
+		<property name="color">
+			<value>Green</value>
+		</property>
 		<relationship name="effectChain">
 			<destination>{ef27ef53-e389-4f6f-bdfd-efc88a35520d}</destination>
 		</relationship>
@@ -56,7 +59,7 @@
 			<destination>{8cd61148-fe27-4f1a-8b65-a7734a11d942}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{ae258c29-10bd-4de9-8b2c-ef316941831d}</destination>
+			<destination>{dfbf3a81-03a8-4346-a3c9-2819bc17d30d}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{a9902993-1820-4c55-b5bc-a32397331312}">
@@ -79,6 +82,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{04442916-7975-47b1-83ce-e197d9776cb9}">
+		<property name="volume">
+			<value>-8.5</value>
+		</property>
 		<relationship name="effectChain">
 			<destination>{9fb92341-7df0-4f8a-8c4d-e884f882f8a7}</destination>
 		</relationship>

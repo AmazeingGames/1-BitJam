@@ -58,7 +58,7 @@
 			<destination>{fb1e505e-f452-48d2-831c-f9f7709224f8}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{ae258c29-10bd-4de9-8b2c-ef316941831d}</destination>
+			<destination>{3343bc34-bb23-4537-b08f-8e1ec5c36669}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{214490c0-0769-4c32-aaaf-3c8be0cfcf8c}" />
@@ -124,7 +124,7 @@
 	</object>
 	<object class="EventMixerGroup" id="{d6020f1a-2730-4873-acca-984da3a8b536}">
 		<property name="volume">
-			<value>-4</value>
+			<value>-3</value>
 		</property>
 		<property name="name">
 			<value>Audio 1</value>
@@ -141,7 +141,7 @@
 	</object>
 	<object class="CommandSound" id="{bab2983d-2f4b-42ff-9f84-e58e95ee4012}">
 		<property name="length">
-			<value>0.10000000000000001</value>
+			<value>0</value>
 		</property>
 		<relationship name="commandTarget">
 			<destination>{a8fc018a-a0bc-4e1f-9766-50d24338c65f}</destination>
@@ -163,7 +163,7 @@
 	</object>
 	<object class="CommandSound" id="{99c2ffb8-8771-4b23-a6d2-20e88e39167d}">
 		<property name="length">
-			<value>0.10000000000000001</value>
+			<value>0</value>
 		</property>
 		<property name="commandType">
 			<value>1</value>

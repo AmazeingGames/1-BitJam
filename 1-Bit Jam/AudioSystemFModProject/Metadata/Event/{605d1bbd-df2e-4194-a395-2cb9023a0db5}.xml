@@ -58,7 +58,7 @@
 			<destination>{e07ab40a-8bfc-48bb-9865-821f719ebd18}</destination>
 		</relationship>
 		<relationship name="output">
-			<destination>{ae258c29-10bd-4de9-8b2c-ef316941831d}</destination>
+			<destination>{bad282f2-b2a3-4cf9-bc1b-a9236ffe05f3}</destination>
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{a33699e2-a6d5-485a-a2c0-ad9cc3eec39c}" />
@@ -144,7 +144,7 @@
 	</object>
 	<object class="CommandSound" id="{c4bde9dc-1535-4019-8d8d-7cf76b4d191c}">
 		<property name="length">
-			<value>0.10000000000000001</value>
+			<value>0</value>
 		</property>
 		<relationship name="commandTarget">
 			<destination>{52bfa51e-9f3e-4c51-ac99-eff150eb71a1}</destination>
@@ -166,7 +166,7 @@
 	</object>
 	<object class="CommandSound" id="{67c327ec-f370-459b-afca-de16b55aa2cf}">
 		<property name="length">
-			<value>0.10000000000000001</value>
+			<value>0</value>
 		</property>
 		<property name="commandType">
 			<value>1</value>
