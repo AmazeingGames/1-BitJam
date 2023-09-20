@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.02.00">
 	<object class="AudioFile" id="{bb6e342b-e329-47c3-a7e2-931a8de3d1a7}">
-		<property name="color">
-			<value>Blue</value>
-		</property>
 		<property name="assetPath">
 			<value>Hell/Hell_Amb_01.wav</value>
 		</property>

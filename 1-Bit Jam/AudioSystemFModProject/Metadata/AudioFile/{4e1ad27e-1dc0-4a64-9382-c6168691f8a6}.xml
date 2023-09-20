@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.02.00">
 	<object class="AudioFile" id="{4e1ad27e-1dc0-4a64-9382-c6168691f8a6}">
-		<property name="color">
-			<value>Red Light 1</value>
-		</property>
 		<property name="assetPath">
 			<value>Neutral/UI_Select_01.wav</value>
 		</property>

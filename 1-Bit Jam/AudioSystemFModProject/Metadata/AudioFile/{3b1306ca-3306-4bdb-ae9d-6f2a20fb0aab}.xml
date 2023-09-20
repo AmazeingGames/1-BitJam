@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.02.00">
 	<object class="AudioFile" id="{3b1306ca-3306-4bdb-ae9d-6f2a20fb0aab}">
-		<property name="color">
-			<value>Green</value>
-		</property>
 		<property name="assetPath">
 			<value>Player/Player_Land_01.wav</value>
 		</property>
