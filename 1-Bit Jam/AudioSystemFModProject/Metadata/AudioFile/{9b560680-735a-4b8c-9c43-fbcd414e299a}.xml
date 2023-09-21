@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.02.00">
 	<object class="AudioFile" id="{9b560680-735a-4b8c-9c43-fbcd414e299a}">
-		<property name="color">
-			<value>Cyan</value>
-		</property>
 		<property name="assetPath">
 			<value>Heaven/Heaven_Amb_01.wav</value>
 		</property>
