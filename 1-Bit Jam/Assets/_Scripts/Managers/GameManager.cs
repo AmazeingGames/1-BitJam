@@ -41,96 +41,31 @@ public class GameManager : Singleton<GameManager>
     #endif
     }
 
-    void OnMainMenuEnter()
-    {
-        //Debug.Log("MainMenu Enter");
-
-        LoadScene("_MainMenu");
-    }
-
-
-    void OnLevelLoad(int levelToLoad)
-    {
-        Debug.Log("level Start");
-
-        if (levelToLoad == -1)
-            throw new NotImplementedException();
-
-        LevelDataCurrent = levelData[levelToLoad - 1];
-
-        LoadLevel(levelToLoad);
-    }
-
-    void OnLose()
-    {
-        StopGame();
-    }
-
     public void StopGame()
     {
         IsGameRunning = false;
-        //Time.timeScale = 0;
-
         GameStop?.Invoke();
     }
 
     public void StartGame()
     {
         IsGameRunning = true;
-        //Time.timeScale = 1;
-
         GameStart?.Invoke();
-    }
-
-    void OnLevelFinish()
-    {
-        //Debug.Log("Level Finish");
-
-        if (DoesLevelExist(LevelDataCurrent.Level + 1))
-        {
-            UpdateGameState(GameState.LevelStart, LevelDataCurrent.Level + 1); 
-        }
-        else
-        {
-            UpdateGameState(GameState.GameFinish);
-        }
-    }
-
-    void OnGameFinish()
-    {
-        LoadScene("_MainMenu");
-    }
-
-    void ReloadLevel()
-    {
-        UpdateGameState(GameState.LevelStart, LevelDataCurrent.Level);
     }
 
     bool LoadLevel(int level) => LoadScene($"Level_{level}", true);
 
 
-    //Discrete Scene Load
-    //Load scene in the background
-    //No load screen
-    //Game Paused
-
     bool LoadScene(string sceneName, bool isLevel = false)
     {
-        //loadingCanvas.gameObject.SetActive(true);
-
         if (!DoesSceneExist(sceneName))
-        {
-            //loadingCanvas.gameObject.SetActive(false);
             return false;
-        }
 
         UnloadScene(sceneToUnload);
         
         sceneToUnload = sceneName;
 
         UpdateGameState(GameState.Loading);
-
-        Debug.Log($"Loading Scene: {sceneName}");
 
         var load = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
 
@@ -147,8 +82,6 @@ public class GameManager : Singleton<GameManager>
         if (sceneToUnload == null)
             return false;
 
-        Debug.Log($"Unloaded scene : {sceneName}");
-
         SceneManager.UnloadSceneAsync(sceneName);
 
         return true;
@@ -160,11 +93,7 @@ public class GameManager : Singleton<GameManager>
     {
         int buildIndex = SceneUtility.GetBuildIndexByScenePath(sceneName);
 
-        if (buildIndex == -1)
-        {
-            return false;
-        }
-        return true;
+        return buildIndex != -1;
     }
 
     public void UpdateGameState(GameState newState, int levelToLoad = -1)
@@ -176,39 +105,38 @@ public class GameManager : Singleton<GameManager>
 
         //Not sure if this is an issue, but this is always called the first time we exit a state, even when we haven't technically 'left' any states. This also happens in the main menu manager.
 
-        Debug.Log($"Change State | Previous State: {PreviousState} | New State: {newState}");
-        //State leave
-        switch (PreviousState)
-        {
-            default:
-                break;
-        }
-
-        //State Enter
         switch (newState)
         {
             case GameState.MainMenu:
-                OnMainMenuEnter();
+                LoadScene("_MainMenu");
                 break;
 
             case GameState.LevelStart:
-                OnLevelLoad(levelToLoad);
+                if (levelToLoad == -1)
+                    throw new NotImplementedException();
+
+                LevelDataCurrent = levelData[levelToLoad - 1];
+
+                LoadLevel(levelToLoad);
                 break;
 
             case GameState.Lose:
-                OnLose();
+                StopGame();
                 break;
 
             case GameState.LevelRestart:
-                ReloadLevel();
+                UpdateGameState(GameState.LevelStart, LevelDataCurrent.Level);
                 break;
 
             case GameState.LevelFinish:
-                OnLevelFinish();
+                if (DoesLevelExist(LevelDataCurrent.Level + 1))
+                    UpdateGameState(GameState.LevelStart, LevelDataCurrent.Level + 1);
+                else
+                    UpdateGameState(GameState.GameFinish); 
                 break;
 
             case GameState.GameFinish:
-                OnGameFinish();
+                LoadScene("_MainMenu");
                 break;
         }
 

@@ -254,6 +254,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bda1c440c0d1a0b48a0f2a71fbaafb3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 4882659650190347893}
+  coloredObject: {fileID: 1913454442237593714}
 --- !u!95 &-1028782486577924786
 Animator:
   serializedVersion: 5
@@ -304,6 +306,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactIcon: {fileID: 8554317906310455455}
+  vison: {fileID: 3916307789024822964}
   interactionCooldownLength: 0.2
   interactBuffer: 0.1
   canInteractTime: 0.1
+  exit: {fileID: 1913454442237593714}

@@ -4,33 +4,10 @@ using UnityEngine;
 
 public class ButtonInteract : Interactable
 {
-    Button button;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        button = GetComponent<Button>();
-
-        base.Start();
-    }
-
-    private void Update()
-    {
-        if (!GameManager.Instance.IsGameRunning)
-            return;
-
-        base.Update();
-    }
+    [SerializeField] Button button;
 
     protected override void SetInteractSound()
-    {
-        interactSound = AudioManager.EventSounds.Null;
-    }
-
-    protected override void GetInput()
-    {
-        base.GetInput();
-    }
+        => interactSound = AudioManager.EventSounds.Null;
 
     protected override void Interaction()
     {

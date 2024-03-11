@@ -4,32 +4,11 @@ using UnityEngine;
 
 public class ExitInteraction : Interactable
 {
-    Exit exit;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        exit = GetComponent<Exit>();
-
-        base.Start();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (!GameManager.Instance.IsGameRunning)
-            return;
-
-        base.Update();
-    }
-
-    protected override void GetInput()
-    {
-        base.GetInput();
-    }
+    [SerializeField] Exit exit;
 
     protected override void FillExtraCaseguards()
     {
+        // Do we need to clear the list?
         base.FillExtraCaseguards();
 
         extraCaseGuards.Add(!exit.IsActiveProperty);
@@ -40,18 +19,11 @@ public class ExitInteraction : Interactable
         base.Interaction();
 
         GameManager.Instance.UpdateGameState(GameManager.GameState.LevelFinish);
-
-        Debug.LogWarning("Interacted with door");
         AudioManager.Instance.TriggerAudioClip(AudioManager.EventSounds.DoorEnter, gameObject);
     }
 
     protected override void SetInteractSound()
     {
         interactSound = AudioManager.EventSounds.DoorEnter;
-    }
-
-    protected override void SetVision()
-    {
-        vison = transform.GetChild(0).GetComponent<Vision>();
     }
 }

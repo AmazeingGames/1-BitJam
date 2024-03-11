@@ -12,14 +12,7 @@ public class Enemy : ColoredObject
     [SerializeField] bool showDebug;
     
     void Awake()
-    {
-        SetSpriteData();
-    }
-
-    void Start()
-    {
-        OnStart();
-    }
+        => SetSpriteData();
 
     void Update()
     {
@@ -37,10 +30,5 @@ public class Enemy : ColoredObject
     }
 
     public override bool IsActiveCheck(ColorSwap.Color backgroundColor)
-    {
-        if (Color == ColorSwap.Color.Neutral)
-            return true;
-
-        return Color == backgroundColor;
-    }
+        => Color == ColorSwap.Color.Neutral || Color == backgroundColor;
 }

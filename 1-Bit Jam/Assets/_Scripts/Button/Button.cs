@@ -5,8 +5,8 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
 
-//This, Button, and Enemy clearly share some repeating qualities.
-//TO DO: Make changes to reduce repeated code.
+// This and Enemy clearly share some repeating qualities.
+// TO DO: Make changes to reduce repeated code.
 public class Button : ColoredObject
 {
     [SerializeField] bool showDebug;
@@ -18,11 +18,6 @@ public class Button : ColoredObject
         animator = GetComponent<Animator>();
 
         animator.runtimeAnimatorController = SpriteData.Controller;
-    }
-
-    void Start()
-    {
-        OnStart();
     }
 
     void Update()
@@ -41,10 +36,5 @@ public class Button : ColoredObject
     }
 
     public override bool IsActiveCheck(ColorSwap.Color backgroundColor)
-    {
-        if (Color == ColorSwap.Color.Neutral)
-            return true;
-
-        return (backgroundColor != Color);
-    }
+        => Color == ColorSwap.Color.Neutral || backgroundColor != Color;
 }

@@ -5,24 +5,14 @@ using UnityEngine;
 
 public class PushableBox : ColoredObject
 {
+    [SerializeField] new Rigidbody2D rigidbody;
     [SerializeField] new BoxCollider2D collider;
     [SerializeField] float defaultMass;
 
     public ColorSwap.Color CurrentState { get; private set; }
-    
-    Rigidbody2D rigidbody2D;
 
     private void Awake()
-    {
-        SetSpriteData();
-    }
-
-    void Start()
-    {
-        rigidbody2D = GetComponent<Rigidbody2D>();
-
-        base.OnStart();
-    }
+        => SetSpriteData();
 
     protected override void HandleColorSwap(ColorSwap.Color newColor)
     {
@@ -31,7 +21,6 @@ public class PushableBox : ColoredObject
         SetSpriteData();
 
         spriteRenderer.sprite = SpriteData.ActiveSprite;
-
         playPhaseAnimation = true;
 
         SetPushability(newColor);
@@ -53,11 +42,9 @@ public class PushableBox : ColoredObject
         {
             ColorSwap.Color.White => defaultMass,
             ColorSwap.Color.Black => 1000,
-
             _ => throw new NotImplementedException(),
         };
-
-        rigidbody2D.mass = newMass;
+        rigidbody.mass = newMass;
     }
 
     public override bool IsActiveCheck(ColorSwap.Color backgroundColor) => true;

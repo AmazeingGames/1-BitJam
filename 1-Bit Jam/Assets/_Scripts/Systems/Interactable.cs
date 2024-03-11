@@ -9,12 +9,13 @@ using UnityEngine.EventSystems;
 public abstract class Interactable : MonoBehaviour
 {
     [SerializeField] GameObject interactIcon;
-    [SerializeField] float interactionCooldownLength;
+    [SerializeField] Vision vison;
 
+    [Header("Properties")]
+    [SerializeField] float interactionCooldownLength;
     [SerializeField] float interactBuffer;
     [SerializeField] float canInteractTime;
 
-    protected Vision vison;
 
     float lastPressedInteract;
     float lastCouldInteract;
@@ -30,24 +31,18 @@ public abstract class Interactable : MonoBehaviour
 
     protected void Start()
     {
-        SetVision();
-            
         SetInteractIconActive(false);
-
         SetInteractSound();
     }
 
     protected abstract void SetInteractSound();
 
-    protected virtual void SetVision()
-    {
-        vison = GetComponent<Vision>();
-    }
-
     protected void Update()
     {
-        UpdateTimers();
+        if (!GameManager.Instance.IsGameRunning)
+            return;
 
+        UpdateTimers();
         GetInput();
 
         CanBeInteractedWith();
@@ -64,19 +59,13 @@ public abstract class Interactable : MonoBehaviour
     protected virtual void GetInput()
     {
         if (Input.GetButtonDown("Interact"))
-        {
             lastPressedInteract = interactBuffer;
-        }
     }
 
     protected virtual void FillExtraCaseguards()
-    {
-        extraCaseGuards.Clear();
-    }
+        => extraCaseGuards.Clear();
 
-    //This could could probably be improved via a state machine. This would also help with optimization
-    //While the player is within range, the button can be interacted with
-    //The button can still be interacted with for a short time after the player leaves the range
+    // This could could probably be improved via a state machine
     protected void CanBeInteractedWith()
     {
         SetInteractIconActive(false);
@@ -105,8 +94,6 @@ public abstract class Interactable : MonoBehaviour
             interactIcon.SetActive(setActive);
     }
 
-
-    //If player presses interact
     protected void ShouldPlayInteraction()
     {
         if (cooldownTimer > 0)
@@ -121,14 +108,6 @@ public abstract class Interactable : MonoBehaviour
         Interaction();
     }
 
-    //On interaction
     protected virtual void Interaction()
-    {
-        cooldownTimer = interactionCooldownLength;
-
-        if (interactSound != AudioManager.EventSounds.Null)
-        {
-            Debug.Log("Played Interact Trigger");
-        }
-    }
+        => cooldownTimer = interactionCooldownLength;
 }

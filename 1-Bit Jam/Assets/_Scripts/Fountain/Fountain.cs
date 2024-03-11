@@ -9,18 +9,19 @@ public class Fountain : ColoredObject
     public ColorSwap.Color CurrentState { get; private set; }
 
     private void Awake()
-    {
-        SetSpriteData();
-    }
-
-    void Start()
-    {
-        base.OnStart();    
-    }
+        => SetSpriteData();
 
     void Update()
+        => CheckAnimations();
+
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        CheckAnimations();    
+        switch (CurrentState)
+        {
+            case ColorSwap.Color.Black:
+                GameManager.Instance.UpdateGameState(GameManager.GameState.Lose);
+                break;
+        }
     }
 
     protected override void HandleColorSwap(ColorSwap.Color newColor)
@@ -42,33 +43,10 @@ public class Fountain : ColoredObject
         {
             ColorSwap.Color.White => LightSpriteData,
             ColorSwap.Color.Black => DarkSpriteData,
-
             _ => throw new NotImplementedException(),
         };
     }
 
     public override bool IsActiveCheck(ColorSwap.Color backgroundColor)
-    {
-        return true;
-    }
-
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        switch (CurrentState)
-        {
-            case ColorSwap.Color.White:
-                Debug.Log("You Good.");
-                //Play splash
-                break;
-
-            case ColorSwap.Color.Black:
-                GameManager.Instance.UpdateGameState(GameManager.GameState.Lose);
-                break;
-
-            default:
-                throw new NotImplementedException();
-        }
-    }
-
-    //private void OnTriggerStay2D(Collider2D collision) { }
+        => true;
 }

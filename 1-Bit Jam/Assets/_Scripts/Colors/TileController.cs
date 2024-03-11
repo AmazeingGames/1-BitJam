@@ -15,8 +15,6 @@ public class TileController : Colored
 
     GameObject tileMaps;
 
-    bool needsToSetup = true;
-
     void Start()
     {
         GameManager.GameStart += HandleLevelLoad;
@@ -114,10 +112,5 @@ public class TileController : Colored
     public override bool IsActiveCheck(ColorSwap.Color backgroundColor)
     {
         throw new System.NotImplementedException();
-    }
-
-    protected override void OnStart()
-    {
-        throw new NotImplementedException();
     }
 }

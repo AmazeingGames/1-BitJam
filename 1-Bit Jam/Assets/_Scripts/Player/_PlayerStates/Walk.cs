@@ -15,6 +15,7 @@ public class Walk : State<CharacterController>
     [SerializeField] float deceleration;
     [SerializeField] float velocityPower;
     [SerializeField] float frictionAmount;
+    [SerializeField] float airFrictionAmount;
 
     [SerializeField] bool showDebug;
 
@@ -38,8 +39,8 @@ public class Walk : State<CharacterController>
     float groundedTimer;
 
     float horizontalInput;
-
     float maxVerticalVelocity;
+    float FritctionType => player.IsGrounded ? frictionAmount : airFrictionAmount;
 
     public override void Enter(CharacterController parent)
     {
@@ -78,12 +79,15 @@ public class Walk : State<CharacterController>
             groundedTimer = coyoteTimeLength;
 
         KeepConstantVelocity();
-
         CheckAnimations();
-
         CheckSounds();
-
         FlipPlayer();
+    }
+
+    public override void FixedUpdate()
+    {
+        MovePlayer();
+        ApplyFriction();
     }
 
     void CheckAnimations()
@@ -97,6 +101,7 @@ public class Walk : State<CharacterController>
         CheckWalkSound();
     }
 
+    // Determines what sound to play when walking
     void CheckWalkSound()
     {
         if (!player.IsGrounded)
@@ -110,8 +115,6 @@ public class Walk : State<CharacterController>
 
         if (walkSoundTimer > 0)
             return;
-
-        //Debug.Log(Mathf.Abs(rigidbody.velocity.x));
 
         AudioManager.EventSounds walkAudioClip = ColorSwap.Instance.BackgroundColor switch
         {
@@ -144,9 +147,8 @@ public class Walk : State<CharacterController>
         runner.transform.localScale = new Vector2(Mathf.Abs(runner.transform.localScale.x) * multipler, Mathf.Abs(runner.transform.localScale.y));
     }
 
-    //Makes sure the player can't gain more vertical velocity than they already have.
-    //Prevents bouncing.
-    //Note: Performance is poor, optimize using Clamp
+    // Makes sure the player can't gain more vertical velocity than they already have
+    // Prevents bouncing
     void KeepConstantVelocity()
     {
         if (rigidbody.velocity.y > maxVerticalVelocity)
@@ -158,35 +160,28 @@ public class Walk : State<CharacterController>
             maxVerticalVelocity = 0;
     }
 
-    public override void FixedUpdate()
-    {
-        MovePlayer();
-        ApplyFriction();
-    }
-
-    //Uses forces and math to move the player
     void MovePlayer()
     {
-        //Calculates the direction we wish to move in; this is our desired velocity
+        // Calculates the direction we wish to move in; this is our desired velocity
         float targetSpeed = horizontalInput * walkSpeed;
 
-        //Difference between the current and desired velocity
+        // Difference between the current and desired velocity
         float speedDifference = targetSpeed - rigidbody.velocity.x;
 
-        //Changes our acceleration rate to suit the situation
+        // Changes our acceleration rate to suit the situation
         float acceleartionRate = (Mathf.Abs(targetSpeed > .01f ? acceleration : deceleration));
 
-        //Applies acceleration to the speed difference, then raises it to a power, meaning acceleration increases with higher speeds
-        //Multiplies it to reapply direction
+        // Applies acceleration to the speed difference, then raises it to a power, meaning acceleration increases with higher speeds
+        // Multiplies it to reapply direction
         float movement = Mathf.Pow(Mathf.Abs(speedDifference) * acceleartionRate, velocityPower) * Mathf.Sign(speedDifference);
 
         rigidbody.AddForce(movement * Vector2.right);
     }
 
-    //Applies force opposite to the player
+    // Applies an opposite force to the player's movement
     void ApplyFriction()
     {
-        float amount = Mathf.Min(Mathf.Abs(rigidbody.velocity.x), Mathf.Abs(frictionAmount));
+        float amount = Mathf.Min(Mathf.Abs(rigidbody.velocity.x), Mathf.Abs(FritctionType));
 
         amount *= Mathf.Sign(rigidbody.velocity.x);
 
@@ -200,7 +195,6 @@ public class Walk : State<CharacterController>
         {
             jumpTimer = 0;
             groundedTimer = 0;
-
             runner.SetState(typeof(Jump));
         }
     }
@@ -209,7 +203,7 @@ public class Walk : State<CharacterController>
     {
     }
 
-    
 
-    
+
+
 }

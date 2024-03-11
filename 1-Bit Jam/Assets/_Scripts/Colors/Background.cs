@@ -5,17 +5,12 @@ using UnityEngine;
 public class Background : Colored
 {
     [SerializeField] GameObject backgroundObject;
-    [field: SerializeField] public ColorSwap.Color color { get; private set; }
-
     [SerializeField] bool showDebug = true;
+    [field: SerializeField] public ColorSwap.Color Color { get; private set; }
 
     // Start is called before the first frame update
     void Start()
-    {
-        SetSize();
-    }
-
-    void SetSize() => backgroundObject.transform.localScale = new Vector3(1000, 1000);
+        => backgroundObject.transform.localScale = new Vector3(1000, 1000);
 
     protected override void HandleColorSwap(ColorSwap.Color newColor)
     {
@@ -26,10 +21,5 @@ public class Background : Colored
         backgroundObject.SetActive(setActive);
     }
 
-    public override bool IsActiveCheck(ColorSwap.Color backgroundColor) => backgroundColor == color;
-
-    protected override void OnStart()
-    {
-        throw new System.NotImplementedException();
-    }
+    public override bool IsActiveCheck(ColorSwap.Color backgroundColor) => backgroundColor == Color;
 }

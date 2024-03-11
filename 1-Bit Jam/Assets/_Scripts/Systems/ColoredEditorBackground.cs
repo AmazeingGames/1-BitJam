@@ -8,14 +8,8 @@ public class ColoredEditorBackground : MonoBehaviour
     ColorSwap.Color gameObjectColor;
 
     Background background;
-
     GameObject child;
-
     GameManager manager;
-
-    void Start()
-    {
-    }
 
     // Update is called once per frame
     void Update()
@@ -25,21 +19,15 @@ public class ColoredEditorBackground : MonoBehaviour
             return;
 
         if (background == null)
-        {
             background = GetComponent<Background>();
-        }
-
-        gameObjectColor = background.color;
+        else
+            gameObjectColor = background.Color;
 
         if (manager == null)
-        {
             manager = GameObject.Find("GameStateManager").GetComponent<GameManager>();
-        }
 
         if (child == null)
-        {
             child = transform.GetChild(0).gameObject;
-        }
 
         bool setActive = gameObjectColor == manager.LevelDataCurrent.StartingColor;
 

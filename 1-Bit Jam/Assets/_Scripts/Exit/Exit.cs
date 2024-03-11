@@ -11,15 +11,7 @@ public class Exit : ColoredObject
 
     // Start is called before the first frame update
     void Awake()
-    {
-        SetSpriteData();
-    }
-
-    void Start()
-    {
-        OnStart();
-    }
-
+        => SetSpriteData();
 
     void Update()
     {
@@ -28,8 +20,6 @@ public class Exit : ColoredObject
 
         CheckAnimations();
     }
-
-    
 
     protected override void HandleColorSwap(ColorSwap.Color newColor)
     {

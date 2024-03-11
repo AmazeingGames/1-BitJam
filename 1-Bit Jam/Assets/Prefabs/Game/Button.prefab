@@ -260,6 +260,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bda1c440c0d1a0b48a0f2a71fbaafb3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 7080741091285468452}
+  coloredObject: {fileID: 5145089212481034869}
 --- !u!114 &-8876349256976934944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285,6 +287,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactIcon: {fileID: 2390617377971542526}
+  vison: {fileID: 5909598516075576875}
   interactionCooldownLength: 0.2
   interactBuffer: 0.1
   canInteractTime: 0.1
+  button: {fileID: 5145089212481034869}

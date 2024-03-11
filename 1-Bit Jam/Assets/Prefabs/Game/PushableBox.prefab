@@ -162,6 +162,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bda1c440c0d1a0b48a0f2a71fbaafb3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 894974307534764739}
+  coloredObject: {fileID: 5656075123205242282}
 --- !u!114 &5656075123205242282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,6 +179,7 @@ MonoBehaviour:
   <Color>k__BackingField: 0
   <DarkSpriteData>k__BackingField: {fileID: 11400000, guid: fe0462ab93e827d4a9db0cce9f361a7d, type: 2}
   <LightSpriteData>k__BackingField: {fileID: 11400000, guid: e583e6d4b92c57641b7bea81504b9c4c, type: 2}
+  rigidbody: {fileID: -1626173065558702110}
   collider: {fileID: -4714348522502517665}
   defaultMass: 5
 --- !u!95 &1623944524025135141

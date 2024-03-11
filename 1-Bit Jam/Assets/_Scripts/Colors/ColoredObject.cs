@@ -6,11 +6,9 @@ using UnityEngine;
 public abstract class ColoredObject : Colored
 {
     [field: SerializeField] public ColorSwap.Color Color { get; protected set; }
-
     [field: SerializeField] public SpriteData DarkSpriteData { get; protected set; }
     [field: SerializeField] public SpriteData LightSpriteData { get; protected set; }
 
-    public SpriteData SpriteData { get; protected set; }
     public bool IsActiveProperty { get; protected set; }
 
     protected bool playPhaseAnimation;
@@ -19,7 +17,22 @@ public abstract class ColoredObject : Colored
     protected ColoredAnimator coloredAnimator;
     protected SpriteRenderer spriteRenderer;
 
-    protected override void OnStart()
+    SpriteData spriteData;
+    public SpriteData SpriteData
+    {
+        get
+        {
+            SetSpriteData();
+            return spriteData;
+        }
+        protected set
+        {
+            spriteData = value;
+        }
+    }
+
+
+    protected void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         coloredAnimator = GetComponent<ColoredAnimator>();
@@ -34,25 +47,14 @@ public abstract class ColoredObject : Colored
         {
             ColorSwap.Color.White => LightSpriteData,
             ColorSwap.Color.Black => DarkSpriteData,
-            ColorSwap.Color.Neutral => throw new NotImplementedException(),
             _ => throw new Exception(),
         };
-    }
-
-    public SpriteData GetCurrentSpriteData()
-    {
-        SetSpriteData();
-
-        return SpriteData;
     }
 
     protected void CheckAnimations()
     {
         if (coloredAnimator == null)
-        {
-            Debug.LogWarning("Colored Animator null");
-            return;
-        }
+            throw new NullReferenceException("Colored Animator null");
 
         if (playPhaseAnimation)
         {

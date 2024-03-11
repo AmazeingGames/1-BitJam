@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using static AudioManager;
-using static AudioManager;
 
 public class ColorSwap : Singleton<ColorSwap>
 {
@@ -14,36 +13,29 @@ public class ColorSwap : Singleton<ColorSwap>
     readonly List<GameObject> whiteListed = new();
 
     public enum Color { White, Black, Neutral, Null }
-
     public Color BackgroundColor { get; private set; }
 
     public event Action <Color> OnColorChange;
 
 
     private void OnEnable()
-    {
-        DebugHelper.ShouldLog($"Is instance null : {Instance == null}", showDebug);
-    }
+        => DebugHelper.ShouldLog($"Is instance null : {Instance == null}", showDebug);
 
     void Start()
-    {
-        whiteListed.Add(gameObject);
-    }
+        => whiteListed.Add(gameObject);
 
     void Update()
     {
     #if DEBUG
         if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
             ChangeColor(Color.White, gameObject);
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
             ChangeColor(Color.Black, gameObject);
-        }
     #endif
     }
 
+    // Changes the color of the world
+    // Notifies listeners
     public void ChangeColor(Color newColor, GameObject callingObject, bool triggerSwapSounds = false, bool triggerAmbienceSounds = false)
     {
         if (whiteListed.Contains(callingObject))
@@ -70,8 +62,7 @@ public class ColorSwap : Singleton<ColorSwap>
             Debug.LogWarning("Calling script doesn't have access to this function.");
     }
 
-    public Color OppositeColor() => OppositeColor(BackgroundColor);
-
+    // Returns the color opposite to the given color
     public Color OppositeColor(Color contrastColor)
     {
         return contrastColor switch
@@ -82,5 +73,8 @@ public class ColorSwap : Singleton<ColorSwap>
         };
     }
 
+    public Color OppositeColor() => OppositeColor(BackgroundColor);
+
+    // Allows only certain objs to swap the world's color
     public void AddToWhiteList(GameObject gameObject) => whiteListed.Add(gameObject);
 }
