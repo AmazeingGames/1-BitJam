@@ -16,7 +16,7 @@ public class Enemy : ColoredObject
 
     void Update()
     {
-        if (!GameManager.Instance.IsGameRunning)
+        if (!GameManager.IsGameRunning)
             return;
 
         CheckAnimations();

@@ -21,36 +21,100 @@ public class GameManager : Singleton<GameManager>
 
     public GameState PreviousState { get; private set; } = GameState.None;
     public GameState State { get; private set; } = GameState.None;
-    public bool IsGameRunning { get; private set; }
+    public static bool IsGameRunning { get; private set; } 
 
     public enum GameState { None, MainMenu, Loading, LevelStart, LevelRestart, GamePause, CreditsMenu, LevelFinish, Lose, GameFinish }
 
-    string sceneToUnload = null;
+    string previousScene = null;
 
     IEnumerator Start()
     {
         yield return null;
 
     #if DEBUG
+        
         if (testLevel != 0 && DoesLevelExist(testLevel))
             UpdateGameState(GameState.LevelStart, testLevel);
         else if (testLevel != -1)
             UpdateGameState(GameState.MainMenu);
+        
     #else
         UpdateGameState(GameState.MainMenu);
     #endif
     }
 
-    public void StopGame()
+    public static void StopGame()
     {
+        Manager.InstanceNullCheck(Instance);
+
         IsGameRunning = false;
         GameStop?.Invoke();
     }
 
-    public void StartGame()
+    public static void StartGame()
     {
+        Manager.InstanceNullCheck(Instance);
+
         IsGameRunning = true;
         GameStart?.Invoke();
+    }
+
+    public static bool DoesLevelExist(int level) => DoesSceneExist($"Level_{level}");
+
+    public static bool DoesSceneExist(string sceneName)
+    {
+        int buildIndex = SceneUtility.GetBuildIndexByScenePath(sceneName);
+
+        return buildIndex != -1;
+    }
+
+    public static void UpdateGameState(GameState newState, int levelToLoad = -1)
+    {
+        Manager.InstanceNullCheck(Instance);
+
+        OnStateLeave?.Invoke(Instance.State);
+
+        Instance.PreviousState = Instance.State;
+        Instance.State = newState;
+
+        //Not sure if this is an issue, but this is always called the first time we exit a state, even when we haven't technically 'left' any states. This also happens in the main menu manager.
+
+        switch (newState)
+        {
+            case GameState.MainMenu:
+                Instance.LoadScene("_MainMenu");
+            break;
+
+            case GameState.LevelStart:
+                if (levelToLoad == -1)
+                    throw new NotImplementedException();
+
+                Instance.LevelDataCurrent = Instance.levelData[levelToLoad - 1];
+
+                Instance.LoadLevel(levelToLoad);
+            break;
+
+            case GameState.Lose:
+                StopGame();
+            break;
+
+            case GameState.LevelRestart:
+                UpdateGameState(GameState.LevelStart, Instance.LevelDataCurrent.Level);
+            break;
+
+            case GameState.LevelFinish:
+                if (DoesLevelExist(Instance.LevelDataCurrent.Level + 1))
+                    UpdateGameState(GameState.LevelStart, Instance.LevelDataCurrent.Level + 1);
+                else
+                    UpdateGameState(GameState.GameFinish); 
+            break;
+
+            case GameState.GameFinish:
+                Instance.LoadScene("_MainMenu");
+            break;
+        }
+
+        OnStateEnter?.Invoke(newState);
     }
 
     bool LoadLevel(int level) => LoadScene($"Level_{level}", true);
@@ -61,9 +125,9 @@ public class GameManager : Singleton<GameManager>
         if (!DoesSceneExist(sceneName))
             return false;
 
-        UnloadScene(sceneToUnload);
-        
-        sceneToUnload = sceneName;
+        UnloadScene(previousScene);
+
+        previousScene = sceneName;
 
         UpdateGameState(GameState.Loading);
 
@@ -79,67 +143,11 @@ public class GameManager : Singleton<GameManager>
         if (!DoesSceneExist(sceneName))
             return false;
 
-        if (sceneToUnload == null)
+        if (previousScene == null)
             return false;
 
         SceneManager.UnloadSceneAsync(sceneName);
 
         return true;
-    }
-
-    public static bool DoesLevelExist(int level) => DoesSceneExist($"Level_{level}");
-
-    public static bool DoesSceneExist(string sceneName)
-    {
-        int buildIndex = SceneUtility.GetBuildIndexByScenePath(sceneName);
-
-        return buildIndex != -1;
-    }
-
-    public void UpdateGameState(GameState newState, int levelToLoad = -1)
-    {
-        OnStateLeave?.Invoke(State);
-
-        PreviousState = State;
-        State = newState;
-
-        //Not sure if this is an issue, but this is always called the first time we exit a state, even when we haven't technically 'left' any states. This also happens in the main menu manager.
-
-        switch (newState)
-        {
-            case GameState.MainMenu:
-                LoadScene("_MainMenu");
-                break;
-
-            case GameState.LevelStart:
-                if (levelToLoad == -1)
-                    throw new NotImplementedException();
-
-                LevelDataCurrent = levelData[levelToLoad - 1];
-
-                LoadLevel(levelToLoad);
-                break;
-
-            case GameState.Lose:
-                StopGame();
-                break;
-
-            case GameState.LevelRestart:
-                UpdateGameState(GameState.LevelStart, LevelDataCurrent.Level);
-                break;
-
-            case GameState.LevelFinish:
-                if (DoesLevelExist(LevelDataCurrent.Level + 1))
-                    UpdateGameState(GameState.LevelStart, LevelDataCurrent.Level + 1);
-                else
-                    UpdateGameState(GameState.GameFinish); 
-                break;
-
-            case GameState.GameFinish:
-                LoadScene("_MainMenu");
-                break;
-        }
-
-        OnStateEnter?.Invoke(newState);
     }
 }

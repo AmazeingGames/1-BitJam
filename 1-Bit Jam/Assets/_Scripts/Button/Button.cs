@@ -21,7 +21,7 @@ public class Button : ColoredObject
 
     void Update()
     {
-        if (!GameManager.Instance.IsGameRunning)
+        if (!GameManager.IsGameRunning)
             return;
 
         CheckAnimations();

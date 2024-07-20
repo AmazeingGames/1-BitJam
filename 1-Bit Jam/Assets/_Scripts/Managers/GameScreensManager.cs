@@ -85,9 +85,9 @@ public class GameScreensManager : Singleton<GameScreensManager>
         creditsMenu.enabled = !creditsMenu.enabled;
 
         if (creditsMenu.enabled)
-            GameManager.Instance.StopGame();
+            GameManager.StopGame();
         else
-            GameManager.Instance.StartGame();
+            GameManager.StartGame();
     }
 
     void HandleLevelLose(GameManager.GameState gameState)
@@ -103,7 +103,7 @@ public class GameScreensManager : Singleton<GameScreensManager>
     {
         Debug.Log("Handled Game Restart");
 
-        GameManager.Instance.UpdateGameState(GameManager.GameState.LevelRestart);
+        GameManager.UpdateGameState(GameManager.GameState.LevelRestart);
         GameOver.enabled = false;
     }
 
@@ -111,7 +111,7 @@ public class GameScreensManager : Singleton<GameScreensManager>
     {
         Debug.Log("Handle Menu Exit");
 
-        GameManager.Instance.UpdateGameState(GameManager.GameState.MainMenu);
+        GameManager.UpdateGameState(GameManager.GameState.MainMenu);
         GameOver.enabled = false;
     }
 
@@ -127,7 +127,7 @@ public class GameScreensManager : Singleton<GameScreensManager>
         loadingMenu.gameObject.SetActive(true);
         menuCamera.gameObject.SetActive(true);
 
-        GameManager.Instance.StopGame();
+        GameManager.StopGame();
 
         while (true)
         {
@@ -141,7 +141,7 @@ public class GameScreensManager : Singleton<GameScreensManager>
 
                 if (loadingLevel)
                 {
-                    GameManager.Instance.StartGame();
+                    GameManager.StartGame();
                 }
 
                 yield break;

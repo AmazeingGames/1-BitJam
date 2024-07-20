@@ -39,7 +39,7 @@ public abstract class Interactable : MonoBehaviour
 
     protected void Update()
     {
-        if (!GameManager.Instance.IsGameRunning)
+        if (!GameManager.IsGameRunning)
             return;
 
         UpdateTimers();

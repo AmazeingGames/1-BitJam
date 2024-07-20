@@ -19,7 +19,7 @@ public class Fountain : ColoredObject
         switch (CurrentState)
         {
             case ColorSwap.Color.Black:
-                GameManager.Instance.UpdateGameState(GameManager.GameState.Lose);
+                GameManager.UpdateGameState(GameManager.GameState.Lose);
                 break;
         }
     }

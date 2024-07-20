@@ -28,7 +28,7 @@ public class Vision : MonoBehaviour
         {
             yield return new WaitForSeconds(timeBetweenCalls);
 
-            if (!GameManager.Instance.IsGameRunning)
+            if (!GameManager.IsGameRunning)
                 continue;
 
             FOV();

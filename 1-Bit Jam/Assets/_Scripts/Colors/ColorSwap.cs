@@ -23,7 +23,7 @@ public class ColorSwap : Singleton<ColorSwap>
 
     void Start()
         => whiteListed.Add(gameObject);
-
+    
     void Update()
     {
     #if DEBUG
@@ -35,13 +35,15 @@ public class ColorSwap : Singleton<ColorSwap>
     }
 
     // Changes the color of the world and notifies listeners
-    public void ChangeColor(Color newColor, GameObject callingObject, bool triggerSwapSounds = false, bool triggerAmbienceSounds = false)
+    public static void ChangeColor(Color newColor, GameObject callingObject, bool triggerSwapSounds = false, bool triggerAmbienceSounds = false)
     {
-        if (whiteListed.Contains(callingObject))
-        {
-            BackgroundColor = newColor;
+        Manager.InstanceNullCheck(Instance);
 
-            OnColorChange?.Invoke(newColor);
+        if (Instance.whiteListed.Contains(callingObject))
+        {
+            Instance.BackgroundColor = newColor;
+
+            Instance.OnColorChange?.Invoke(newColor);
 
             EventSounds eventToTrigger;
 
@@ -62,7 +64,7 @@ public class ColorSwap : Singleton<ColorSwap>
     }
 
     // Returns the color opposite to the given color
-    public Color OppositeColor(Color contrastColor)
+    public static Color OppositeColor(Color contrastColor)
     {
         return contrastColor switch
         {
@@ -73,8 +75,21 @@ public class ColorSwap : Singleton<ColorSwap>
     }
 
     // Returns the color opposite to the background
-    public Color OppositeColor() => OppositeColor(BackgroundColor);
+    public static Color OppositeColor()
+    {
+        Manager.InstanceNullCheck(Instance);
+
+        return OppositeColor(Instance.BackgroundColor);
+    }
 
     // Makes sure only whitelisted objs can change world color
-    public void AddToWhiteList(GameObject gameObject) => whiteListed.Add(gameObject);
+    public static IEnumerator AddToWhiteList(GameObject gameObject) 
+    {
+        Manager.InstanceNullCheck(Instance);
+
+        yield return null;
+        
+        Instance.whiteListed.Add(gameObject);
+
+    }
 }

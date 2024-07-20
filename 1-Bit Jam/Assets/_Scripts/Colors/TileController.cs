@@ -58,28 +58,28 @@ public class TileController : Colored
             {
                 case "Heaven Active":
                     activeHeavenTiles = child;
-                    break;
+                break;
 
                 case "Heaven Inactive":
                     inactiveHeavenTiles = child;
-                    break;
+                break;
 
                 case "Hell Active":
                     activeHellTiles = child;
-                    break;
+                break;
 
                 case "Hell Inactive":
                     inactiveHellTiles = child;
-                    break;
+                break;
 
                 default:
-                    throw new Exception("Name not recognized.");
+                throw new Exception("Name not recognized.");
             }
         }
 
         Debug.Log("TileMaps done");
 
-        ColorSwap.Instance.ChangeColor(GameManager.Instance.LevelDataCurrent.StartingColor, gameObject, triggerAmbienceSounds: true);
+        ColorSwap.ChangeColor(GameManager.Instance.LevelDataCurrent.StartingColor, gameObject, triggerAmbienceSounds: true);
         
         SetTilesActive(ColorSwap.Instance.BackgroundColor);
 

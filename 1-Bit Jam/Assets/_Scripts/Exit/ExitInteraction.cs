@@ -18,7 +18,7 @@ public class ExitInteraction : Interactable
     {
         base.Interaction();
 
-        GameManager.Instance.UpdateGameState(GameManager.GameState.LevelFinish);
+        GameManager.UpdateGameState(GameManager.GameState.LevelFinish);
         AudioManager.Instance.TriggerAudioClip(AudioManager.EventSounds.DoorEnter, gameObject);
     }
 

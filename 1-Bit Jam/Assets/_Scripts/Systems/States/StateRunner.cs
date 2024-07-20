@@ -29,7 +29,7 @@ public class StateRunner<T> : MonoBehaviour where T : MonoBehaviour
 
     void Update()
     {
-        if (!GameManager.Instance.IsGameRunning)
+        if (!GameManager.IsGameRunning)
             return;
 
         activeState.CaptureInput();
@@ -39,7 +39,7 @@ public class StateRunner<T> : MonoBehaviour where T : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!GameManager.Instance.IsGameRunning)
+        if (!GameManager.IsGameRunning)
             return;
 
         activeState.FixedUpdate();    

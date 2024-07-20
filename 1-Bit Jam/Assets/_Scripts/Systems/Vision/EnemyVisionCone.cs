@@ -26,7 +26,7 @@ public class EnemyVisionCone : Vision
 
     void Update()
     {
-        if (!GameManager.Instance.IsGameRunning)
+        if (!GameManager.IsGameRunning)
             return;
 
         CheckForPlayer();
@@ -43,7 +43,7 @@ public class EnemyVisionCone : Vision
                 break;
             case AlertConsequence.Lose:
                 if (CanSeePlayer)
-                    GameManager.Instance.UpdateGameState(GameManager.GameState.Lose);
+                    GameManager.UpdateGameState(GameManager.GameState.Lose);
                 break;
         }
     }
