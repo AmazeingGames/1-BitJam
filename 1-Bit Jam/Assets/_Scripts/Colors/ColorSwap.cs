@@ -34,8 +34,7 @@ public class ColorSwap : Singleton<ColorSwap>
     #endif
     }
 
-    // Changes the color of the world
-    // Notifies listeners
+    // Changes the color of the world and notifies listeners
     public void ChangeColor(Color newColor, GameObject callingObject, bool triggerSwapSounds = false, bool triggerAmbienceSounds = false)
     {
         if (whiteListed.Contains(callingObject))
@@ -73,8 +72,9 @@ public class ColorSwap : Singleton<ColorSwap>
         };
     }
 
+    // Returns the color opposite to the background
     public Color OppositeColor() => OppositeColor(BackgroundColor);
 
-    // Allows only certain objs to swap the world's color
+    // Makes sure only whitelisted objs can change world color
     public void AddToWhiteList(GameObject gameObject) => whiteListed.Add(gameObject);
 }

@@ -5,7 +5,5 @@ using UnityEngine;
 public class CanSwapColor : MonoBehaviour
 {
     private void Start()
-    {
-        ColorSwap.Instance.AddToWhiteList(gameObject);
-    }
+        => ColorSwap.Instance.AddToWhiteList(gameObject);
 }

@@ -31,7 +31,6 @@ public abstract class ColoredObject : Colored
         }
     }
 
-
     protected void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
