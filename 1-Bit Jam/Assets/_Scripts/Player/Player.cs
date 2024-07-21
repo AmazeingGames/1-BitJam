@@ -17,6 +17,8 @@ public class Player : Singleton<Player>
     // Start is called before the first frame update
     void Start()
     {
+        Manager.InstanceNullCheck();
+
         Collider = GetComponent<CircleCollider2D>();
 
         StartCoroutine(GroundCheck());

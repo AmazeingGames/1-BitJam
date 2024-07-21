@@ -8,9 +8,9 @@ public class Manager
 {
     public static bool hasLoadedScene = false;
 
-    public static void InstanceNullCheck<T>(T instance) where T : Singleton<T>
+    public static void InstanceNullCheck()
     {
-        if (instance != null || hasLoadedScene)
+        if (hasLoadedScene)
             return;
 
         for (int i = 0; i < SceneManager.sceneCount; i++)

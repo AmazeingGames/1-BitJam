@@ -37,7 +37,7 @@ public class ColorSwap : Singleton<ColorSwap>
     // Changes the color of the world and notifies listeners
     public static void ChangeColor(Color newColor, GameObject callingObject, bool triggerSwapSounds = false, bool triggerAmbienceSounds = false)
     {
-        Manager.InstanceNullCheck(Instance);
+        Manager.InstanceNullCheck();
 
         if (Instance.whiteListed.Contains(callingObject))
         {
@@ -77,7 +77,7 @@ public class ColorSwap : Singleton<ColorSwap>
     // Returns the color opposite to the background
     public static Color OppositeColor()
     {
-        Manager.InstanceNullCheck(Instance);
+        Manager.InstanceNullCheck();
 
         return OppositeColor(Instance.BackgroundColor);
     }
@@ -85,7 +85,7 @@ public class ColorSwap : Singleton<ColorSwap>
     // Makes sure only whitelisted objs can change world color
     public static IEnumerator AddToWhiteList(GameObject gameObject) 
     {
-        Manager.InstanceNullCheck(Instance);
+        Manager.InstanceNullCheck();
 
         yield return null;
         

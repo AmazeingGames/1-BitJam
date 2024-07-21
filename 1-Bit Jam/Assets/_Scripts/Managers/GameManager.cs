@@ -67,7 +67,7 @@ public class GameManager : Singleton<GameManager>
 
     public static void StopGame()
     {
-        Manager.InstanceNullCheck(Instance);
+        Manager.InstanceNullCheck();
 
         IsGameRunning = false;
         GameStop?.Invoke();
@@ -75,7 +75,7 @@ public class GameManager : Singleton<GameManager>
 
     public static void StartGame()
     {
-        Manager.InstanceNullCheck(Instance);
+        Manager.InstanceNullCheck();
 
         IsGameRunning = true;
         GameStart?.Invoke();
@@ -92,7 +92,7 @@ public class GameManager : Singleton<GameManager>
 
     public static void UpdateGameState(GameState newState, int levelToLoad = -1)
     {
-        Manager.InstanceNullCheck(Instance);
+        Manager.InstanceNullCheck();
 
         OnStateLeave?.Invoke(Instance.State);
 
