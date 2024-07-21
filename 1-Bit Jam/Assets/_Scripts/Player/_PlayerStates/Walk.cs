@@ -128,7 +128,7 @@ public class Walk : State<CharacterController>
     }
 
 
-    //Sets the scale of the player negative or positve, when they move left/right
+    // Sets the scale of the player negative or positve, when they move left/right
     void FlipPlayer()
     {
         if (horizontalInput == 0 && rigidbody.velocity.x == 0)

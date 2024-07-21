@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
-    [SerializeField] int testLevel;
     [SerializeField] List<LevelData> levelData = new();
 
     public LevelData LevelDataCurrent { get; private set; }
@@ -31,11 +32,32 @@ public class GameManager : Singleton<GameManager>
     {
         yield return null;
 
-    #if DEBUG
-        
-        if (testLevel != 0 && DoesLevelExist(testLevel))
-            UpdateGameState(GameState.LevelStart, testLevel);
-        else if (testLevel != -1)
+#if DEBUG
+        // Starts the game by unloading and reloading the level already in the scene
+        int levelToLoad = -1;
+        string levelString;
+
+        for (int i = 0; i < SceneManager.sceneCount; i++)
+        {
+            var scene = SceneManager.GetSceneAt(i);
+
+            if (scene.name[..5] != "Level")
+                continue;
+
+            levelString = scene.name[(scene.name.LastIndexOf('_') + 1)..];
+
+            if (int.TryParse(levelString, out int levelNumber))
+            {
+                previousScene = scene.name;
+                levelToLoad = levelNumber;
+            }
+        }
+
+        if (DoesLevelExist(levelToLoad))
+        {
+            UpdateGameState(GameState.LevelStart, levelToLoad);
+        }
+        else
             UpdateGameState(GameState.MainMenu);
         
     #else
@@ -119,7 +141,7 @@ public class GameManager : Singleton<GameManager>
 
     bool LoadLevel(int level) => LoadScene($"Level_{level}", true);
 
-
+    // Asynchronously loads the given scene, while unloading the last loaded scene
     bool LoadScene(string sceneName, bool isLevel = false)
     {
         if (!DoesSceneExist(sceneName))
